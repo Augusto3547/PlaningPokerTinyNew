@@ -1,5 +1,6 @@
 import {initializeApp} from "firebase/app";
-import {getDatabase, ref, child, get, push} from "firebase/database";
+import {getDatabase, ref, child, get, push, onValue, update} from "firebase/database";
+import "./routie"
 
 const firebaseConfig = {
   apiKey: "AIzaSyBcXWuDslHfFbtENzKZaiNoYdEwXDyrEq8",
@@ -30,76 +31,62 @@ export async function New_Game() {
 
     game_id = response.key;
   }
-  const teste = firebase.database().ref().child('Games/' + game_id)
-  const namegamedb ={name: gameName}
 
-  teste.set(namegamedb)
-
-  const playersRef = firebase.database().ref().child('Games/' + game_id + '/' + '/players');
-  const player = {
+  const playersRef = await push(ref(getDatabase(app), "Games/" + game_id + '/players'), {
     name: nameFirtsPlayer,
     card: '',
-  };
+  })
 
-  const p = await playersRef.push(player);
-
-  //console.log(p.key); // id player
-  // AJAX -> TelaJogo {id, nome, jogo}
-  // TelaJogo obtemInformacoes
-  // Editar NomePlayer => Pega o id do usuario e da um set/update
-
+  let stringcon = playersRef.key + ";" + nameFirtsPlayer + ";" + gameName
+  setCookie(nameFirtsPlayer,stringcon,1)
   PutInformationInScreen();
 
   Global_Game_ID = game_id;
-  Global_FirtsUser_ID = p.key;
+  Global_FirtsUser_ID = playersRef.key;
 
   routie('id=' + Global_Game_ID);
-  
+  listen_game();
 }
 
-// async function GetInformations(){   
-//   var infor = firebase.database().ref('Games/');
-//   infor.on('value', (snapshot) => {
-//     const data = snapshot.val();
-//     console.log(data)
-//   });
 
-// }
-
-
-export async function New_Player(NameNewPlayer){
+export async function New_Player(NameNewPlayer,Idsala){
     var NewPlayer = {
       name: NameNewPlayer,
       card: '',
     };
-    let ref = firebase.database().ref().child('Games/' + Global_Game_ID +'/players') 
 
-    let p = ref.push(NewPlayer)
+    const refdb = push(ref(getDatabase(app),'Games/' + Idsala + '/players'),NewPlayer)
+
+    console.log(refdb.key) // Salvr isso em um cookie
+
+    setCookie(NameNewPlayer,refdb.key,1)
 
       // Buscar no Banco o nome do Jogo
-      var Global_nameGame = '';
-      var dbrefgamename = firebase.database().ref().child('Games/'+ Global_Game_ID)
-        
-      dbrefgamename.once('value', (snapshot)=>{
-         Global_nameGame = snapshot.val().name;
-         console.log(Global_nameGame)
-      })
-
-      console.log(Global_nameGame)
+      const dbRef = ref(getDatabase());
+      await get(child(dbRef, "Games/" + Idsala)).then((snapshot) => {
+        if (snapshot.exists()) {
+          gameName = snapshot.val().name // para colocar o noem do jogo na tela quanado um novo jogador entrar
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+      nameFirtsPlayer = NameNewPlayer; // para colocar o nome do jogo na tela quanado um novo jogador entrar
 
       //Buscar no Banco o Jogadores que já estão na sessão
 
-        var dbrefnameplayer = firebase.database().ref().child('Games/' + Global_Game_ID +'/players')    
-      
-        dbrefnameplayer.on('value', (snapshot)=>{
-          snapshot.forEach(snapshotItem => {
-
-            let chave = snapshotItem.key
-            let dado = snapshotItem.val().name;
-
-            console.log(chave,dado)
-        })
-      })
+      let teste = '';
+      await get(child(dbRef, "Games/" + Idsala + "/players")).then((snapshot) => {
+        if (snapshot.exists()) {
+          teste = snapshot.val()
+          console.log(teste)
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
 
     PutInformationInScreen();
 }
@@ -109,36 +96,52 @@ export async function New_Player(NameNewPlayer){
 
 async function listen_game(){
 
-  let game_ref = firebase.database().ref('Games/' + Global_Game_ID);
+  // Buscar o ID do Jogo
+  const dbRef = ref(getDatabase());
+  await get(child(dbRef, "Games/")).then((snapshot) => {
+    if (snapshot.exists()) {
+      Global_Game_ID = Object.keys(snapshot.val())[0]
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+  
+  const db = getDatabase();
+  const starCountRef = ref(db, 'Games/' + Global_Game_ID + '/players');
+  onValue(starCountRef, (snapshot) => {
+    console.log(snapshot.val())
+  });
 
-  game_ref.on('child_changed', (snapshot) =>{
-    Object.keys(snapshot.val().players).map((playerId)=>{
-      console.log(playerId)
-      if (Global_FirtsUser_ID != playerId){
-        const nome = snapshot.val().players[playerId].name;
-        if(nome){
-          //Colocar o nome na Tela Jogo
-        }
-      }
-    })
-  })
+  // game_ref.on('child_changed', (snapshot) =>{
+  //   Object.keys(snapshot.val().players).map((playerId)=>{
+  //     console.log(playerId)
+  //     if (Global_FirtsUser_ID != playerId){
+  //       const nome = snapshot.val().players[playerId].name;
+  //       if(nome){
+  //         //Colocar o nome na Tela Jogo
+  //       }
+  //     }
+  //   })
+  // })
 
 }
 
-async function Change_Name(){
+export async function Change_Name(){
   var nameChange = document.getElementById("ChangeNamePlayer").value;
 
-  let dbref = firebase.database().ref('Games/' + Global_Game_ID + '/players' + '/' + Global_FirtsUser_ID)
-
-  let playerChange = {
+  let playerChange ={
     name: nameChange,
     card: '',
-  };
+  }
+
+    const dbref = ref(getDatabase(app),'Games/' + Global_Game_ID + '/players' + '/' + Global_FirtsUser_ID)
 
   if (nameChange.lenght == 0){
     window.alert("For Change a name first, you neded to put a any name")
   }else{
-    dbref.update(playerChange)
+    update(dbref,playerChange)
   }
 
   var pnameplayer = document.querySelector("p.nameaftercard");
@@ -173,5 +176,30 @@ async function PutInformationInScreen(){
   var titlename = document.querySelector("title");
   titlename.textContent = "Planning Poker || " + gameName;
 
-  listen_game();
 }
+
+function setCookie(cname, cvalue ,exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  console.log(gameName,nameFirtsPlayer)
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+} 
+
+// export function getDataUserAuth() {
+//   let cookies = document.cookie;
+//   var options = cookies.split(';');
+//   options.forEach((element) => {
+//     if (element.length > 0) {
+//       var regExp = /\(([^)]+)\)/;
+//       var value = regExp.exec(element);
+//       $('.lastoption').before(
+//         "<option name='mcustom' value='" +
+//           value[1] +
+//           "'>" +
+//           element +
+//           '</option>'
+//       );
+//     }
+//   });
+// }

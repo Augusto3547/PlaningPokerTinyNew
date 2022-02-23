@@ -1,36 +1,39 @@
 import {New_Game} from "./Firebase.js"
+import {New_Player} from "./Firebase.js"
+import {Change_Name} from "./Firebase.js"
+import {getDataUserAuth} from "./Firebase.js"
 import $ from 'jquery'
 
 $(document).ready(function () {
   //getVotingSystem();
+  getDataUserAuth();
 
   var url = window.location.href;
   var res  = url.split('#')
   let Global_Game_ID = ''
   if (res.length > 1){ // Se já existir um game criado e  o jogador entarr pela url com o ID
-    // // Buscar no Banco o nome do Jogo
-    // var Global_nameGame = 'Nome do Jogo criado';
-    // let dbrefgamename = firebase.database().ref().child('Games/'+ Global_Game_ID)
-    
-    // dbrefgamename.on('value',function(snapshot){
-    //   var Global_nameGame = snapshot.val();
-    // })
-    // let refgame = document.querySelector("input.namegame")
-    // refgame.value = Global_nameGame
-    // console.log(Global_nameGame)
-    
     var idnotf = res[1].substr(3)
     Global_Game_ID = idnotf
+    var cookies= document.cookie;
+    //Verificar se tem um cokkie salvo, então não pedir um nome para o jogador entrar
+    if(cookies.length == 0){
     $('.register').addClass('hidden');
-    $('.section, .footer, .superhide').removeClass('hidden');
+    $('.section, .superhide').removeClass('hidden');
     $('.nmplayer').removeClass('hidden');
-
+  }else{
+    $('.register').addClass('hidden');
+    $('.section, .superhide').removeClass('hidden');
   }
+}
 
   $('.cg').on('click', function(){
     let NewName = $('.displaynamenew').val()
-      New_Player(NewName);
+      New_Player(NewName,Global_Game_ID);
       $('.nmplayer').addClass('hidden');
+  })
+
+  $('.pencil').on('click',()=>{
+    Change_Name();
   })
 
   $('.cheap .card').click(function (e) {
@@ -91,6 +94,7 @@ $(document).ready(function () {
   $('.closexinvite').on('click', function (e) {
     $('.dialog2').toggleClass('hidden');
   });
+
 
   //Para fechar close e no botão news
   $('.news, #closenews').on('click', function (e) {

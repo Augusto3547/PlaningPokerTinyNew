@@ -36,6 +36,9 @@ function fecharJanela() {
   elemento.classList.add('hidden');
 }
 
+let buttonsettimer = document.querySelector("button#RevelCards")
+buttonsettimer.addEventListener('click', SetTimer)
+
 function SetTimer() {
   //Timer
   var duracao = 2;
