@@ -1,5 +1,5 @@
 import {initializeApp} from "firebase/app";
-import {getDatabase, ref, child, get, push, onValue, update} from "firebase/database";
+import {getDatabase, ref, child, get, push, onValue, update, onChildChanged} from "firebase/database";
 import "./routie"
 
 const firebaseConfig = {
@@ -15,14 +15,13 @@ const app = initializeApp(firebaseConfig);
 
   var game_id = "";
   var gameName = ""
-  var nameFirtsPlayer = ""
+  var namePlayer = ""
   var Global_Game_ID = ""
-  var Global_FirtsUser_ID = ""
 
 export async function New_Game() {
 
   gameName = document.getElementById('namegame').value;
-  nameFirtsPlayer = document.getElementById('displayname').value;
+  namePlayer = document.getElementById('displayname').value;
 
   if (!game_id){
     const response = await push(ref(getDatabase(app), "Games"), {
@@ -33,19 +32,16 @@ export async function New_Game() {
   }
 
   const playersRef = await push(ref(getDatabase(app), "Games/" + game_id + '/players'), {
-    name: nameFirtsPlayer,
+    name: namePlayer,
     card: '',
   })
 
-  let stringcon = playersRef.key + ";" + nameFirtsPlayer + ";" + gameName
-  setCookie(nameFirtsPlayer,stringcon,1)
+  setCookie(namePlayer,playersRef.key,1)
   PutInformationInScreen();
 
   Global_Game_ID = game_id;
-  Global_FirtsUser_ID = playersRef.key;
 
   routie('id=' + Global_Game_ID);
-  listen_game();
 }
 
 
@@ -72,29 +68,13 @@ export async function New_Player(NameNewPlayer,Idsala){
       }).catch((error) => {
         console.error(error);
       });
-      nameFirtsPlayer = NameNewPlayer; // para colocar o nome do jogo na tela quanado um novo jogador entrar
+      namePlayer = NameNewPlayer; // para colocar o nome do jogo na tela quanado um novo jogador entrar
 
-      //Buscar no Banco o Jogadores que já estão na sessão
-
-      let teste = '';
-      await get(child(dbRef, "Games/" + Idsala + "/players")).then((snapshot) => {
-        if (snapshot.exists()) {
-          teste = snapshot.val()
-          console.log(teste)
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
 
     PutInformationInScreen();
 }
 
-
-//const staylisten = setInterval(listen_game,500)
-
-async function listen_game(){
+export async function listen_game(){
 
   // Buscar o ID do Jogo
   const dbRef = ref(getDatabase());
@@ -107,24 +87,42 @@ async function listen_game(){
   }).catch((error) => {
     console.error(error);
   });
+
+  //Buscar o ID do usuário que esta jogando 
+  let current_user_id = '';
+  let cookies = document.cookie;
+  var teste = cookies.split(';');
+  teste.forEach((element) => {
+    if (element.length > 0) {
+      let ca = element.split('=')
+      current_user_id = ca[1];
+    }
+  });
   
-  const db = getDatabase();
-  const starCountRef = ref(db, 'Games/' + Global_Game_ID + '/players');
-  onValue(starCountRef, (snapshot) => {
-    console.log(snapshot.val())
+  const dbchangeref = ref(getDatabase(), 'Games/' + Global_Game_ID);
+  onChildChanged(dbchangeref, (snapshot) => {
+    Object.keys(snapshot.val()).map((playerId)=>{
+      console.log(playerId)
+      if(current_user_id != playerId){
+        const nome = snapshot.val()[playerId].name
+        if(nome){
+          let pselector = document.getElementById("testep")
+          pselector.innerHTML = nome;
+        }
+      }
+    })
+    // Object.keys(snapshot.val().players).map((playerId)=>{
+    //   console.log(playerId)
+    //   if (current_user_id != playerId){
+    //     const nome = snapshot.val().players[playerId].name;
+    //     if(nome){
+    //       let pselector = document.getElementById("testep")
+    //       pselector.innerHTML = nome;
+    //     }
+    //   }
+    // })
   });
 
-  // game_ref.on('child_changed', (snapshot) =>{
-  //   Object.keys(snapshot.val().players).map((playerId)=>{
-  //     console.log(playerId)
-  //     if (Global_FirtsUser_ID != playerId){
-  //       const nome = snapshot.val().players[playerId].name;
-  //       if(nome){
-  //         //Colocar o nome na Tela Jogo
-  //       }
-  //     }
-  //   })
-  // })
 
 }
 
@@ -136,7 +134,32 @@ export async function Change_Name(){
     card: '',
   }
 
-    const dbref = ref(getDatabase(app),'Games/' + Global_Game_ID + '/players' + '/' + Global_FirtsUser_ID)
+  let current_user_id = '';
+  let cookies = document.cookie;
+  var teste = cookies.split(';');
+  teste.forEach((element) => {
+    if (element.length > 0) {
+      let ca = element.split('=')
+      current_user_id = ca[1];
+    }
+  });
+
+  deleteAllCookies();
+  setCookie(nameChange,current_user_id,1)
+
+  // Buscar o ID do Jogo
+  const dbRef = ref(getDatabase());
+  await get(child(dbRef, "Games/")).then((snapshot) => {
+    if (snapshot.exists()) {
+      Global_Game_ID = Object.keys(snapshot.val())[0]
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+
+  const dbref = ref(getDatabase(app),'Games/' + Global_Game_ID + '/players' + '/' + current_user_id)
 
   if (nameChange.lenght == 0){
     window.alert("For Change a name first, you neded to put a any name")
@@ -158,48 +181,95 @@ export async function Change_Name(){
   closesection.classList.add("hidden")
 }
 
-async function PutInformationInScreen(){
+export async function getDataUserAuth(Idsala) {
+  let user_ID = '';
+  let cookies = document.cookie;
+  var teste = cookies.split(';');
+  teste.forEach((element) => {
+    if (element.length > 0) {
+      let ca = element.split('=')
+      user_ID = ca[1];
+    }
+  });
+
+  let gameName = '';
+  // Buscar no Banco o nome do Jogo
+  const dbRef = ref(getDatabase());
+  await get(child(dbRef, "Games/" + Idsala)).then((snapshot) => {
+    if (snapshot.exists()) {
+      gameName = snapshot.val().name // para colocar o noem do jogo na tela quanado um novo jogador entrar
+      
+    } else {
+      console.log("No data available");
+    }
+  })
+
+  let namePlayer = ''
+  // Buscar no Banco o nome do player
+  await get(child(dbRef, "Games/" + Idsala +"/players/" + user_ID)).then((snapshot) => {
+    if (snapshot.exists()) {
+      namePlayer = snapshot.val().name // para colocar o noem do jogo na tela quanado um novo jogador entrar
+      
+    } else {
+      console.log("No data available");
+    }
+  })
+
+   //Nome do lado da imagem
+   var labelgame = document.querySelector("label.namegame");
+   labelgame.textContent = gameName;
+   //Nome em baixo da carta com a animação
+   var pnameplayer = document.querySelector("p.nameaftercard");
+   pnameplayer.textContent = namePlayer;
+   // Nome no botão para trocar o mesmo
+   var bnameplayer = document.querySelector("button.profile");
+   var tag = document.createElement("i");
+   tag.classList.add("fas");
+   tag.classList.add("fa-angle-down");
+   bnameplayer.textContent = namePlayer;
+   bnameplayer.appendChild(tag);
+ 
+   var titlename = document.querySelector("title");
+   titlename.textContent = "Planning Poker || " + gameName;
+
+}
+
+
+  async function PutInformationInScreen(){
   //Nome do lado da imagem
   var labelgame = document.querySelector("label.namegame");
   labelgame.textContent = gameName;
   //Nome em baixo da carta com a animação
   var pnameplayer = document.querySelector("p.nameaftercard");
-  pnameplayer.textContent = nameFirtsPlayer;
+  pnameplayer.textContent = namePlayer;
   // Nome no botão para trocar o mesmo
   var bnameplayer = document.querySelector("button.profile");
   var tag = document.createElement("i");
   tag.classList.add("fas");
   tag.classList.add("fa-angle-down");
-  bnameplayer.textContent = nameFirtsPlayer;
+  bnameplayer.textContent = namePlayer;
   bnameplayer.appendChild(tag);
 
   var titlename = document.querySelector("title");
   titlename.textContent = "Planning Poker || " + gameName;
 
+  listen_game();
 }
 
 function setCookie(cname, cvalue ,exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
   let expires = "expires="+ d.toUTCString();
-  console.log(gameName,nameFirtsPlayer)
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 } 
 
-// export function getDataUserAuth() {
-//   let cookies = document.cookie;
-//   var options = cookies.split(';');
-//   options.forEach((element) => {
-//     if (element.length > 0) {
-//       var regExp = /\(([^)]+)\)/;
-//       var value = regExp.exec(element);
-//       $('.lastoption').before(
-//         "<option name='mcustom' value='" +
-//           value[1] +
-//           "'>" +
-//           element +
-//           '</option>'
-//       );
-//     }
-//   });
-// }
+function deleteAllCookies() {
+  var cookies = document.cookie.split(";");
+
+  for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+}

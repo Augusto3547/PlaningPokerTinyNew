@@ -1,13 +1,14 @@
+import {getDatabase, ref, child, get, push, onValue, update} from "firebase/database";
 import {New_Game} from "./Firebase.js"
 import {New_Player} from "./Firebase.js"
 import {Change_Name} from "./Firebase.js"
 import {getDataUserAuth} from "./Firebase.js"
+import {listen_game} from "./Firebase.js"
 import $ from 'jquery'
 
 $(document).ready(function () {
   //getVotingSystem();
-  getDataUserAuth();
-
+  listen_game();
   var url = window.location.href;
   var res  = url.split('#')
   let Global_Game_ID = ''
@@ -23,6 +24,7 @@ $(document).ready(function () {
   }else{
     $('.register').addClass('hidden');
     $('.section, .superhide').removeClass('hidden');
+    getDataUserAuth(Global_Game_ID);
   }
 }
 
