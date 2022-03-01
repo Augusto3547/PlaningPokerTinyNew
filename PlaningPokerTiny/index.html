@@ -22,18 +22,18 @@
             </div>
         </div>
         <div class="spaceregister">
-                <p class="textp">Choose a name and a voting system for your game.</p>
-                    <input placeholder="Game's name" type="text" id="namegame" class="namegame" name="namegame">
-                    <label class="inputfirtscreen" for="slectall">Voting system</label>
-                        <select class="slectall" id="slectall">
-                            <option value="(0,1/2,1,2,3,5,8,13,20,40,100,?)">Modified Fibonacci (0,1/2,1,2,3,5,8,13,20,40,100,?)
-                            </option>
-                            <option value="(0,1,2,3,5,8,13,21,34,55,89,?)">Fibonacci (0,1,2,3,5,8,13,21,34,55,89,?)</option>
-                            <option class="lastoption" onclick="RetirarAtributo()" value="Custom">Create Custom Deck</option>
-                        </select>
-                    <label class="inputfirtscreen" for="displayname">Your name</label>
-                    <input placeholder="Your's name" type="text" id="displayname" class="displayname">
-                    <input type="submit" value="Create Game :)" class="creategame" name="creategame">
+            <p class="textp">Choose a name and a voting system for your game.</p>
+            <input placeholder="Game's name" type="text" id="namegame" class="namegame" name="namegame">
+            <label class="inputfirtscreen" for="slectall">Voting system</label>
+            <select class="slectall" id="slectall">
+                <option value="(0,1/2,1,2,3,5,8,13,20,40,100,?)">Modified Fibonacci (0,1/2,1,2,3,5,8,13,20,40,100,?)
+                </option>
+                <option value="(0,1,2,3,5,8,13,21,34,55,89,?)">Fibonacci (0,1,2,3,5,8,13,21,34,55,89,?)</option>
+                <option class="lastoption" value="Custom">Create Custom Deck</option>
+            </select>
+            <label class="inputfirtscreen" for="displayname">Your name</label>
+            <input placeholder="Your's name" type="text" id="displayname" class="displayname">
+            <input type="submit" value="Create Game :)" class="creategame" name="creategame">
             <div class="dialog hidden" id="escondido">
                 <div class="addDeck">
                     <div class="space">
@@ -41,7 +41,7 @@
                         <h4 class="h4cd">Create Custom Deck</h4>
                         <div class="inputs">
                             <input type="text" value="My Custom Deck" id="namecustomdeck" class="inputdeck"> <br>
-                            <input type="text" value="1,2,3,5,8,13" id="valuecustomdeck"  class="inputdeck"> <br>
+                            <input type="text" value="1,2,3,5,8,13" id="valuecustomdeck" class="inputdeck"> <br>
                         </div>
                         <i class="fas fa-info-circle hover" id="detail"></i>
                         <p class="pdetails">Enter up to 3 characters per value, separated by commas.</p>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     <!--HTML quando um player novo entrar-->
     <div class="nmplayer hidden" id="hide">
         <div class="spacename">
@@ -83,54 +83,55 @@
     <!--HTML para a tela do Jogo-->
     <div class="superhide hidden">
         <div class="top">
-          <div class="esquerda">
-              <img class="logopoker" src="img/ImgPoker.png" alt="">
-              <label for="" class="namegame" id="namegame">
-                  Planing Poker game
-              </label>
-              <!-- <i id="gear" class="fas fa-2x fa-fw fa-cog"></i> -->
-          </div>
-          <div class="direita">
-              <div class="buttons">
-                   <button class="profile"><!--<i class="far fa-address-card"></i> -->
-                          Player's Name
-                      <!-- <i class="fas fa-angle-down"></i> -->
-                  </button>
-                  <div class="diag hidden" id="escon">
-                      <div class="changenameplayer">
-                          <div class="nomeplayer">
-                              <input type="text" id="ChangeNamePlayer" class="inputchangenameplayer"
-                                  placeholder="Change Name">
-                          </div>
-                          <div class="pencil">
-                              <i class="fas fa-pen"></i>
-                          </div>
-                      </div>
-                  </div>
-                  <button class="invite" onclick="RetirarHide()"><i class="fas fa-user-plus"></i> Invite
-                      Players</button>
-                  <button class="qrcode" id="qrcode"><i class="fas fa-qrcode"></i></button>
-              </div>
-          </div>
-      </div>
-      <div class="qcode hidden" id="qrcodehide">
-          <div class="spaceqrcode">
-              <div class="forright">
-                  <div class="closeqrcode">
-                      <i class="fas fa-times fa-1x" id="closeqrcode"></i>
-                  </div>
-              </div>
-              <div id="alignqrcode">
-                  <input id="qrcodecontent" type="text" />
-                  <div id="qrcodegerado">
-                      <img id="imageQRCode" src="">
-                  </div>
-              </div>
-          </div>
-      </div>
-      </div>    
-        <section class="section hidden">
-            <!--
+            <div class="esquerda">
+                <img class="logopoker" src="img/ImgPoker.png" alt="">
+                <label for="" class="namegame" id="namegame">
+                    Planing Poker game
+                </label>
+                <!-- <i id="gear" class="fas fa-2x fa-fw fa-cog"></i> -->
+            </div>
+            <div class="direita">
+                <div class="buttons">
+                    <button class="profile">
+                        <!--<i class="far fa-address-card"></i> -->
+                        Player's Name
+                        <!-- <i class="fas fa-angle-down"></i> -->
+                    </button>
+                    <div class="diag hidden" id="escon">
+                        <div class="changenameplayer">
+                            <div class="nomeplayer">
+                                <input type="text" id="ChangeNamePlayer" class="inputchangenameplayer"
+                                    placeholder="Change Name">
+                            </div>
+                            <div class="pencil">
+                                <i class="fas fa-pen"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="invite"><i class="fas fa-user-plus"></i> Invite
+                        Players</button>
+                    <button class="qrcode" id="qrcode"><i class="fas fa-qrcode"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="qcode hidden" id="qrcodehide">
+            <div class="spaceqrcode">
+                <div class="forright">
+                    <div class="closeqrcode">
+                        <i class="fas fa-times fa-1x" id="closeqrcode"></i>
+                    </div>
+                </div>
+                <div id="alignqrcode">
+                    <input id="qrcodecontent" type="text" />
+                    <div id="qrcodegerado">
+                        <img id="imageQRCode" src="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section hidden">
+        <!--
             <div class="clock">
                 <i class="far fa-2x fa-fw fa-clock"></i>
             </div>
@@ -149,93 +150,90 @@
                 </div>                
             </div>
             -->
-            <div class="midle">
-                <div id="testep">
-                    <p>fdlsnflds</p>
-                  </div>
-                <p class="emoji">Feeling lonely? &#x1f634</p>
-                <p class="invite" onclick="RetirarHide()">Invite Players</p>
-                <div class="dialog2 hidden" id="escondido2">
-                    <div class="inviteplayers">
-                        <div class="forright">
-                            <div class="closexinvite">
-                                <i class="fas fa-times fa-1x" id="closeinvite"></i>
-                            </div>
-                        </div>
-                        <div class="alignleft">
-                            <h4 class="titleinviteplayers">Invite Players</h4>
-                            <div class="inputsurl">
-                                <label for="" class="labelurl">URL:</label>
-                                <input type="text" class="inputurlfix" id="inputurlfix">
-                            </div>
-                            <div class="copylink">
-                                <button type="submit" class="copyurllink" id="copyurllink" onclick="CopyUrlTransfer()">Copy
-                                    Invitation Link</button>
-                            </div>
+        <div class="midle">
+            <p class="emoji">Feeling lonely? &#x1f634</p>
+            <p class="invite">Invite Players</p>
+            <div class="dialog2 hidden" id="escondido2">
+                <div class="inviteplayers">
+                    <div class="forright">
+                        <div class="closexinvite">
+                            <i class="fas fa-times fa-1x" id="closeinvite"></i>
                         </div>
                     </div>
-                </div>
-                <div class="tabel" id="tabel">
-                    <p id="temp">Pick your Cards!</p>
-                    <button class="RevelCards hidden" id="RevelCards">Reveal Cards!</button>
-                    <button class="StartNewVoting hidden" id="StartNewVoting">Start New
-                        Voting</button>
-                    <p id="timer"></p>
-                </div>
-                <div class="cardplayer">
-                    <div class="cardplayerplay">
-                        <button class="cardnew hidden" id="newcard">2</button>
-    
-                        <img id="imgbackcard" class="imgbackcard hidden" src="img/backcard.png" alt="">
+                    <div class="alignleft">
+                        <h4 class="titleinviteplayers">Invite Players</h4>
+                        <div class="inputsurl">
+                            <label for="" class="labelurl">URL:</label>
+                            <input type="text" class="inputurlfix" id="inputurlfix">
+                        </div>
+                        <div class="copylink">
+                            <button type="submit" class="copyurllink" id="copyurllink">Copy Invitation Link</button>
+                        </div>
                     </div>
-                </div>
-                <div class="nameplayeraftercard">
-                    <p class="nameaftercard">
-                        Player's name
-                    </p>
                 </div>
             </div>
-        </section>
-        <div class="resultofvoting hidden">
-            <div class="sapceresult">
-                <div class="spacecards">
-                    <div class="cheapresult">
-                        <div class="alignvotecards">
-                            <button class="cardresults">0</button>
-                            <div>
-                                <p class="voteaftercard">Votes: 0</p>
-                            </div>
-                        </div>
-    
-                        <div class="alignvotecards">
-                            <button class="cardresults">0</button>
-                            <div>
-                                <p class="voteaftercard">Votes: 0</p>
-                            </div>
-                        </div>
-    
-                        <div class="alignvotecards">
-                            <button class="cardresults">0</button>
-                            <div>
-                                <p class="voteaftercard">Votes: 0</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="tabel" id="tabel">
+                <p id="temp">Pick your Cards!</p>
+                <button class="RevelCards hidden" id="RevelCards">Reveal Cards!</button>
+                <button class="StartNewVoting hidden" id="StartNewVoting">Start New
+                    Voting</button>
+                <p id="timer"></p>
+            </div>
+            <div id="players">
+                
+            </div>
+            <div class="cardplayer">
+                <div class="cardplayerplay">
+                    <button class="cardnew hidden" id="newcard"></button>
+                    <img id="imgbackcard" class="imgbackcard hidden" src="img/backcard.png">
                 </div>
-                <div class="separation">
-                    <div class="bar">
-                    </div>
-                </div>
-                <div class="average">
-                    <h3>Average:</h3>
-                    <p>result average</p>
-                </div>
+            </div>
+            <div class="nameplayeraftercard">
+                <p class="nameaftercard">
+                    Player's name
+                </p>
             </div>
         </div>
-            <div>
-                <p class="choosecard">Choose your card &#x1f447</p>
-                <div class="cheapplayer">
-                    <!--
+    </section>
+    <div class="resultofvoting hidden">
+        <div class="sapceresult">
+            <div class="spacecards">
+                <div class="cheapresult">
+                    <div class="alignvotecards">
+                        <button class="cardresults">0</button>
+                        <div>
+                            <p class="voteaftercard">Votes: 0</p>
+                        </div>
+                    </div>
+                    <div class="alignvotecards">
+                        <button class="cardresults">0</button>
+                        <div>
+                            <p class="voteaftercard">Votes: 0</p>
+                        </div>
+                    </div>
+
+                    <div class="alignvotecards">
+                        <button class="cardresults">0</button>
+                        <div>
+                            <p class="voteaftercard">Votes: 0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="separation">
+                <div class="bar">
+                </div>
+            </div>
+            <div class="average">
+                <h3>Average:</h3>
+                <p>result average</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p class="choosecard">Choose your card &#x1f447</p>
+        <div class="cheapplayer">
+            <!--
                         <div class="news">
                             <i class="far fa-2x fa-fw fa-newspaper"></i>
                         </div>
@@ -254,23 +252,23 @@
                                 </div>
                             </div>
                     -->
-                    <div class="cheap">
-                        <button class="card">0</button>
-                        <button class="card">1/2</button>
-                        <button class="card">1</button>
-                        <button class="card">2</button>
-                        <button class="card">3</button>
-                        <button class="card">5</button>
-                        <button class="card">8</button>
-                        <button class="card">13</button>
-                        <button class="card">20</button>
-                        <button class="card">40</button>
-                        <button class="card">100</button>
-                        <button class="card">?</button>
-                    </div>
-                </div>
+            <div class="cheap">
+                <button class="card">0</button>
+                <button class="card">1/2</button>
+                <button class="card">1</button>
+                <button class="card">2</button>
+                <button class="card">3</button>
+                <button class="card">5</button>
+                <button class="card">8</button>
+                <button class="card">13</button>
+                <button class="card">20</button>
+                <button class="card">40</button>
+                <button class="card">100</button>
+                <button class="card">?</button>
             </div>
-      <script type="module" src="./index.js"></script>
+        </div>
+    </div>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>

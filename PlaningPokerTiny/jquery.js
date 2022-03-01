@@ -1,41 +1,56 @@
-import {getDatabase, ref, child, get, push, onValue, update} from "firebase/database";
-import {New_Game} from "./Firebase.js"
-import {New_Player} from "./Firebase.js"
-import {Change_Name} from "./Firebase.js"
-import {getDataUserAuth} from "./Firebase.js"
-import {listen_game} from "./Firebase.js"
-import $ from 'jquery'
+import {  getDatabase,  ref,  child,  get,  push,  onValue,  update} from 'firebase/database';
+import { New_Game } from './Firebase.js';
+import { New_Player } from './Firebase.js';
+import { Change_Name } from './Firebase.js';
+import { getDataUserAuth } from './Firebase.js';
+import { listen_game } from './Firebase.js';
+import {RetirarHide} from './JavaScript.js'
+import {CopyUrlTransfer} from './JavaScript.js'
+import $ from 'jquery';
 
 $(document).ready(function () {
   //getVotingSystem();
   listen_game();
   var url = window.location.href;
-  var res  = url.split('#')
-  let Global_Game_ID = ''
-  if (res.length > 1){ // Se já existir um game criado e  o jogador entarr pela url com o ID
-    var idnotf = res[1].substr(3)
-    Global_Game_ID = idnotf
-    var cookies= document.cookie;
+  var res = url.split('#');
+  let Global_Game_ID = '';
+  if (res.length > 1) {
+    // Se já existir um game criado e  o jogador entarr pela url com o ID
+    var idnotf = res[1].substr(3);
+    Global_Game_ID = idnotf;
+    var cookies = document.cookie;
     //Verificar se tem um cokkie salvo, então não pedir um nome para o jogador entrar
-    if(cookies.length == 0){
-    $('.register').addClass('hidden');
-    $('.section, .superhide').removeClass('hidden');
-    $('.nmplayer').removeClass('hidden');
-  }else{
-    $('.register').addClass('hidden');
-    $('.section, .superhide').removeClass('hidden');
-    getDataUserAuth(Global_Game_ID);
+    if (cookies.length == 0) {
+      $('.register').addClass('hidden');
+      $('.section, .superhide').removeClass('hidden');
+      $('.nmplayer').removeClass('hidden');
+    } else {
+      $('.register').addClass('hidden');
+      $('.section, .superhide').removeClass('hidden');
+      getDataUserAuth(Global_Game_ID);
+    }
   }
-}
+  $('.cg').on('click', function () {
+    let NewName = $('.displaynamenew').val();
+    New_Player(NewName, Global_Game_ID);
+    $('.nmplayer').addClass('hidden');
+  });
 
-  $('.cg').on('click', function(){
-    let NewName = $('.displaynamenew').val()
-      New_Player(NewName,Global_Game_ID);
-      $('.nmplayer').addClass('hidden');
+  $('.pencil').on('click', () => {
+    Change_Name();
+  });
+
+  $('.invite').on('click', ()=>{
+    RetirarHide();
   })
 
-  $('.pencil').on('click',()=>{
-    Change_Name();
+  $('.lastoption').on('click', ()=>{
+      var element = document.getElementById('escondido');
+      element.classList.remove('hidden');
+  })
+
+  $('.copyurllink').on('click', ()=>{
+    CopyUrlTransfer();
   })
 
   $('.cheap .card').click(function (e) {
@@ -43,10 +58,10 @@ $(document).ready(function () {
       $('.card.ativo').removeClass('ativo');
     }
     $(this).toggleClass('ativo');
-    if ($(this).hasClass('ativo')){
+    if ($(this).hasClass('ativo')) {
       RetireHideImageCard();
       RetireHideRevelCards();
-    }else{
+    } else {
       AddHideImageCard();
       AddHideRevelCards();
     }
@@ -96,7 +111,6 @@ $(document).ready(function () {
   $('.closexinvite').on('click', function (e) {
     $('.dialog2').toggleClass('hidden');
   });
-
 
   //Para fechar close e no botão news
   $('.news, #closenews').on('click', function (e) {
@@ -182,7 +196,6 @@ $(document).ready(function () {
   //Esta função abaixo é para validar se o player colocou o nome ou não
 
   $('.creategame').on('click', async function (e) {
-
     if ($('#displayname').val().length == 0) {
       alert('Favor inserir nome antes de enviar');
       return;
@@ -206,7 +219,6 @@ $(document).ready(function () {
     inputcqrcode.value = window.location.href;
     GeraQRCode();
   });
-
 });
 
 // function getVotingSystem() {
@@ -244,12 +256,12 @@ function RetireHideRevelCards() {
   revealcards.classList.remove('hidden');
 }
 
-function AddHideImageCard(){
+function AddHideImageCard() {
   var imageretire = document.getElementById('imgbackcard');
   imageretire.classList.add('hidden');
 }
 
-function AddHideRevelCards(){
+function AddHideRevelCards() {
   var revealcards = document.getElementById('RevelCards');
   revealcards.classList.add('hidden');
 }

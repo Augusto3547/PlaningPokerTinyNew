@@ -1,8 +1,3 @@
-function RetirarAtributo() {
-  var element = document.getElementById('escondido');
-  element.classList.remove('hidden');
-}
-
 function AdicionarAtributo(e) {
   console.log(e);
   var element = document.getElementById('escondido');
@@ -13,14 +8,14 @@ function CancelarAcao(e) {
   e.stopPropagation();
 }
 
-function RetirarHide() {
+export function RetirarHide() {
   var elemento = document.getElementById('escondido2');
   elemento.classList.remove('hidden');
 }
 
 //Copiar para a area de transferencia do usuario com o botão Copy Invitation link
 
-function CopyUrlTransfer() {
+export function CopyUrlTransfer() {
   var inputc = document.body.appendChild(document.createElement('input'));
   inputc.value = window.location.href;
   inputc.focus();
