@@ -48,10 +48,10 @@ export async function New_Game() {
     }
   );
 
+  Global_Game_ID = game_id;
+
   setCookie(namePlayer, playersRef.key, 1);
   PutInformationInScreen();
-
-  Global_Game_ID = game_id;
 
   routie('id=' + Global_Game_ID);
 }
@@ -89,7 +89,8 @@ export async function New_Player(NameNewPlayer, Idsala) {
   PutInformationInScreen();
 }
 
- export async function listen_game() {
+export async function listen_game() {
+  console.log('ENTROU');
   // Buscar o ID do Jogo
   const dbRef = ref(getDatabase());
   await get(child(dbRef, 'Games/'))
@@ -110,39 +111,42 @@ export async function New_Player(NameNewPlayer, Idsala) {
   let ca = cookies.split('=');
   current_user_id = ca[1];
 
-  const dbchangeref = ref(getDatabase(), 'Games/' + Global_Game_ID);
+  const dbchangeref = ref(
+    getDatabase(),
+    'Games/' + Global_Game_ID + '/players'
+  );
   onChildAdded(dbchangeref, (snapshot) => {
-    Object.keys(snapshot.val()).map((playerId) => {
-      console.log(current_user_id, playerId);
-      if (current_user_id != playerId) {
-        let teste = document.getElementById(playerId);
-        if (!teste) {
-          const nome = snapshot.val()[playerId].name;
-          if (nome) {
-            const p = document.createElement('div');
-            p.id = playerId;
-            p.textContent = nome;
-            // let markup = (`
-            // <div class="${current_user_id}">
-            //   <div class="cardplayer">
-            //   <div class="cardplayerplay">
-            //       <button class="cardnew hidden" id="newcard"></button>
-            //       <img id="imgbackcard" class="imgbackcard hidden" src="img/backcard.png">
-            //   </div>
-            //   </div>
-            //   <div class="nameplayeraftercard">
-            //       <p class="nameaftercard">
-            //           ${p}
-            //       </p>
-            //   </div>      
-            // </div>
-            // `);
-            let pselector = document.getElementById('players');
-            pselector.append(p);
-          }
+    console.log(snapshot.val());
+    console.log(snapshot.key);
+    const playerId = snapshot.key;
+    //Object.keys(snapshot.val()).map((playerId) => {
+    console.log(current_user_id, playerId);
+    if (current_user_id != playerId) {
+      let teste = document.getElementById(playerId);
+      if (!teste) {
+        const nome = snapshot.val().name;
+        if (nome) {
+          let markup = `
+          <div id="${playerId}">
+            <div class="cardplayer">
+            <div class="cardplayerplay">
+                <button class="cardnew hidden" id="newcard"></button>
+                <img id="imgbackcard" class="imgbackcard hidden" src="img/backcard.png">
+            </div>
+            </div>
+            <div class="nameplayeraftercard">
+                <p class="nameaftercard">
+                    ${nome}
+                </p>
+            </div>
+          </div>
+          `;
+          let pselector = document.getElementById('players');
+          pselector.innerHTML += markup;
         }
       }
-    });
+    }
+    //});
   });
 }
 
@@ -276,6 +280,7 @@ async function PutInformationInScreen() {
   var titlename = document.querySelector('title');
   titlename.textContent = 'Planning Poker || ' + gameName;
 
+  listen_game();
 }
 
 function setCookie(cname, cvalue, exdays) {

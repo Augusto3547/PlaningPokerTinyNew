@@ -1,16 +1,24 @@
-import {  getDatabase,  ref,  child,  get,  push,  onValue,  update} from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+  push,
+  onValue,
+  update,
+} from 'firebase/database';
 import { New_Game } from './Firebase.js';
 import { New_Player } from './Firebase.js';
 import { Change_Name } from './Firebase.js';
 import { getDataUserAuth } from './Firebase.js';
 import { listen_game } from './Firebase.js';
-import {RetirarHide} from './JavaScript.js'
-import {CopyUrlTransfer} from './JavaScript.js'
+import { RetirarHide } from './JavaScript.js';
+import { CopyUrlTransfer } from './JavaScript.js';
 import $ from 'jquery';
 
 $(document).ready(function () {
   //getVotingSystem();
-  listen_game();
+
   var url = window.location.href;
   var res = url.split('#');
   let Global_Game_ID = '';
@@ -28,6 +36,8 @@ $(document).ready(function () {
       $('.register').addClass('hidden');
       $('.section, .superhide').removeClass('hidden');
       getDataUserAuth(Global_Game_ID);
+
+      listen_game();
     }
   }
   $('.cg').on('click', function () {
@@ -40,18 +50,18 @@ $(document).ready(function () {
     Change_Name();
   });
 
-  $('.invite').on('click', ()=>{
+  $('.invite').on('click', () => {
     RetirarHide();
-  })
+  });
 
-  $('.lastoption').on('click', ()=>{
-      var element = document.getElementById('escondido');
-      element.classList.remove('hidden');
-  })
+  $('.lastoption').on('click', () => {
+    var element = document.getElementById('escondido');
+    element.classList.remove('hidden');
+  });
 
-  $('.copyurllink').on('click', ()=>{
+  $('.copyurllink').on('click', () => {
     CopyUrlTransfer();
-  })
+  });
 
   $('.cheap .card').click(function (e) {
     if (!$(this).hasClass('ativo')) {

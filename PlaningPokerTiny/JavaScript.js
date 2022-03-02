@@ -31,8 +31,8 @@ function fecharJanela() {
   elemento.classList.add('hidden');
 }
 
-let buttonsettimer = document.querySelector("button#RevelCards")
-buttonsettimer.addEventListener('click', SetTimer)
+let buttonsettimer = document.querySelector('button#RevelCards');
+buttonsettimer.addEventListener('click', SetTimer);
 
 function SetTimer() {
   //Timer
@@ -52,14 +52,14 @@ function SetTimer() {
       clearInterval(funcao);
 
       resumoVotacao();
-      timer.textContent = ""
+      timer.textContent = '';
     }
 
     duracao--;
   }, 1000);
 
   // Valor Carta
-  
+
   var cardvalue = document.querySelector('button.card.ativo').textContent;
 
   var cardselect = document.querySelector('button#newcard');
@@ -95,9 +95,8 @@ function resumoVotacao() {
   result.classList.remove('hidden');
 }
 
-  let butt = document.querySelector("button.StartNewVoting");
-  butt.addEventListener("click", function(e){
-
+let butt = document.querySelector('button.StartNewVoting');
+butt.addEventListener('click', function (e) {
   var timer = document.querySelector('p#timer');
   timer.classList.remove('hidden');
 
@@ -113,10 +112,9 @@ function resumoVotacao() {
   var result = document.querySelector('div.resultofvoting');
   result.classList.add('hidden');
 
-  var cardativo = document.querySelector('button.card.ativo')
-  cardativo.classList.remove("ativo")
+  var cardativo = document.querySelector('button.card.ativo');
+  cardativo.classList.remove('ativo');
 
   var temp = document.querySelector('p#temp');
   temp.classList.remove('hidden');
-
-  })
+});
