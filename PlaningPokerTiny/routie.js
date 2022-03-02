@@ -211,8 +211,12 @@ var Routie = function(w, isModule) {
    
 };
 
-if (typeof module == 'undefined'){
-  Routie(window);
-} else {
-  module.exports = Routie(window,true);
-}
+// if (typeof module == 'undefined'){
+//   console.log("N é modulo")
+//   Routie(window);
+// } else {
+//   console.log("é modulo")
+//   module.exports = Routie(window,true);
+// }
+
+export const routie = Routie(window,true);

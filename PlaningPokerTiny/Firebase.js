@@ -1,16 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import {
-  getDatabase,
-  ref,
-  child,
-  get,
-  push,
-  onValue,
-  update,
-  onChildChanged,
-  onChildAdded,
-} from 'firebase/database';
-import './routie';
+import {  getDatabase,  ref,  child,  get, push,  onValue,  update,  onChildChanged,  onChildAdded,} from 'firebase/database';
+import {routie} from './routie';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBcXWuDslHfFbtENzKZaiNoYdEwXDyrEq8',
@@ -90,7 +80,6 @@ export async function New_Player(NameNewPlayer, Idsala) {
 }
 
 export async function listen_game() {
-  console.log('ENTROU');
   // Buscar o ID do Jogo
   const dbRef = ref(getDatabase());
   await get(child(dbRef, 'Games/'))
@@ -116,8 +105,6 @@ export async function listen_game() {
     'Games/' + Global_Game_ID + '/players'
   );
   onChildAdded(dbchangeref, (snapshot) => {
-    console.log(snapshot.val());
-    console.log(snapshot.key);
     const playerId = snapshot.key;
     //Object.keys(snapshot.val()).map((playerId) => {
     console.log(current_user_id, playerId);

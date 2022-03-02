@@ -1,3 +1,3 @@
 import "./Firebase";
 import "./JavaScript";
-import "./jquery"
+import "./jquery";

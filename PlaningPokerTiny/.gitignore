@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Meus arquivos
+
+.firebaserc
+firebase.json
+dist
