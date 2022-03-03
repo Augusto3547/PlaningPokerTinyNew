@@ -1,12 +1,4 @@
-import {
-  getDatabase,
-  ref,
-  child,
-  get,
-  push,
-  onValue,
-  update,
-} from 'firebase/database';
+import {  getDatabase,  ref,  child,  get,  push,  onValue,  update} from 'firebase/database';
 import { New_Game } from './Firebase.js';
 import { New_Player } from './Firebase.js';
 import { Change_Name } from './Firebase.js';
@@ -71,10 +63,47 @@ $(document).ready(function () {
     if ($(this).hasClass('ativo')) {
       RetireHideImageCard();
       RetireHideRevelCards();
+      // Jogar o valor da carta para o banco no respectivo usuário 
+
+      //Buscar o ID do usuário que esta jogando
+      let current_user_id = '';
+      let cookies = document.cookie;
+      let ca = cookies.split('=');
+      current_user_id = ca[1];
+
+        // Buscar o Id do jogo pela URL
+
+        let url = window.location.href;
+        let res = url.split('#');
+        let idnotf = res[1].substr(3);
+        Global_Game_ID = idnotf;
+
+      let card_value = $('.card.ativo').text();
+      let card = {
+        card: card_value
+      }
+      const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
+
+      // console.log(Global_Game_ID)
+      // console.log(current_user_id)
+      // console.log(card_value)
+      // console.log(dbref)
+      
     } else {
       AddHideImageCard();
       AddHideRevelCards();
+      //Retirar o valor da carta no banco caso o player desclicar da mesma
+      let current_user_id = '';
+      let cookies = document.cookie;
+      let ca = cookies.split('=');
+      current_user_id = ca[1];
+
+      let card = {
+        card: ""
+      }
+      const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
     }
+
   });
 
   $('#RevelCards').on('click', function () {});
@@ -257,7 +286,7 @@ function setCookie(cValue, expDays) {
 }
 
 function RetireHideImageCard() {
-  var imageretire = document.getElementById('imgbackcard');
+  var imageretire = document.querySelector('img.imgbackcard');
   imageretire.classList.remove('hidden');
 }
 
@@ -266,8 +295,8 @@ function RetireHideRevelCards() {
   revealcards.classList.remove('hidden');
 }
 
-function AddHideImageCard() {
-  var imageretire = document.getElementById('imgbackcard');
+ function AddHideImageCard() {
+  var imageretire = document.querySelector('img.imgbackcard');
   imageretire.classList.add('hidden');
 }
 

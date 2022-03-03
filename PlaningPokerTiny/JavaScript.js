@@ -1,3 +1,5 @@
+import {  getDatabase,  ref,  child,  get,  push,  onValue,  update} from 'firebase/database';
+
 function AdicionarAtributo(e) {
   console.log(e);
   var element = document.getElementById('escondido');
@@ -35,6 +37,20 @@ let buttonsettimer = document.querySelector('button#RevelCards');
 buttonsettimer.addEventListener('click', SetTimer);
 
 function SetTimer() {
+  let Global_Game_ID = ""
+        // Buscar o Id do jogo pela URL
+
+        let url = window.location.href;
+        let res = url.split('#');
+        let idnotf = res[1].substr(3);
+        Global_Game_ID = idnotf;
+
+  let udpaterevealcards = {
+    cards_turned: true,
+  }
+  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID),udpaterevealcards)
+
+
   //Timer
   var duracao = 2;
 
@@ -76,7 +92,7 @@ function resumoVotacao() {
   var timer = document.querySelector('p#timer');
   timer.classList.add('hidden');
 
-  var oldcard = document.querySelector('img#imgbackcard');
+  var oldcard = document.querySelector('img.imgbackcard');
   oldcard.classList.add('hidden');
 
   var newcard = document.querySelector('button#newcard');
@@ -100,7 +116,7 @@ butt.addEventListener('click', function (e) {
   var timer = document.querySelector('p#timer');
   timer.classList.remove('hidden');
 
-  var oldcard = document.querySelector('img#imgbackcard');
+  var oldcard = document.querySelector('img.imgbackcard');
   oldcard.classList.add('hidden');
 
   var newcard = document.querySelector('button#newcard');

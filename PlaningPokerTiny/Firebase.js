@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {  getDatabase,  ref,  child,  get, push,  onValue,  update,  onChildChanged,  onChildAdded,} from 'firebase/database';
+import { data } from 'jquery';
+import $ from 'jquery';
 import {routie} from './routie';
 
 const firebaseConfig = {
@@ -25,6 +27,7 @@ export async function New_Game() {
   if (!game_id) {
     const response = await push(ref(getDatabase(app), 'Games'), {
       name: gameName,
+      cards_turned: false,
     });
 
     game_id = response.key;
@@ -37,6 +40,12 @@ export async function New_Game() {
       card: '',
     }
   );
+
+  // Colcoar o id do primeiro jogador na id da tag img no html fixo
+
+  let first_id_player = playersRef.key
+  let imgselect  = document.querySelector("img.imgbackcard")
+  imgselect.id = first_id_player
 
   Global_Game_ID = game_id;
 
@@ -79,6 +88,7 @@ export async function New_Player(NameNewPlayer, Idsala) {
   PutInformationInScreen();
 }
 
+// Esta função é responsável por ouvir TODOS os eventos do jogo e realizar as alterações necessárias
 export async function listen_game() {
   // Buscar o ID do Jogo
   const dbRef = ref(getDatabase());
@@ -104,21 +114,20 @@ export async function listen_game() {
     getDatabase(),
     'Games/' + Global_Game_ID + '/players'
   );
+  //Verificar quando um novo jogador entrar
   onChildAdded(dbchangeref, (snapshot) => {
     const playerId = snapshot.key;
     //Object.keys(snapshot.val()).map((playerId) => {
-    console.log(current_user_id, playerId);
     if (current_user_id != playerId) {
       let teste = document.getElementById(playerId);
       if (!teste) {
         const nome = snapshot.val().name;
         if (nome) {
           let markup = `
-          <div id="${playerId}">
             <div class="cardplayer">
             <div class="cardplayerplay">
                 <button class="cardnew hidden" id="newcard"></button>
-                <img id="imgbackcard" class="imgbackcard hidden" src="img/backcard.png">
+                <img id="${playerId}" class="imgbackcard hidden" src="img/backcard.png">
             </div>
             </div>
             <div class="nameplayeraftercard">
@@ -126,7 +135,6 @@ export async function listen_game() {
                     ${nome}
                 </p>
             </div>
-          </div>
           `;
           let pselector = document.getElementById('players');
           pselector.innerHTML += markup;
@@ -135,6 +143,20 @@ export async function listen_game() {
     }
     //});
   });
+
+  //Verificar se os jogadores selecionaram as cartas e colocar a imagem de trás da carta
+  const dbrefcardchange = ref(getDatabase(),'Games/' + Global_Game_ID + '/players')
+  onChildChanged(dbrefcardchange, (data)=>{
+    if (data.val().card != ''){
+      let imageretire = document.getElementById(data.key);
+      imageretire.classList.remove('hidden');
+      console.log(data.key)
+    } else {
+      let imageretire = document.getElementById(data.key);
+      imageretire.classList.add('hidden');
+    }
+  })
+
 }
 
 export async function Change_Name() {
