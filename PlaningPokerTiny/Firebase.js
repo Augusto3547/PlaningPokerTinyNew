@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import {  getDatabase,  ref,  child,  get, push,  onValue,  update,  onChildChanged,  onChildAdded,} from 'firebase/database';
+import {  getDatabase,  ref,  child,  get, push,  onValue,  update,  onChildChanged,  onChildAdded, set} from 'firebase/database';
 import { data } from 'jquery';
 import $ from 'jquery';
 import {routie} from './routie';
@@ -27,7 +27,6 @@ export async function New_Game() {
   if (!game_id) {
     const response = await push(ref(getDatabase(app), 'Games'), {
       name: gameName,
-      cards_turned: false,
     });
 
     game_id = response.key;
@@ -40,12 +39,21 @@ export async function New_Game() {
       card: '',
     }
   );
+    console.log(game_id)
+  const db = getDatabase();
+  set(ref(db, 'Games/' + game_id + "/players"+ "/cards_turned"), {
+    turned: false,
+  });
 
-  // Colcoar o id do primeiro jogador na id da tag img no html fixo
+  //Colcoar o id do primeiro jogador na id da tag img no html fixo
 
   let first_id_player = playersRef.key
   let imgselect  = document.querySelector("img.imgbackcard")
   imgselect.id = first_id_player
+
+   //Colocar o id do primeiro jogador na new card HTML fixo
+   let newcardselect  = document.querySelector("button.newcard")
+   newcardselect.id = first_id_player
 
   Global_Game_ID = game_id;
 
@@ -145,18 +153,134 @@ export async function listen_game() {
   });
 
   //Verificar se os jogadores selecionaram as cartas e colocar a imagem de trás da carta
-  const dbrefcardchange = ref(getDatabase(),'Games/' + Global_Game_ID + '/players')
-  onChildChanged(dbrefcardchange, (data)=>{
-    if (data.val().card != ''){
-      let imageretire = document.getElementById(data.key);
-      imageretire.classList.remove('hidden');
-      console.log(data.key)
-    } else {
-      let imageretire = document.getElementById(data.key);
-      imageretire.classList.add('hidden');
+  const dbrefcardchange = ref(getDatabase(),'Games/' + Global_Game_ID + "/players")
+   onChildChanged(dbrefcardchange, (data)=>{
+    try{
+      if (data.val().card != ''){
+        // console.log(data.key)
+        // console.log(data.val().card)
+        // console.log(data.val())
+        let imageretire = document.getElementById(data.key);
+        imageretire.classList.remove('hidden');
+      } else {
+        let imageretire = document.getElementById(data.key);
+        imageretire.classList.add('hidden');
+      }
+    }
+    catch(e){
+     
     }
   })
 
+  //Setar  timer e revelar as cartas
+  const dbreftimer = ref(getDatabase(),'Games/' + Global_Game_ID + "/players" + "/cards_turned")
+  onChildChanged(dbreftimer, (data)=>{
+
+    if(data.val()== true){
+        console.log('entrou')
+    //Timer
+    var duracao = 2;
+  
+     var revealcards = document.getElementById('RevelCards');
+     revealcards.classList.add('hidden');
+  
+     var temp = document.querySelector('p#temp');
+     temp.classList.add('hidden');
+  
+     var funcao = setInterval(function () {
+       var timer = document.querySelector('p#timer');
+       timer.textContent = duracao;
+  
+       if (duracao == 0) {
+         clearInterval(funcao);
+
+        //Resumo votação
+        var timer = document.querySelector('p#timer');
+        timer.classList.add('hidden');
+      
+        var oldcard = document.querySelector('img.imgbackcard');
+        oldcard.classList.add('hidden');
+      
+        var newcard = document.querySelector('button#newcard');
+        newcard.classList.remove('hidden');
+      
+        var buttonnewvoting = document.querySelector('button.StartNewVoting');
+        buttonnewvoting.classList.remove('hidden');
+      
+        var cheapnew = document.querySelector('div.cheap');
+        cheapnew.style.opacity = '';
+      
+        var popac = document.querySelector('p.choosecard');
+        popac.style.opacity = '';
+      
+        var result = document.querySelector('div.resultofvoting');
+        result.classList.remove('hidden');
+
+
+  
+         timer.textContent = '';
+       }
+  
+       duracao--;
+     }, 1000);
+  
+    // Valor Carta (Buscar no banco, pois senão lança uma exeption)
+
+    let current_user_id = '';
+    let cookies = document.cookie;
+    let ca = cookies.split('=');
+    current_user_id = ca[1];
+    var cardvalue = "";
+    let gbrefgetcardvalue = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/" + current_user_id)
+    onValue(gbrefgetcardvalue,(snapshot) => {
+      if (snapshot.exists()) {
+        cardvalue = snapshot.val().card
+      } else {
+        console.log("No data available");
+      }
+    })
+  
+    //var cardvalue = document.querySelector('button.card.ativo').textContent;
+    if (cardvalue == ''){
+      cardvalue = "?"
+    }
+  
+    var cardselect = document.querySelector('button#newcard');
+    cardselect.textContent = cardvalue;
+  
+    var cheapnew = document.querySelector('div.cheap');
+    cheapnew.style.opacity = '0.2';
+  
+    var popac = document.querySelector('p.choosecard');
+    popac.style.opacity = '0.2';
+  
+  }else if(data.val() == false){
+
+  //Quando o cara clica em começar uma nova votação
+  var timer = document.querySelector('p#timer');
+  timer.classList.remove('hidden');
+
+  var oldcard = document.querySelector('img.imgbackcard');
+  oldcard.classList.add('hidden');
+
+  var newcard = document.querySelector('button#newcard');
+  newcard.classList.add('hidden');
+
+  var buttonnewvoting = document.querySelector('button.StartNewVoting');
+  buttonnewvoting.classList.add('hidden');
+
+  var result = document.querySelector('div.resultofvoting');
+  result.classList.add('hidden');
+
+  var cardativo = document.querySelector('button.card.ativo');
+  cardativo.classList.remove('ativo');
+
+  var temp = document.querySelector('p#temp');
+  temp.classList.remove('hidden');
+
+  console.log(document.querySelector('p#temp'))
+  }
+})
 }
 
 export async function Change_Name() {

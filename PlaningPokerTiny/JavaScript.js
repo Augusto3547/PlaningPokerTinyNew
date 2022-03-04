@@ -46,9 +46,9 @@ function SetTimer() {
         Global_Game_ID = idnotf;
 
   let udpaterevealcards = {
-    cards_turned: true,
+    turned: true,
   }
-  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID),udpaterevealcards)
+  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
 
 
   //Timer
@@ -111,8 +111,23 @@ function resumoVotacao() {
   result.classList.remove('hidden');
 }
 
-let butt = document.querySelector('button.StartNewVoting');
+let butt = document.querySelector('button.StartNewVoting'); // <- Start New Voting
 butt.addEventListener('click', function (e) {
+
+  let Global_Game_ID = ""
+        // Buscar o Id do jogo pela URL
+
+        let url = window.location.href;
+        let res = url.split('#');
+        let idnotf = res[1].substr(3);
+        Global_Game_ID = idnotf;
+
+  let udpaterevealcards = {
+    turned: false,
+  }
+  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
+
+
   var timer = document.querySelector('p#timer');
   timer.classList.remove('hidden');
 
