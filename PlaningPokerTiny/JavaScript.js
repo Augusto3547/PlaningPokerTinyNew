@@ -51,8 +51,8 @@ function SetTimer() {
   const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
 
 
-  //Timer
-  var duracao = 2;
+   //Timer
+   var duracao = 2;
 
   var revealcards = document.getElementById('RevelCards');
   revealcards.classList.add('hidden');
@@ -76,10 +76,10 @@ function SetTimer() {
 
   // Valor Carta
 
-  var cardvalue = document.querySelector('button.card.ativo').textContent;
+  // var cardvalue = document.querySelector('button.card.ativo').textContent;
 
-  var cardselect = document.querySelector('button#newcard');
-  cardselect.textContent = cardvalue;
+  // var cardselect = document.querySelector('button#newcard');
+  // cardselect.textContent = cardvalue;
 
   var cheapnew = document.querySelector('div.cheap');
   cheapnew.style.opacity = '0.2';
@@ -126,7 +126,6 @@ butt.addEventListener('click', function (e) {
     turned: false,
   }
   const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
-
 
   var timer = document.querySelector('p#timer');
   timer.classList.remove('hidden');

@@ -39,7 +39,7 @@ export async function New_Game() {
       card: '',
     }
   );
-    console.log(game_id)
+    //console.log(game_id)
   const db = getDatabase();
   set(ref(db, 'Games/' + game_id + "/players"+ "/cards_turned"), {
     turned: false,
@@ -51,9 +51,9 @@ export async function New_Game() {
   let imgselect  = document.querySelector("img.imgbackcard")
   imgselect.id = first_id_player
 
-   //Colocar o id do primeiro jogador na new card HTML fixo
-   let newcardselect  = document.querySelector("button.newcard")
-   newcardselect.id = first_id_player
+  //  //Colocar o id do primeiro jogador na new card HTML fixo
+  //  let newcardselect  = document.querySelector("button.newcard")
+  //  newcardselect.id = first_id_player
 
   Global_Game_ID = game_id;
 
@@ -69,7 +69,7 @@ export async function New_Player(NameNewPlayer, Idsala) {
     card: '',
   };
 
-  console.log(Idsala);
+  //console.log(Idsala);
 
   const refdb = await push(
     ref(getDatabase(app), 'Games/' + Idsala + '/players'),
@@ -85,7 +85,7 @@ export async function New_Player(NameNewPlayer, Idsala) {
       if (snapshot.exists()) {
         gameName = snapshot.val().name; // para colocar o noem do jogo na tela quanado um novo jogador entrar
       } else {
-        console.log('No data available');
+        //console.log('No data available');
       }
     })
     .catch((error) => {
@@ -105,11 +105,11 @@ export async function listen_game() {
       if (snapshot.exists()) {
         Global_Game_ID = Object.keys(snapshot.val())[0];
       } else {
-        console.log('No data available');
+        //console.log('No data available');
       }
     })
     .catch((error) => {
-      console.error(error);
+      //console.error(error);
     });
 
   //Buscar o ID do usuário que esta jogando
@@ -131,17 +131,18 @@ export async function listen_game() {
       if (!teste) {
         const nome = snapshot.val().name;
         if (nome) {
+          //console.log(playerId)
           let markup = `
             <div class="cardplayer">
-            <div class="cardplayerplay">
-                <button class="cardnew hidden" id="newcard"></button>
-                <img id="${playerId}" class="imgbackcard hidden" src="img/backcard.png">
-            </div>
-            </div>
-            <div class="nameplayeraftercard">
+              <div class="cardplayerplay">
+                  <button class="cardnew hidden" id="newcard"></button>
+                  <img id="${playerId}" class="imgbackcard hidden" src="img/backcard.png">
+              </div>
+              <div class="nameplayeraftercard">
                 <p class="nameaftercard">
                     ${nome}
                 </p>
+            </div>
             </div>
           `;
           let pselector = document.getElementById('players');
@@ -154,22 +155,22 @@ export async function listen_game() {
 
   //Verificar se os jogadores selecionaram as cartas e colocar a imagem de trás da carta
   const dbrefcardchange = ref(getDatabase(),'Games/' + Global_Game_ID + "/players")
-   onChildChanged(dbrefcardchange, (data)=>{
-    try{
-      if (data.val().card != ''){
-        // console.log(data.key)
-        // console.log(data.val().card)
-        // console.log(data.val())
-        let imageretire = document.getElementById(data.key);
+   onChildChanged(dbrefcardchange, (key, value)=>{
+     //console.log(key.val())
+    //try{
+      console.log(key)
+      console.log(value)
+      if (key.val().card != ''){
+        let imageretire = document.getElementById(value);
         imageretire.classList.remove('hidden');
       } else {
-        let imageretire = document.getElementById(data.key);
+        let imageretire = document.getElementById(value);
         imageretire.classList.add('hidden');
       }
-    }
-    catch(e){
+    //}
+   // catch(e){
      
-    }
+   // }
   })
 
   //Setar  timer e revelar as cartas
@@ -177,7 +178,7 @@ export async function listen_game() {
   onChildChanged(dbreftimer, (data)=>{
 
     if(data.val()== true){
-        console.log('entrou')
+        //console.log('entrou')
     //Timer
     var duracao = 2;
   
@@ -195,14 +196,31 @@ export async function listen_game() {
          clearInterval(funcao);
 
         //Resumo votação
+
+        let gbrefturncards = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
+        onValue(gbrefturncards,(snapshot)=>{
+          Object.keys(snapshot.val()).map((user)=>{
+            let aa = document.getElementById(user)
+            if(aa){
+              let tt = aa.previousElementSibling
+              tt.classList.remove('hidden')
+
+              var oldcard = document.getElementById(user);
+              oldcard.classList.add('hidden');
+
+            }
+          })
+        })
+
+
         var timer = document.querySelector('p#timer');
         timer.classList.add('hidden');
       
-        var oldcard = document.querySelector('img.imgbackcard');
-        oldcard.classList.add('hidden');
+        // var oldcard = document.querySelector('img.imgbackcard');
+        // oldcard.classList.add('hidden');
       
-        var newcard = document.querySelector('button#newcard');
-        newcard.classList.remove('hidden');
+        // var newcard = document.querySelector('button#newcard');
+        // newcard.classList.remove('hidden');
       
         var buttonnewvoting = document.querySelector('button.StartNewVoting');
         buttonnewvoting.classList.remove('hidden');
@@ -226,27 +244,33 @@ export async function listen_game() {
   
     // Valor Carta (Buscar no banco, pois senão lança uma exeption)
 
-    let current_user_id = '';
-    let cookies = document.cookie;
-    let ca = cookies.split('=');
-    current_user_id = ca[1];
-    var cardvalue = "";
-    let gbrefgetcardvalue = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/" + current_user_id)
+    let gbrefgetcardvalue = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
     onValue(gbrefgetcardvalue,(snapshot) => {
       if (snapshot.exists()) {
-        cardvalue = snapshot.val().card
+        
+        Object.keys(snapshot.val()).map((el)=>{
+          //console.log(el)
+          const card = document.getElementById(el);
+          if(card){
+            const sb = card.previousElementSibling;
+            sb.textContent = snapshot.val()[el].card;
+            //console.log(snapshot.val()[el].card)
+
+          }
+        })
+
       } else {
-        console.log("No data available");
+        //console.log("No data available");
       }
     })
   
     //var cardvalue = document.querySelector('button.card.ativo').textContent;
-    if (cardvalue == ''){
-      cardvalue = "?"
-    }
+    // if (cardvalue == ''){
+    //   cardvalue = "?"
+    // }
   
-    var cardselect = document.querySelector('button#newcard');
-    cardselect.textContent = cardvalue;
+    // var cardselect = document.querySelector('button#newcard');
+    // cardselect.textContent = cardvalue;
   
     var cheapnew = document.querySelector('div.cheap');
     cheapnew.style.opacity = '0.2';
@@ -255,19 +279,42 @@ export async function listen_game() {
     popac.style.opacity = '0.2';
   
   }else if(data.val() == false){
+    //console.log("Entrou false")
+    let gbrefstartnewround = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
+        onValue(gbrefstartnewround,(snapshot)=>{
+          Object.keys(snapshot.val()).map((user)=>{
+            let hh = document.getElementById(user)
+            if(hh){
+              let jj = hh.previousElementSibling
+              jj.classList.add('hidden')
 
+             let olddcard = document.getElementById(user);
+              olddcard.classList.add('hidden');
+
+              var buttonnewvoting = document.querySelector('button.StartNewVoting');
+              buttonnewvoting.classList.add('hidden');
+
+            }
+          })
+
+          // snapshot.forEach((childSnapshot)=>{
+          //  update(childSnapshot,{
+          //    card: "",
+          //  })
+          // })
+        })
   //Quando o cara clica em começar uma nova votação
   var timer = document.querySelector('p#timer');
   timer.classList.remove('hidden');
 
-  var oldcard = document.querySelector('img.imgbackcard');
-  oldcard.classList.add('hidden');
+  // var oldcard = document.querySelector('img.imgbackcard');
+  // oldcard.classList.add('hidden');
 
-  var newcard = document.querySelector('button#newcard');
-  newcard.classList.add('hidden');
+  // var newcard = document.querySelector('button#newcard');
+  // newcard.classList.add('hidden');
 
-  var buttonnewvoting = document.querySelector('button.StartNewVoting');
-  buttonnewvoting.classList.add('hidden');
+  // var buttonnewvoting = document.querySelector('button.StartNewVoting');
+  // buttonnewvoting.classList.add('hidden');
 
   var result = document.querySelector('div.resultofvoting');
   result.classList.add('hidden');
@@ -277,8 +324,7 @@ export async function listen_game() {
 
   var temp = document.querySelector('p#temp');
   temp.classList.remove('hidden');
-
-  console.log(document.querySelector('p#temp'))
+      
   }
 })
 }
@@ -311,7 +357,7 @@ export async function Change_Name() {
       if (snapshot.exists()) {
         Global_Game_ID = Object.keys(snapshot.val())[0];
       } else {
-        console.log('No data available');
+        //console.log('No data available');
       }
     })
     .catch((error) => {
@@ -344,6 +390,7 @@ export async function Change_Name() {
 }
 
 export async function getDataUserAuth(Idsala) {
+
   let user_ID = '';
   let cookies = document.cookie;
   var teste = cookies.split(';');
@@ -361,7 +408,7 @@ export async function getDataUserAuth(Idsala) {
     if (snapshot.exists()) {
       gameName = snapshot.val().name; // para colocar o noem do jogo na tela quanado um novo jogador entrar
     } else {
-      console.log('No data available');
+      //console.log('No data available');
     }
   });
 
@@ -372,7 +419,7 @@ export async function getDataUserAuth(Idsala) {
       if (snapshot.exists()) {
         namePlayer = snapshot.val().name; // para colocar o noem do jogo na tela quanado um novo jogador entrar
       } else {
-        console.log('No data available');
+        //console.log('No data available');
       }
     }
   );
@@ -393,6 +440,14 @@ export async function getDataUserAuth(Idsala) {
 
   var titlename = document.querySelector('title');
   titlename.textContent = 'Planning Poker || ' + gameName;
+
+  let current_user_id = '';
+  let cookiess = document.cookie;
+  let ca = cookiess.split('=');
+  current_user_id = ca[1];
+
+  let imgselect  = document.querySelector("img.imgbackcard")
+  imgselect.id = current_user_id
 }
 
 async function PutInformationInScreen() {
@@ -412,6 +467,14 @@ async function PutInformationInScreen() {
 
   var titlename = document.querySelector('title');
   titlename.textContent = 'Planning Poker || ' + gameName;
+
+  let current_user_id = '';
+  let cookies = document.cookie;
+  let ca = cookies.split('=');
+  current_user_id = ca[1];
+
+  let imgselect  = document.querySelector("img.imgbackcard")
+  imgselect.id = current_user_id
 
   listen_game();
 }

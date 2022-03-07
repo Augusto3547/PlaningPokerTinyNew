@@ -599,6 +599,14 @@ input#qrcodecontent {
   justify-content: center;
 }
 
+#players{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
 button.RevelCards {
   border-radius: 0.8rem;
   cursor: pointer;
@@ -636,10 +644,10 @@ p#timer{
 }
 
 .cardplayer {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
-  margin-top: 2%;
+  margin-top: 2%; 
 }
 
 .cardplayerplay {
@@ -647,10 +655,12 @@ p#timer{
   height: 5rem;
   width: 3rem;
   border-radius: 0.8rem;
+  margin: 0 15px;
 }
 
 .nameplayeraftercard {
   text-align: center;
+  
 }
 
 img.imgbackcard {

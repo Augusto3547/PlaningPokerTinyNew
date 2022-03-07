@@ -29,6 +29,14 @@ $(document).ready(function () {
       $('.section, .superhide').removeClass('hidden');
       getDataUserAuth(Global_Game_ID);
 
+      let current_user_id = '';
+      let cookies = document.cookie;
+      let ca = cookies.split('=');
+      current_user_id = ca[1];
+
+      let imgselect  = document.querySelector("img.imgbackcard")
+      imgselect.id = current_user_id
+
       listen_game();
     }
   }
