@@ -37,19 +37,6 @@ let buttonsettimer = document.querySelector('button#RevelCards');
 buttonsettimer.addEventListener('click', SetTimer);
 
 function SetTimer() {
-  let Global_Game_ID = ""
-        // Buscar o Id do jogo pela URL
-
-        let url = window.location.href;
-        let res = url.split('#');
-        let idnotf = res[1].substr(3);
-        Global_Game_ID = idnotf;
-
-  let udpaterevealcards = {
-    turned: true,
-  }
-  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
-
 
    //Timer
    var duracao = 2;
@@ -114,19 +101,6 @@ function resumoVotacao() {
 let butt = document.querySelector('button.StartNewVoting'); // <- Start New Voting
 butt.addEventListener('click', function (e) {
 
-  let Global_Game_ID = ""
-        // Buscar o Id do jogo pela URL
-
-        let url = window.location.href;
-        let res = url.split('#');
-        let idnotf = res[1].substr(3);
-        Global_Game_ID = idnotf;
-
-  let udpaterevealcards = {
-    turned: false,
-  }
-  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
-
   var timer = document.querySelector('p#timer');
   timer.classList.remove('hidden');
 
@@ -143,7 +117,9 @@ butt.addEventListener('click', function (e) {
   result.classList.add('hidden');
 
   var cardativo = document.querySelector('button.card.ativo');
-  cardativo.classList.remove('ativo');
+  if(cardativo){
+    cardativo.classList.remove('ativo');
+  }
 
   var temp = document.querySelector('p#temp');
   temp.classList.remove('hidden');

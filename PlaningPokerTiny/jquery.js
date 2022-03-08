@@ -90,7 +90,7 @@ $(document).ready(function () {
       let card = {
         card: card_value
       }
-      const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
+      let dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
 
       // console.log(Global_Game_ID)
       // console.log(current_user_id)
@@ -109,12 +109,43 @@ $(document).ready(function () {
       let card = {
         card: ""
       }
-      const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
+      let dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
     }
 
   });
 
-  $('#RevelCards').on('click', function () {});
+  // Alterar para cartas viradas : true
+   $('#RevelCards').on('click', function (e) {
+    let Global_Game_ID = ""
+    // Buscar o Id do jogo pela URL
+
+    let url = window.location.href;
+    let res = url.split('#');
+    let idnotf = res[1].substr(3);
+    Global_Game_ID = idnotf;
+
+    let udpaterevealcards = {
+    turned: true,
+    }
+    const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
+
+   });
+
+   // Alterar para cartas viradas : false
+   $('#StartNewVoting').on('click', function (e) {
+    let Global_Game_ID = ""
+        // Buscar o Id do jogo pela URL
+
+        let url = window.location.href;
+        let res = url.split('#');
+        let idnotf = res[1].substr(3);
+        Global_Game_ID = idnotf;
+
+  let udpaterevealcards = {
+    turned: false,
+  }
+  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
+   })
 
   $(document).click(function (e) {
     //Para fechar fora timer
