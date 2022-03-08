@@ -51,6 +51,11 @@ export async function New_Game() {
   let imgselect  = document.querySelector("img.imgbackcard")
   imgselect.id = first_id_player
 
+  // Colocar o Id do player na tag p do nome em baixo da carta
+
+  let pselect = document.querySelector('.nameaftercard')
+  pselect.classList.add(first_id_player)
+
   Global_Game_ID = game_id;
 
   setCookie(namePlayer, playersRef.key, 1);
@@ -105,7 +110,7 @@ export async function listen_game() {
       }
     })
     .catch((error) => {
-      //console.error(error);
+      console.error(error);
     });
 
   //Buscar o ID do usuário que esta jogando
@@ -127,7 +132,7 @@ export async function listen_game() {
       if (!teste) {
         const nome = snapshot.val().name;
         if (nome) {
-          //console.log(playerId)
+          console.log(playerId)
           let markup = `
             <div class="cardplayer">
               <div class="cardplayerplay">
@@ -135,12 +140,13 @@ export async function listen_game() {
                   <img id="${playerId}" class="imgbackcard hidden" src="img/backcard.png">
               </div>
               <div class="nameplayeraftercard">
-                <p class="nameaftercard">
+                <p class="nameaftercard ${playerId}">
                     ${nome}
                 </p>
             </div>
             </div>
           `;
+          console.log(markup)
           let pselector = document.getElementById('players');
           pselector.innerHTML += markup;
         }
@@ -369,6 +375,45 @@ export async function listen_game() {
         
     }
 })
+  //Verificar o noem do jogador alterado e mudar para os outros
+
+  let dbchangename = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
+  onChildChanged(dbchangename, (data)=>{
+    if(data.val().name){
+      console.log(data.val().name)
+  get(dbchangename).then((snapshot) => {
+    Object.keys(snapshot.val()).map((user)=>{
+      let yy = document.querySelector(`p.${user}`)
+      if(yy){
+        yy.textContent = data.val().name;        
+      }
+    })
+  }).catch((error) => {
+    console.error(error);
+  });
+    }
+
+  })
+
+
+  // let gbrefgetcardvalue = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
+  // get(gbrefgetcardvalue).then((snapshot) => {
+  //   Object.keys(snapshot.val()).map((el)=>{
+  //     const card = document.getElementById(el);
+  //     if(card){
+  //       const sb = card.previousElementSibling;
+  //       sb.textContent = snapshot.val()[el].card;
+  //     }
+  //   })
+  // }).catch((error) => {
+  //   console.error(error);
+  // });
+
+
+
+
+
+
 }
 
 export async function Change_Name() {
@@ -417,8 +462,20 @@ export async function Change_Name() {
     update(dbref, playerChange);
   }
 
-  var pnameplayer = document.querySelector('p.nameaftercard');
-  pnameplayer.textContent = nameChange;
+  // let dbchangename = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
+  // get(dbchangename).then((snapshot) => {
+  //   Object.keys(snapshot.val()).map((user)=>{
+  //     let aa = document.querySelector(`p.${user}`)
+  //     aa.textContent = nameChange;        
+  //   })
+  // }).catch((error) => {
+  //   console.error(error);
+  // });
+
+  var pnameplayer = document.querySelector("p.nameaftercard");
+  if(pnameplayer){
+    pnameplayer.textContent = nameChange;
+  }
   // Nome no botão para trocar o mesmo
   var bnameplayer = document.querySelector('button.profile');
   var tag = document.createElement('i');
@@ -490,6 +547,9 @@ export async function getDataUserAuth(Idsala) {
 
   let imgselect  = document.querySelector("img.imgbackcard")
   imgselect.id = current_user_id
+
+  let pselect = document.querySelector('.nameaftercard')
+  pselect.classList.add(current_user_id)
 }
 
 async function PutInformationInScreen() {
@@ -517,6 +577,9 @@ async function PutInformationInScreen() {
 
   let imgselect  = document.querySelector("img.imgbackcard")
   imgselect.id = current_user_id
+
+  let pselect = document.querySelector('.nameaftercard')
+  pselect.classList.add(current_user_id)
 
   listen_game();
 }

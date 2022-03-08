@@ -11,6 +11,12 @@ div.register{
   width: 100%;
   height: 100%;
   top: 0;
+  background-image: url('./img/fundo_mesa.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment:fixed;
+  background-size: cover;
+
 }
 div.spaceregister {
   z-index: 2;
@@ -22,7 +28,7 @@ div.spaceregister {
   transform: translate(-50%, -50%);
   border-radius: 15px;
   width: 45%;
-  height: 50%;
+  height: 45%;
 }
 
 .inputfirtscreen{
