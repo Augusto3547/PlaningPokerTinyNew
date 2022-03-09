@@ -653,7 +653,7 @@ p#timer{
   display: block;
   justify-content: center;
   align-items: center;
-  margin-top: 2%; 
+  margin: 2% 1%;
 }
 
 .cardplayerplay {
@@ -661,7 +661,7 @@ p#timer{
   height: 5rem;
   width: 3rem;
   border-radius: 0.8rem;
-  margin: 0 15px;
+  margin: 0 auto;
 }
 
 .nameplayeraftercard {
@@ -1052,3 +1052,9 @@ h4.titleinviteplayers {
   font-weight: bold;
   font-weight: bold;
 }
+/*
+################################################################################
+##                                RESPONSIVO                                  ##
+################################################################################
+*/
+

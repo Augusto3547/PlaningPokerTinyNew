@@ -132,7 +132,7 @@ export async function listen_game() {
       if (!teste) {
         const nome = snapshot.val().name;
         if (nome) {
-          console.log(playerId)
+          //console.log(playerId)
           let markup = `
             <div class="cardplayer">
               <div class="cardplayerplay">
@@ -146,7 +146,7 @@ export async function listen_game() {
             </div>
             </div>
           `;
-          console.log(markup)
+          //console.log(markup)
           let pselector = document.getElementById('players');
           pselector.innerHTML += markup;
         }
@@ -177,7 +177,7 @@ export async function listen_game() {
   onChildChanged(dbreftimer, (change)=>{
 
       if(change.val()== true){
-          console.log('entrou')
+          //console.log('entrou')
       //Timer
       var duracao = 2;
     
@@ -239,7 +239,7 @@ export async function listen_game() {
               vetorformatado = vetor.filter(function(el, i) {
                   return vetor.indexOf(el) === i;
               });
-              console.log(vetorformatado);
+              //console.log(vetorformatado);
 
             vetorformatado.forEach(n=>{
               var count_num = 0
@@ -374,20 +374,17 @@ export async function listen_game() {
       teste.innerHTML = ""
         
     }
-})
+  })
   //Verificar o noem do jogador alterado e mudar para os outros
 
   let dbchangename = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
   onChildChanged(dbchangename, (data)=>{
     if(data.val().name){
-      console.log(data.val().name)
   get(dbchangename).then((snapshot) => {
-    Object.keys(snapshot.val()).map((user)=>{
-      let yy = document.querySelector(`p.${user}`)
-      if(yy){
+      let yy = document.querySelector(`p.${data.key}`)
+      if(yy){ 
         yy.textContent = data.val().name;        
       }
-    })
   }).catch((error) => {
     console.error(error);
   });

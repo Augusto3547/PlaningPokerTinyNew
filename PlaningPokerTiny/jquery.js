@@ -22,11 +22,11 @@ $(document).ready(function () {
     //Verificar se tem um cokkie salvo, então não pedir um nome para o jogador entrar
     if (cookies.length == 0) {
       $('.register').addClass('hidden');
-      $('.section, .superhide').removeClass('hidden');
+      $('.section, .superhide, .footer').removeClass('hidden');
       $('.nmplayer').removeClass('hidden');
     } else {
       $('.register').addClass('hidden');
-      $('.section, .superhide').removeClass('hidden');
+      $('.section, .superhide, .footer').removeClass('hidden');
       getDataUserAuth(Global_Game_ID);
 
       let current_user_id = '';
