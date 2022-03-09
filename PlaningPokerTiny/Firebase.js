@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import {  getDatabase,  ref,  child,  get, push,  onValue,  update,  onChildChanged,  onChildAdded, set} from 'firebase/database';
+import {  getDatabase,  ref,  child,  get, push,  onValue,  update,  onChildChanged,  onChildAdded, set, remove} from 'firebase/database';
 import { data } from 'jquery';
 import $ from 'jquery';
 import {routie} from './routie';
@@ -21,6 +21,14 @@ var namePlayer = '';
 var Global_Game_ID = '';
 
 export async function New_Game() {
+
+  //Limpar todos os jogos anteriores quando o proximo é criado
+  var aaaaaaa= ref(getDatabase(app),"Games")
+  set(aaaaaaa, null)
+
+  //Limpar os cookies do primeiro usuário 
+  deleteAllCookies();
+  
   gameName = document.getElementById('namegame').value;
   namePlayer = document.getElementById('displayname').value;
 
@@ -546,7 +554,9 @@ export async function getDataUserAuth(Idsala) {
   imgselect.id = current_user_id
 
   let pselect = document.querySelector('.nameaftercard')
-  pselect.classList.add(current_user_id)
+  if(pselect){
+    pselect.classList.add(current_user_id)
+  }
 }
 
 async function PutInformationInScreen() {

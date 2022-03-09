@@ -1058,3 +1058,535 @@ h4.titleinviteplayers {
 ################################################################################
 */
 
+@media screen and (max-width:1686px){
+
+  div.spaceregister {
+    z-index: 2;
+    background-color: rgb(247, 248, 248);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    width: 40%;
+    height: 40%;
+  }
+  
+  .inputfirtscreen{
+    display: block;
+    margin-left: 10%;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+  }
+  
+  img#poker {
+    max-width: 40px;
+    max-height: 40px;
+    margin-top: 30px;
+    margin-left: 30px;
+    float: left;
+    border: transparent thin solid;
+    padding: 5px;
+    margin: 0px 10px 10px 0;
+    margin-top: 35px;
+    margin-left: 35px;
+  }
+  h1 {
+    display: inline-block;
+    padding-top: 25px;
+    font-size: 30px;
+  }
+  p.textp {
+    text-align: center;
+    font-size: normal 7px arial;
+    color: black;
+    margin-top: 10%;
+  }
+  input.namegame {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 74%;
+    height: 50px;
+    padding: 0 1.6rem;
+    font-size: 20px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+  input.displayname {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 74%;
+    height: 50px;
+    padding: 0 1.6rem;
+    font-size: 20px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+
+  input.creategame {
+    display: block;
+    background: #3993ff;
+    color: white;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: 82%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width:1576px){
+  div.spaceregister {
+    z-index: 2;
+    background-color: rgb(247, 248, 248);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    width: 40%;
+    height: 36%;
+  }
+  
+  .inputfirtscreen{
+    display: block;
+    margin-left: 10%;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+  }
+  
+  img#poker {
+    max-width: 40px;
+    max-height: 40px;
+    margin-top: 30px;
+    margin-left: 30px;
+    float: left;
+    border: transparent thin solid;
+    padding: 5px;
+    margin: 0px 10px 10px 0;
+    margin-top: 35px;
+    margin-left: 35px;
+  }
+  h1 {
+    display: inline-block;
+    padding-top: 25px;
+    font-size: 30px;
+  }
+  p.textp {
+    text-align: center;
+    font-size: normal 7px arial;
+    color: black;
+    margin-top: 10%;
+  }
+  input.namegame {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 70%;
+    height: 50px;
+    padding: 0 1.6rem;
+    font-size: 20px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+  input.displayname {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 70%;
+    height: 50px;
+    padding: 0 1.6rem;
+    font-size: 20px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+
+  input.creategame {
+    display: block;
+    background: #3993ff;
+    color: white;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: 80%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+}
+@media screen and (max-width:1156px){
+  input.creategame {
+    width: 82%;
+  }
+}
+
+@media screen and (max-width:886px){
+  div.spaceregister{
+    height: 31%;
+  }
+  input.creategame {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width:756px){
+    
+  div.spaceregister {
+    z-index: 2;
+    background-color: rgb(247, 248, 248);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    width: 40%;
+    height: 25%;
+  }
+  
+  .inputfirtscreen{
+    display: block;
+    margin-left: 10%;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+  }
+  
+  img#poker {
+    max-width: 30px;
+    max-height: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+    border: transparent thin solid;
+    padding: 5px;
+    margin: 0px 10px 10px 0;
+    margin-top: 35px;
+    margin-left: 35px;
+  }
+  h1 {
+    display: inline-block;
+    padding-top: 30px;
+    font-size: 20px;
+  }
+  p.textp {
+    text-align: center;
+    font-size: normal arial;
+    color: black;
+    margin-top: 10%;
+    font-size: 14px;
+  }
+  input.namegame {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 65%;
+    height: 10%;
+    padding: 0 1.6rem;
+    font-size: 17px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+  input.displayname {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 65%;
+    height: 10%;
+    padding: 0 1.6rem;
+    font-size: 17px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+
+  input.creategame {
+    display: block;
+    background: #3993ff;
+    color: white;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: 84%;
+    height: 10%;
+    font-weight: bold;
+    font-size: 15px;
+    border-color: #74b3ff;
+    margin-left: 10%;
+  }
+}
+@media screen and (max-width:630px){
+
+  div.spaceregister{
+    height: 22%;
+  }
+
+  p.textp{
+    font-size: 12px;
+  }
+
+  input.namegame {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 65%;
+    height: 10%;
+    padding: 0 1.6rem;
+    font-size: 15px;
+    border-color: #74b3ff;
+    margin-left: 7%;
+  }
+  input.displayname {
+    appearance: none;
+    background: transparent;
+    border: 2px solid #e8e9ea;
+    border-radius: 10px;
+    color: black;
+    width: 65%;
+    height: 10%;
+    padding: 0 1.6rem;
+    font-size: 15px;
+    border-color: #74b3ff;
+    margin-left: 7%;
+  }
+
+  input.creategame {
+    display: block;
+    background: #3993ff;
+    color: white;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: 87%;
+    height: 10%;
+    font-weight: bold;
+    font-size: 13px;
+    border-color: #74b3ff;
+    margin-left: 7%;
+  }
+
+  .inputfirtscreen{
+    display: block;
+    margin-left: 7%;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+  }
+}
+
+@media screen and (max-width:542px){
+
+  img#poker {
+    max-width: 20px;
+    max-height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+    border: transparent thin solid;
+    padding: 5px;
+    margin: 0px 10px 10px 0;
+    margin-top: 35px;
+    margin-left: 35px;
+  }
+  h1 {
+    display: inline-block;
+    padding-top: 32px;
+    font-size: 15px;
+  }  
+
+  div.spaceregister{
+    height: 18%;
+  }
+
+  p.textp{
+    font-size: 10px;
+  }
+
+  input.displayname{
+    font-size: 11px;
+    width: 60%;
+  }
+
+  input.namegame{
+    font-size: 11px;
+    width: 60%;
+  }
+
+  input.creategame{
+    margin-top: 20px;
+    font-size: 10px;
+    width: 85%;
+  }  
+
+  .inputfirtscreen{
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width:450px){
+
+  img#poker {
+    max-width: 18px;
+    max-height: 18px;
+    margin-top: 8px;
+    margin-left: 8px;
+    float: left;
+    border: transparent thin solid;
+    padding: 5px;
+    margin: 0px 10px 10px 0;
+    margin-top: 35px;
+    margin-left: 35px;
+  }
+  h1 {
+    display: inline-block;
+    padding-top: 34px;
+    font-size: 12px;
+  }  
+
+  div.spaceregister{
+    height: 16%;
+  }
+
+  p.textp{
+    font-size: 8px;
+  }
+
+  input.displayname{
+    font-size: 10px;
+    width: 56%;
+  }
+
+  input.namegame{
+    font-size: 10px;
+    width: 56%;
+  }
+
+  input.creategame{
+    margin-top: 20px;
+    font-size: 10px;
+    width: 85%;
+  }  
+
+  .inputfirtscreen{
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width:368px){
+
+  img#poker {
+    max-width: 16px;
+    max-height: 16px;
+    margin-top: 6px;
+    margin-left: 6px;
+    float: left;
+    border: transparent thin solid;
+    padding: 5px;
+    margin: 0px 10px 10px 0;
+    margin-top: 35px;
+    margin-left: 35px;
+  }
+  h1 {
+    display: inline-block;
+    padding-top: 36px;
+    font-size: 10px;
+  }  
+
+  p.textp{
+    font-size: 7px;
+  }
+
+  div.spaceregister{
+    height: 15%;
+  }
+
+  input.displayname{
+    font-size: 9px;
+    width: 50%;
+  }
+
+  input.namegame{
+    font-size: 9px;
+    width: 50%;
+  }
+
+  input.creategame{
+    margin-top: 15px;
+    font-size: 9px;
+    width: 85%;
+  }  
+}
+
+@media screen and (max-width:320px){
+
+  img#poker {
+    max-width: 14px;
+    max-height: 14px;
+    margin-top: 4px;
+    margin-left: 4px;
+    float: left;
+    border: transparent thin solid;
+    padding: 5px;
+    margin: 0px 10px 10px 0;
+    margin-top: 35px;
+    margin-left: 35px;
+  }
+  h1 {
+    display: inline-block;
+    padding-top: 35px;
+    font-size: 10px;
+  }  
+
+  div.spaceregister{
+    height: 14%;
+  }
+
+  p.textp{
+    font-size: 6px;
+  }
+
+  input.displayname{
+    font-size: 8px;
+    width: 45%;
+  }
+
+  input.namegame{
+    font-size: 8px;
+    width: 45%;
+  }
+
+  input.creategame{
+    margin-top: 16px;
+    font-size: 8px;
+    width: 87%;
+  }  
+
+  .inputfirtscreen{
+    font-size: 7px;
+  }
+}

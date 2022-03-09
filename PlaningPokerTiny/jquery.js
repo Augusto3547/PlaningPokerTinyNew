@@ -11,6 +11,8 @@ import $ from 'jquery';
 $(document).ready(function () {
   //getVotingSystem();
 
+  $('#namegame').val("Tiny") // Pré carregar o nome padrão do jogo como "Tiny"
+
   var url = window.location.href;
   var res = url.split('#');
   let Global_Game_ID = '';
