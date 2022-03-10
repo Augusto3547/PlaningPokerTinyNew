@@ -42,6 +42,14 @@ $(document).ready(function () {
       listen_game();
     }
   }
+
+  // let page_width = window.screen.width
+  // console.log(page_width)
+  // if(page_width <= 616){
+  //   let icon_qrcode = document.getElementById("qrcode")
+  //   icon_qrcode.classList.remove()
+  // }
+
   $('.cg').on('click', function () {
     let NewName = $('.displaynamenew').val();
     New_Player(NewName, Global_Game_ID);
@@ -296,7 +304,7 @@ $(document).ready(function () {
 
   $('#qrcode').on('click', function () {
     var inputcqrcode = document.getElementById('qrcodecontent');
-    inputcqrcode.value = window.location.href;
+    inputcqrcode.value = escape(window.location.href);
     GeraQRCode();
   });
 });

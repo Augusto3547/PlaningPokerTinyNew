@@ -18,27 +18,6 @@ div.register{
   background-size: cover;
 
 }
-div.spaceregister {
-  z-index: 2;
-  background-color: rgb(247, 248, 248);
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 15px;
-  width: 45%;
-  height: 45%;
-}
-
-.inputfirtscreen{
-  display: block;
-  margin-left: 18%;
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: bold;
-  color: rgb(128, 128, 128);
-}
 
 body {
   font-family: sans-serif;
@@ -65,21 +44,68 @@ p.textp {
   text-align: center;
   font-size: normal 7px arial;
   color: black;
-  margin-top: 10%;
 }
+
+div.spaceregister {
+  z-index: 2;
+  background-color: rgb(247, 248, 248);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  padding: 2%;
+  
+}
+
+.inputfirtscreen{
+  display: block;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(128, 128, 128);
+}
+
 input.namegame {
   appearance: none;
   background: transparent;
   border: 2px solid #e8e9ea;
   border-radius: 10px;
   color: black;
-  width: 500px;
+  width: 90%;
   height: 50px;
   padding: 0 1.6rem;
   font-size: 20px;
   border-color: #74b3ff;
-  margin-left: 18%;
 }
+
+input.creategame {
+  display: block;
+  background: #3993ff;
+  color: white;
+  border-radius: 10px;
+  margin-top: 30px;
+  width: 100%;
+  height: 50px;
+  font-weight: bold;
+  font-size: 20px;
+  border-color: #74b3ff;
+}
+
+input.displayname {
+  appearance: none;
+  background: transparent;
+  border: 2px solid #e8e9ea;
+  border-radius: 10px;
+  color: black;
+  width: 90%;
+  height: 50px;
+  padding: 0 1.6rem;
+  font-size: 20px;
+  border-color: #74b3ff;
+}
+
 select {
   appearance: none;
   background: transparent;
@@ -89,19 +115,6 @@ select {
   width: 555px;
   height: 50px;
   padding: 0 1.6rem;
-  font-size: 20px;
-  border-color: #74b3ff;
-  margin-left: 18%;
-}
-input.creategame {
-  display: block;
-  background: #3993ff;
-  color: white;
-  border-radius: 10px;
-  margin-top: 30px;
-  width: 555px;
-  height: 50px;
-  font-weight: bold;
   font-size: 20px;
   border-color: #74b3ff;
   margin-left: 18%;
@@ -183,7 +196,6 @@ input.displayname {
   padding: 0 1.6rem;
   font-size: 20px;
   border-color: #74b3ff;
-  margin-left: 18%;
 }
 
 input.displaynamenew{
@@ -349,6 +361,15 @@ button.card:hover {
   justify-content: space-between;
   align-items: center;
   margin: 25px;
+  height: 33%;
+}
+
+.section{
+  height: 33%;
+}
+
+div.footer{
+  height: 33%;
 }
 
 div.esquerda {
@@ -474,6 +495,20 @@ button.qrcode {
   width: 3rem;
   letter-spacing: 0.02em;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img.qrcode{
+  width: 2rem;
+  height: 2rem;
+}
+
+div.buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button.issue:hover {
@@ -770,6 +805,7 @@ div.cheap {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  align-items: center;
 }
 
 button.card {
@@ -1058,6 +1094,8 @@ h4.titleinviteplayers {
 ################################################################################
 */
 
+
+/* Resposivo da tela de create Game*/
 @media screen and (max-width:1686px){
 
   div.spaceregister {
@@ -1070,16 +1108,16 @@ h4.titleinviteplayers {
     transform: translate(-50%, -50%);
     border-radius: 15px;
     width: 40%;
-    height: 40%;
+  
   }
   
   .inputfirtscreen{
     display: block;
-    margin-left: 10%;
     margin-top: 10px;
     font-size: 15px;
     font-weight: bold;
     color: rgb(128, 128, 128);
+    margin-left: 10%;
   }
   
   img#poker {
@@ -1103,7 +1141,6 @@ h4.titleinviteplayers {
     text-align: center;
     font-size: normal 7px arial;
     color: black;
-    margin-top: 10%;
   }
   input.namegame {
     appearance: none;
@@ -1158,12 +1195,10 @@ h4.titleinviteplayers {
     transform: translate(-50%, -50%);
     border-radius: 15px;
     width: 40%;
-    height: 36%;
   }
   
   .inputfirtscreen{
     display: block;
-    margin-left: 10%;
     margin-top: 10px;
     font-size: 15px;
     font-weight: bold;
@@ -1191,7 +1226,6 @@ h4.titleinviteplayers {
     text-align: center;
     font-size: normal 7px arial;
     color: black;
-    margin-top: 10%;
   }
   input.namegame {
     appearance: none;
@@ -1204,7 +1238,6 @@ h4.titleinviteplayers {
     padding: 0 1.6rem;
     font-size: 20px;
     border-color: #74b3ff;
-    margin-left: 10%;
   }
   input.displayname {
     appearance: none;
@@ -1217,7 +1250,6 @@ h4.titleinviteplayers {
     padding: 0 1.6rem;
     font-size: 20px;
     border-color: #74b3ff;
-    margin-left: 10%;
   }
 
   input.creategame {
@@ -1231,7 +1263,6 @@ h4.titleinviteplayers {
     font-weight: bold;
     font-size: 20px;
     border-color: #74b3ff;
-    margin-left: 10%;
   }
 }
 @media screen and (max-width:1156px){
@@ -1241,9 +1272,6 @@ h4.titleinviteplayers {
 }
 
 @media screen and (max-width:886px){
-  div.spaceregister{
-    height: 31%;
-  }
   input.creategame {
     width: 85%;
   }
@@ -1261,12 +1289,10 @@ h4.titleinviteplayers {
     transform: translate(-50%, -50%);
     border-radius: 15px;
     width: 40%;
-    height: 25%;
   }
   
   .inputfirtscreen{
     display: block;
-    margin-left: 10%;
     margin-top: 10px;
     font-size: 15px;
     font-weight: bold;
@@ -1294,7 +1320,6 @@ h4.titleinviteplayers {
     text-align: center;
     font-size: normal arial;
     color: black;
-    margin-top: 10%;
     font-size: 14px;
   }
   input.namegame {
@@ -1308,7 +1333,6 @@ h4.titleinviteplayers {
     padding: 0 1.6rem;
     font-size: 17px;
     border-color: #74b3ff;
-    margin-left: 10%;
   }
   input.displayname {
     appearance: none;
@@ -1321,7 +1345,6 @@ h4.titleinviteplayers {
     padding: 0 1.6rem;
     font-size: 17px;
     border-color: #74b3ff;
-    margin-left: 10%;
   }
 
   input.creategame {
@@ -1335,14 +1358,9 @@ h4.titleinviteplayers {
     font-weight: bold;
     font-size: 15px;
     border-color: #74b3ff;
-    margin-left: 10%;
   }
 }
 @media screen and (max-width:630px){
-
-  div.spaceregister{
-    height: 22%;
-  }
 
   p.textp{
     font-size: 12px;
@@ -1359,7 +1377,6 @@ h4.titleinviteplayers {
     padding: 0 1.6rem;
     font-size: 15px;
     border-color: #74b3ff;
-    margin-left: 7%;
   }
   input.displayname {
     appearance: none;
@@ -1372,7 +1389,6 @@ h4.titleinviteplayers {
     padding: 0 1.6rem;
     font-size: 15px;
     border-color: #74b3ff;
-    margin-left: 7%;
   }
 
   input.creategame {
@@ -1386,12 +1402,10 @@ h4.titleinviteplayers {
     font-weight: bold;
     font-size: 13px;
     border-color: #74b3ff;
-    margin-left: 7%;
   }
 
   .inputfirtscreen{
     display: block;
-    margin-left: 7%;
     margin-top: 10px;
     font-size: 13px;
     font-weight: bold;
@@ -1418,10 +1432,6 @@ h4.titleinviteplayers {
     padding-top: 32px;
     font-size: 15px;
   }  
-
-  div.spaceregister{
-    height: 18%;
-  }
 
   p.textp{
     font-size: 10px;
@@ -1468,10 +1478,6 @@ h4.titleinviteplayers {
     font-size: 12px;
   }  
 
-  div.spaceregister{
-    height: 16%;
-  }
-
   p.textp{
     font-size: 8px;
   }
@@ -1479,21 +1485,30 @@ h4.titleinviteplayers {
   input.displayname{
     font-size: 10px;
     width: 56%;
+    margin-left: 3%;
+    border-radius: 6px;
+    height: 16px;
   }
 
   input.namegame{
     font-size: 10px;
     width: 56%;
+    margin-left: 3%;
+    border-radius: 6px;
+    height: 16px;
   }
 
   input.creategame{
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 10px;
-    width: 85%;
+    width: 93%;
+    border-radius: 6px;
+    margin-left: 3%;
   }  
 
   .inputfirtscreen{
     font-size: 9px;
+    margin-left: 3%;
   }
 }
 
@@ -1519,10 +1534,6 @@ h4.titleinviteplayers {
 
   p.textp{
     font-size: 7px;
-  }
-
-  div.spaceregister{
-    height: 15%;
   }
 
   input.displayname{
@@ -1562,10 +1573,6 @@ h4.titleinviteplayers {
     font-size: 10px;
   }  
 
-  div.spaceregister{
-    height: 14%;
-  }
-
   p.textp{
     font-size: 6px;
   }
@@ -1589,4 +1596,275 @@ h4.titleinviteplayers {
   .inputfirtscreen{
     font-size: 7px;
   }
+}
+
+/*Resposivo da tela de Jogo principal*/
+
+@media screen and (max-width:770px){
+
+  img.logopoker{
+    max-width: 30px;
+    max-height: 30px;
+  }
+
+  label.namegame{
+    font-size: 13px;
+  }
+
+  button.profile{
+    font-size: 1rem;
+  }
+
+  div.changenameplayer{
+    height: 40px;
+    width: 200px;
+    margin-top: 40%;
+  }
+
+  input.ChangeNamePlayer{
+    
+  }
+
+  button.invite{
+    font-size: 0.8rem;
+    font-weight: 550;
+    height: 2rem;
+  }
+
+  button.qrcode{
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 9px;
+  }
+  img.qrcode{
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  div.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tabel{
+    min-width: 18rem;
+  }
+
+  p#temp{
+    font-size: 12.5px;
+  }
+
+  .cardplayerplay{
+    height: 4rem;
+    width: 2.4rem;
+  }
+  img.imgbackcard{
+    height: 4rem;
+    width: 2.4rem;
+  }
+
+  .nameplayeraftercard{
+    font-size: 13px;
+  }
+
+  p.choosecard{
+    font-size: 14px;
+  }
+
+  button.card{
+    height: 4rem;
+    min-width: 2.4rem;
+  }
+
+}
+
+@media screen and (max-width:616px){
+  .tabel{
+    min-width: 16rem;
+  }
+
+  .cardplayerplay{
+    height: 3.2rem;
+    width: 2rem;
+    border-radius: 10px;
+  }
+  img.imgbackcard{
+    height: 3.2rem;
+    width: 2rem;
+    border-radius: 10px;
+  }
+
+  div.cheap{
+    height: 90px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    justify-content:center;
+    align-items: center;
+  }
+
+  div.footer{
+    padding: 0 40px;
+  }
+}
+
+@media screen and (max-width:460px){
+
+  img.logopoker{
+    max-width: 20px;
+    max-height: 20px;
+  }
+
+  label.namegame{
+    font-size: 10px;
+  }
+
+  button.profile{
+    font-size: 0.8rem;
+  }
+
+  button.invite{
+    font-size: 0.7rem;
+    font-weight: 550;
+    height: 1.8rem;
+  }
+
+  button.qrcode{
+    height: 1.8rem;
+    width: 1.8rem;
+  }
+
+  img.qrcode{
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .tabel{
+    min-width: 13rem;
+  }
+
+  p#temp{
+    font-size: 11px;
+  }
+
+  .cardplayerplay{
+    height: 3rem;
+    width: 1.9rem;
+  }
+  img.imgbackcard{
+    height: 3rem;
+    width: 1.9rem;
+  }
+
+  .nameplayeraftercard{
+    font-size: 11px;
+  }
+
+  p.choosecard{
+    font-size: 13px;
+  }
+
+  button.card{
+    height: 3.2rem;
+    min-width: 2rem;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width:412px){
+  .tabel{
+    min-width: 10rem;
+  }
+}
+
+@media screen and (max-width:382px){
+  
+  img.logopoker{
+    max-width: 17px;
+    max-height: 17px;
+  }
+
+  label.namegame{
+    font-size: 8px;
+    margin: 0 8px;
+  }
+
+  button.profile{
+    font-size: 0.8rem;
+  }
+
+  button.invite{
+    font-size: 0.7rem;
+    font-weight: 550;
+    height: 1.8rem;
+    margin: 0 8px;
+  }
+
+  button.qrcode{
+    height: 1.8rem;
+    width: 1.8rem;
+  }
+
+  img.qrcode{
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .tabel{
+    min-width: 10rem;
+    height: 10rem;
+  }
+
+  p#temp{
+    font-size: 11px;
+  }
+
+  .cardplayerplay{
+    height: 2.8rem;
+    width: 1.8rem;
+  }
+  img.imgbackcard{
+    height: 3rem;
+    width: 1.9rem;
+  }
+
+  .nameplayeraftercard{
+    font-size: 11px;
+  }
+
+  p.choosecard{
+    font-size: 13px;
+  }
+
+  button.card{
+    height: 3.2rem;
+    min-width: 2rem;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width:375px){
+      div.top{
+        display: flex;
+        flex-direction: column;
+      }
+
+      div.direita{
+        margin-top: 20px;
+      }
+
+      img.logopoker{
+        max-width: 20px;
+        max-height: 20px;
+      }
+    
+      label.namegame{
+        font-size: 12px;
+      }
+      .tabel{
+        min-width: 6rem;
+        height: 6rem;
+      }
+    
 }
