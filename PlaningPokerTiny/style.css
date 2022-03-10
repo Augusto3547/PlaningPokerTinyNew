@@ -423,10 +423,10 @@ button.profile:hover {
 }
 
 .changenameplayer {
-  height: 80px;
-  width: 300px;
+  height: 60px;
+  width: 220px;
   background-color: rgb(235, 229, 229);
-  margin-top: 25px;
+  margin-top: 40%;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -435,6 +435,7 @@ button.profile:hover {
   border-color: black;
   border-width: 2px;
   border-style: solid;
+  margin-right: 120px;
 }
 
 .inputchangenameplayer {
@@ -442,7 +443,6 @@ button.profile:hover {
   box-shadow: 0 0 0 0;
   border: 0 none;
   outline: 0;
-  font-size: 18px;
 }
 
 .pencil {
@@ -1021,7 +1021,6 @@ p.sugestion {
   transform: translate(-50%, -50%);
   border-radius: 15px;
   width: 32%;
-  height: 27%;
   padding: 25px;
 }
 
@@ -1084,7 +1083,7 @@ h4.titleinviteplayers {
   color: rgb(255, 255, 255);
   background: #3993ff;
   border-color: rgb(224, 219, 219);
-  font-size: 120%;
+  font-size: 1.2rem;
   font-weight: bold;
   font-weight: bold;
 }
@@ -1618,11 +1617,13 @@ h4.titleinviteplayers {
   div.changenameplayer{
     height: 40px;
     width: 200px;
-    margin-top: 40%;
+    margin-top: 28%;
+    margin-left: 10%;
   }
 
-  input.ChangeNamePlayer{
-    
+  .pencil{
+    height: 15px;
+    width: 15px;
   }
 
   button.invite{
@@ -1724,6 +1725,22 @@ h4.titleinviteplayers {
     font-size: 0.8rem;
   }
 
+  div.changenameplayer{
+    height: 25px;
+    margin-top: 25%;
+    margin-left: 6%;
+    width: 40%;
+  }
+
+  .pencil{
+    height: 11px;
+    width: 11px;
+  }
+
+  .inputchangenameplayer{
+    width: 100%;
+  }
+
   button.invite{
     font-size: 0.7rem;
     font-weight: 550;
@@ -1773,6 +1790,23 @@ h4.titleinviteplayers {
 }
 
 @media screen and (max-width:412px){
+
+  div.changenameplayer{
+    height: 25px;
+    margin-top: 25%;
+    margin-left: 6%;
+    width: 35%;
+  }
+
+  .pencil{
+    height: 11px;
+    width: 11px;
+  }
+
+  .inputchangenameplayer{
+    width: 100%;
+  }
+
   .tabel{
     min-width: 10rem;
   }
@@ -1845,26 +1879,96 @@ h4.titleinviteplayers {
 }
 
 @media screen and (max-width:375px){
-      div.top{
-        display: flex;
-        flex-direction: column;
-      }
 
-      div.direita{
-        margin-top: 20px;
-      }
+  div.changenameplayer{
+    height: 25px;
+    margin-top: 25%;
+    margin-left: 10%;
+    width: 35%;
+  }
 
-      img.logopoker{
-        max-width: 20px;
-        max-height: 20px;
-      }
-    
-      label.namegame{
-        font-size: 12px;
-      }
-      .tabel{
-        min-width: 6rem;
-        height: 6rem;
-      }
-    
+  .pencil{
+    height: 8px;
+    width: 8px;
+  }
+
+  .inputchangenameplayer{
+    width: 100%;
+  }
+
+  div.top{
+    display: flex;
+    flex-direction: column;
+  }
+
+  div.direita{
+    margin-top: 20px;
+  }
+
+  img.logopoker{
+    max-width: 20px;
+    max-height: 20px;
+  }
+
+  label.namegame{
+    font-size: 12px;
+  }
+  .tabel{
+    min-width: 6rem;
+    height: 6rem;
+  }
+
+}
+
+/*Responsivo do inite players*/
+
+@media screen and (max-width:1032px){
+
+  .inviteplayers{
+    width: 60%;
+  }
+}
+
+@media screen and (max-width:520px){
+
+  h4.titleinviteplayers{
+    font-size: 1rem;
+  }
+  
+  .labelurl{
+    font-size: 0.9rem;
+  }
+
+  .inputurlfix{
+    font-size: 0.8rem;
+  }
+
+  .copyurllink{
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width:375px){
+
+  .inviteplayers{
+    padding: 14px;
+  }
+
+  h4.titleinviteplayers{
+    font-size: 0.8rem;
+  }
+  
+  .labelurl{
+    font-size: 0.7rem;
+  }
+
+  .inputurlfix{
+    font-size: 0.8rem;
+    height:30px;
+  }
+
+  .copyurllink{
+    font-size: 0.9rem;
+    height:30px;
+  }
 }
