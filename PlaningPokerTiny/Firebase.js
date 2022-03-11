@@ -292,6 +292,7 @@ export async function listen_game() {
         
           var result = document.querySelector('div.resultofvoting');
           result.classList.remove('hidden');
+          result.classList.add("w3-animate-bottom")
 
 
     
@@ -369,6 +370,7 @@ export async function listen_game() {
 
       var result = document.querySelector('div.resultofvoting');
       result.classList.add('hidden');
+      result.classList.add("w3-animate-bottom")
 
       var cardativo = document.querySelector('button.card.ativo');
       if(cardativo){

@@ -361,15 +361,6 @@ button.card:hover {
   justify-content: space-between;
   align-items: center;
   margin: 25px;
-  height: 33%;
-}
-
-.section{
-  height: 33%;
-}
-
-div.footer{
-  height: 33%;
 }
 
 div.esquerda {
@@ -424,7 +415,7 @@ button.profile:hover {
 
 .changenameplayer {
   height: 60px;
-  width: 220px;
+  width: 80%;
   background-color: rgb(235, 229, 229);
   margin-top: 40%;
   border-radius: 10px;
@@ -535,7 +526,6 @@ div.spaceqrcode {
   transform: translate(-50%, -50%);
   border-radius: 15px;
   width: 50%;
-  height: 60%;
   padding: 30px;
 }
 
@@ -561,8 +551,8 @@ div#qrcode {
 }
 
 img#imageQRCode {
-  height: 500px;
-  width: 500px;
+  height: 100%;
+  width: 100%;
 }
 
 input#qrcodecontent {
@@ -641,7 +631,6 @@ input#qrcodecontent {
 }
 
 #players{
-  width: 100%;
   text-align: center;
   display: flex;
   flex-wrap: nowrap;
@@ -724,6 +713,9 @@ img.imgbackcard {
   align-items: center;
   background-color: whitesmoke;
   width: auto;
+  position: absolute;
+  width: 100%;
+  height: 19.5rem;
 }
 
 div.bar{
@@ -773,7 +765,7 @@ div.cheapresult{
 
 p.choosecard {
   text-align: center;
-  margin-top: 220px;
+  margin-top: 180px;
 }
 
 .cheapplayer {
@@ -800,12 +792,11 @@ p.choosecard {
 }
 
 div.cheap {
-  width: 100%;
   text-align: center;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
   align-items: center;
+  margin: auto;
 }
 
 button.card {
@@ -1266,13 +1257,17 @@ h4.titleinviteplayers {
 }
 @media screen and (max-width:1156px){
   input.creategame {
-    width: 82%;
+    width: 78%;
+  }
+
+  div.spaceregister{
+    width: 60%;
   }
 }
 
 @media screen and (max-width:886px){
   input.creategame {
-    width: 85%;
+    width: 81%;
   }
 }
 
@@ -1287,7 +1282,7 @@ h4.titleinviteplayers {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 15px;
-    width: 40%;
+    width: 65%;
   }
   
   .inputfirtscreen{
@@ -1328,7 +1323,7 @@ h4.titleinviteplayers {
     border-radius: 10px;
     color: black;
     width: 65%;
-    height: 10%;
+    height: 30px;
     padding: 0 1.6rem;
     font-size: 17px;
     border-color: #74b3ff;
@@ -1340,7 +1335,7 @@ h4.titleinviteplayers {
     border-radius: 10px;
     color: black;
     width: 65%;
-    height: 10%;
+    height: 30px;
     padding: 0 1.6rem;
     font-size: 17px;
     border-color: #74b3ff;
@@ -1352,8 +1347,8 @@ h4.titleinviteplayers {
     color: white;
     border-radius: 10px;
     margin-top: 30px;
-    width: 84%;
-    height: 10%;
+    width: 76%;
+    height: 30px;
     font-weight: bold;
     font-size: 15px;
     border-color: #74b3ff;
@@ -1372,7 +1367,7 @@ h4.titleinviteplayers {
     border-radius: 10px;
     color: black;
     width: 65%;
-    height: 10%;
+    height: 25px;
     padding: 0 1.6rem;
     font-size: 15px;
     border-color: #74b3ff;
@@ -1384,7 +1379,7 @@ h4.titleinviteplayers {
     border-radius: 10px;
     color: black;
     width: 65%;
-    height: 10%;
+    height: 25px;
     padding: 0 1.6rem;
     font-size: 15px;
     border-color: #74b3ff;
@@ -1395,9 +1390,9 @@ h4.titleinviteplayers {
     background: #3993ff;
     color: white;
     border-radius: 10px;
-    margin-top: 30px;
-    width: 87%;
-    height: 10%;
+    margin-top: 25px;
+    width: 79%;
+    height: 25px;
     font-weight: bold;
     font-size: 13px;
     border-color: #74b3ff;
@@ -1449,7 +1444,7 @@ h4.titleinviteplayers {
   input.creategame{
     margin-top: 20px;
     font-size: 10px;
-    width: 85%;
+    width: 76%;
   }  
 
   .inputfirtscreen{
@@ -1483,31 +1478,31 @@ h4.titleinviteplayers {
 
   input.displayname{
     font-size: 10px;
-    width: 56%;
-    margin-left: 3%;
+    width: 60%;
+    margin-left: 8%;
     border-radius: 6px;
-    height: 16px;
+    height: 20px;
   }
 
   input.namegame{
     font-size: 10px;
-    width: 56%;
-    margin-left: 3%;
+    width: 60%;
+    margin-left: 8%;
     border-radius: 6px;
-    height: 16px;
+    height: 20px;
   }
 
   input.creategame{
     margin-top: 15px;
     font-size: 10px;
-    width: 93%;
+    width: 79%;
     border-radius: 6px;
-    margin-left: 3%;
+    margin-left: 8%;
   }  
 
   .inputfirtscreen{
     font-size: 9px;
-    margin-left: 3%;
+    margin-left: 8%;
   }
 }
 
@@ -1537,17 +1532,19 @@ h4.titleinviteplayers {
 
   input.displayname{
     font-size: 9px;
-    width: 50%;
+    width: 62%;
+    font-size: 12px;
   }
 
   input.namegame{
     font-size: 9px;
-    width: 50%;
+    width: 62%;
+    font-size: 12px;
   }
 
   input.creategame{
     margin-top: 15px;
-    font-size: 9px;
+    font-size: 12px;
     width: 85%;
   }  
 }
@@ -1578,22 +1575,24 @@ h4.titleinviteplayers {
 
   input.displayname{
     font-size: 8px;
-    width: 45%;
+    width: 60%;
+    font-size: 12px;
   }
 
   input.namegame{
     font-size: 8px;
-    width: 45%;
+    width: 60%;
+    font-size: 12px;
   }
 
   input.creategame{
     margin-top: 16px;
-    font-size: 8px;
+    font-size: 12px;
     width: 87%;
   }  
 
   .inputfirtscreen{
-    font-size: 7px;
+    font-size: 9px;
   }
 }
 
@@ -1652,6 +1651,11 @@ h4.titleinviteplayers {
     min-width: 18rem;
   }
 
+  .cardnew{
+    height: 4rem;
+    min-width: 2.4rem;
+  }
+
   p#temp{
     font-size: 12.5px;
   }
@@ -1684,6 +1688,11 @@ h4.titleinviteplayers {
   .tabel{
     min-width: 16rem;
   }
+  .cardnew{
+    height: 3.2rem;
+    min-width: 2rem;
+    border-radius: 10px;
+  }
 
   .cardplayerplay{
     height: 3.2rem;
@@ -1701,12 +1710,11 @@ h4.titleinviteplayers {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    justify-content:center;
     align-items: center;
   }
 
   div.footer{
-    padding: 0 40px;
+    padding: 0 20px;
   }
 }
 
@@ -1761,6 +1769,23 @@ h4.titleinviteplayers {
     min-width: 13rem;
   }
 
+  .cardnew{
+    height: 3rem;
+    min-width: 1.9rem;
+    border-radius: 8px;
+  }
+
+  button.RevelCards{
+    height: 2.5rem;
+    width: 8.5rem;
+  }
+
+  button.StartNewVoting{
+    height: 2.5rem;
+    width: 8.5rem;
+    font-size: 12px;
+  }
+
   p#temp{
     font-size: 11px;
   }
@@ -1768,7 +1793,9 @@ h4.titleinviteplayers {
   .cardplayerplay{
     height: 3rem;
     width: 1.9rem;
+    border-radius: 8px;
   }
+
   img.imgbackcard{
     height: 3rem;
     width: 1.9rem;
@@ -1810,6 +1837,24 @@ h4.titleinviteplayers {
   .tabel{
     min-width: 10rem;
   }
+
+  .cardnew{
+    height: 3rem;
+    min-width: 1.9rem;
+    border-radius: 8px;
+  }
+
+  button.RevelCards{
+    height: 2.2rem;
+    width: 8rem;
+    font-size: 0.8rem;
+  }
+
+  button.StartNewVoting{
+    height: 2.2rem;
+    width: 8rem;
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width:382px){
@@ -1848,6 +1893,12 @@ h4.titleinviteplayers {
   .tabel{
     min-width: 10rem;
     height: 10rem;
+  }
+
+  .cardnew{
+    height: 2.8rem;
+    min-width: 1.8rem;
+    border-radius: 7px;
   }
 
   p#temp{
@@ -1914,13 +1965,35 @@ h4.titleinviteplayers {
     font-size: 12px;
   }
   .tabel{
-    min-width: 6rem;
     height: 6rem;
+  }
+
+  button.RevelCards{
+    height: 1.9rem;
+    width: 6.9rem;
+    font-size: 0.7rem;
+    border-radius: 0.6rem;
+  }
+
+  button.StartNewVoting{
+    height: 1.9rem;
+    width: 6.9rem;
+    font-size: 0.7rem;
+  }
+  .cardnew{
+    height: 2.8rem;
+    width: 1.8rem;
+    border-radius: 7px;
+    font-size: 12px;
+  }
+
+  button.card{
+    font-size: 12px;
   }
 
 }
 
-/*Responsivo do inite players*/
+/*Responsivo do invite players*/
 
 @media screen and (max-width:1032px){
 
@@ -1972,3 +2045,31 @@ h4.titleinviteplayers {
     height:30px;
   }
 }
+
+/* Responsivo do QR Code*/
+
+@media screen and (max-width:550px){
+  input#qrcodecontent{
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width:430px){
+  input#qrcodecontent{
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width:375px){
+
+  input#qrcodecontent{
+    font-size: 10px;
+  }
+
+  .forright {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+}
+
