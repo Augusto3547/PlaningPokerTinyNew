@@ -1,10 +1,25 @@
 body {
   margin: 0;
   background-color: white;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-div.register{
+.background_card{  
+  background: linear-gradient(45deg,#3993ff 12%,transparent 0,transparent 88%,#3993ff 0),linear-gradient(135deg,transparent 37%,#1a7bf2 0,#1a7bf2 63%,transparent 0),linear-gradient(45deg,transparent 37%,#3993ff 0,#3993ff 63%,transparent 0),#74b3ff;
+  background-color: rgb(116, 179, 255);
+  background-position-x: 0%, 0%, 0%, 0%;
+  background-position-y: 0%, 0%, 0%, 0%;
+  background-repeat: repeat, repeat, repeat, repeat;
+  background-attachment: scroll, scroll, scroll, scroll;
+  background-image: linear-gradient(45deg, rgb(57, 147, 255) 12%, transparent 0px, transparent 88%, rgb(57, 147, 255) 0px), linear-gradient(135deg, transparent 37%, rgb(26, 123, 242) 0px, rgb(26, 123, 242) 63%, transparent 0px), linear-gradient(45deg, transparent 37%, rgb(57, 147, 255) 0px, rgb(57, 147, 255) 63%, transparent 0px), none;
+  background-size: auto, auto, auto, auto;
+  background-origin: padding-box, padding-box, padding-box, padding-box;
+  background-clip: border-box, border-box, border-box, border-box;
+  background-size: 17px 17px;
+}
+
+div.register {
   z-index: 1;
   background-color: white;
   position: absolute;
@@ -14,9 +29,8 @@ div.register{
   background-image: url('./img/fundo_mesa.jpg');
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment:fixed;
+  background-attachment: fixed;
   background-size: cover;
-
 }
 
 body {
@@ -56,10 +70,9 @@ div.spaceregister {
   transform: translate(-50%, -50%);
   border-radius: 15px;
   padding: 2%;
-  
 }
 
-.inputfirtscreen{
+.inputfirtscreen {
   display: block;
   margin-top: 10px;
   font-size: 15px;
@@ -165,14 +178,11 @@ div.spacename {
   transform: translate(-50%, -50%);
   border-radius: 15px;
   width: 30%;
-  height: 25%;
   padding: 20px 20px;
 }
 
 h4.h4cyn {
   font-size: 25px;
-  margin-top: 1.5%;
-  margin-bottom: 0;
 }
 
 .kitbula {
@@ -198,13 +208,13 @@ input.displayname {
   border-color: #74b3ff;
 }
 
-input.displaynamenew{
+input.displaynamenew {
   appearance: none;
   background: transparent;
   border: 2px solid #e8e9ea;
   border-radius: 10px;
   color: black;
-  width: 500px;
+  width: 90%;
   height: 50px;
   padding: 0 1.6rem;
   font-size: 20px;
@@ -215,7 +225,7 @@ button.cg {
   margin-top: 5%;
   border-radius: 10px;
   height: 50px;
-  width: 97%;
+  width: 100%;
   color: rgb(255, 255, 255);
   background: #3993ff;
   border-color: rgb(224, 219, 219);
@@ -491,12 +501,12 @@ button.qrcode {
   justify-content: center;
 }
 
-img.qrcode{
+img.qrcode {
   width: 2rem;
   height: 2rem;
 }
 
-div.buttons{
+div.buttons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -630,7 +640,7 @@ input#qrcodecontent {
   justify-content: center;
 }
 
-#players{
+#players {
   text-align: center;
   display: flex;
   flex-wrap: nowrap;
@@ -652,7 +662,7 @@ button.RevelCards {
   position: absolute;
 }
 
-button.StartNewVoting{
+button.StartNewVoting {
   border-radius: 0.8rem;
   cursor: pointer;
   font-size: 1rem;
@@ -667,7 +677,7 @@ button.StartNewVoting{
   position: absolute;
 }
 
-p#timer{
+p#timer {
   font-weight: bold;
   color: #74b3ff;
   font-size: 30px;
@@ -690,7 +700,6 @@ p#timer{
 
 .nameplayeraftercard {
   text-align: center;
-  
 }
 
 img.imgbackcard {
@@ -699,41 +708,58 @@ img.imgbackcard {
   border-radius: 0.8rem;
 }
 
-.resultofvoting{
-  position: absolute;
-  width: 100%;
-  height: 30%;
-  background-color: white;
-  margin-top: 90px;
+@keyframes animatebottom {
+  from {
+    bottom: -500px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
 }
 
-.sapceresult{
+.resultofvoting {
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  animation: animatebottom 0.4s;
+  bottom: 0;
+}
+
+.sapceresult {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: whitesmoke;
+  background-color: white;
   width: auto;
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 19.5rem;
+  bottom: 0%;
+  padding: 15px 0px;
 }
 
-div.bar{
+.spacecards{
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+div.bar {
   height: 200px;
   width: 15px;
   background-color: black;
   margin: 0 30px;
 }
 
-div.cheapresult{
+div.cheapresult {
   width: 100%;
   text-align: center;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  margin: auto;
 }
 
-.cardresults{
+.cardresults {
   border-radius: 0.8rem;
   font-size: 19px;
   height: 5rem;
@@ -745,13 +771,13 @@ div.cheapresult{
   color: black;
 }
 
-.alignvotecards{
-  align-items:center;
+.alignvotecards {
+  align-items: center;
   justify-content: center;
   margin: 0 10px;
 }
 
-.average{
+.average {
   width: auto;
   height: auto;
   display: flex;
@@ -759,7 +785,7 @@ div.cheapresult{
   align-items: center;
 }
 
-.voteaftercard{
+.voteaftercard {
   text-align: center;
 }
 
@@ -812,7 +838,7 @@ button.card {
   color: #3993ff;
 }
 
-.cardnew{
+.cardnew {
   border-radius: 0.8rem;
   font-size: 19px;
   height: 5rem;
@@ -821,7 +847,7 @@ button.card {
   background: white;
   border: 2px solid #3993ff;
   cursor: pointer;
-  color: #3993ff; 
+  color: #3993ff;
 }
 
 .cheap button.card:hover {
@@ -1084,10 +1110,8 @@ h4.titleinviteplayers {
 ################################################################################
 */
 
-
 /* Resposivo da tela de create Game*/
-@media screen and (max-width:1686px){
-
+@media screen and (max-width: 1686px) {
   div.spaceregister {
     z-index: 2;
     background-color: rgb(247, 248, 248);
@@ -1098,10 +1122,9 @@ h4.titleinviteplayers {
     transform: translate(-50%, -50%);
     border-radius: 15px;
     width: 40%;
-  
   }
-  
-  .inputfirtscreen{
+
+  .inputfirtscreen {
     display: block;
     margin-top: 10px;
     font-size: 15px;
@@ -1109,7 +1132,7 @@ h4.titleinviteplayers {
     color: rgb(128, 128, 128);
     margin-left: 10%;
   }
-  
+
   img#poker {
     max-width: 40px;
     max-height: 40px;
@@ -1174,7 +1197,7 @@ h4.titleinviteplayers {
   }
 }
 
-@media screen and (max-width:1576px){
+@media screen and (max-width: 1576px) {
   div.spaceregister {
     z-index: 2;
     background-color: rgb(247, 248, 248);
@@ -1186,15 +1209,15 @@ h4.titleinviteplayers {
     border-radius: 15px;
     width: 40%;
   }
-  
-  .inputfirtscreen{
+
+  .inputfirtscreen {
     display: block;
     margin-top: 10px;
     font-size: 15px;
     font-weight: bold;
     color: rgb(128, 128, 128);
   }
-  
+
   img#poker {
     max-width: 40px;
     max-height: 40px;
@@ -1255,24 +1278,23 @@ h4.titleinviteplayers {
     border-color: #74b3ff;
   }
 }
-@media screen and (max-width:1156px){
+@media screen and (max-width: 1156px) {
   input.creategame {
     width: 78%;
   }
 
-  div.spaceregister{
+  div.spaceregister {
     width: 60%;
   }
 }
 
-@media screen and (max-width:886px){
+@media screen and (max-width: 886px) {
   input.creategame {
     width: 81%;
   }
 }
 
-@media screen and (max-width:756px){
-    
+@media screen and (max-width: 756px) {
   div.spaceregister {
     z-index: 2;
     background-color: rgb(247, 248, 248);
@@ -1284,15 +1306,15 @@ h4.titleinviteplayers {
     border-radius: 15px;
     width: 65%;
   }
-  
-  .inputfirtscreen{
+
+  .inputfirtscreen {
     display: block;
     margin-top: 10px;
     font-size: 15px;
     font-weight: bold;
     color: rgb(128, 128, 128);
   }
-  
+
   img#poker {
     max-width: 30px;
     max-height: 30px;
@@ -1354,9 +1376,8 @@ h4.titleinviteplayers {
     border-color: #74b3ff;
   }
 }
-@media screen and (max-width:630px){
-
-  p.textp{
+@media screen and (max-width: 630px) {
+  p.textp {
     font-size: 12px;
   }
 
@@ -1398,7 +1419,7 @@ h4.titleinviteplayers {
     border-color: #74b3ff;
   }
 
-  .inputfirtscreen{
+  .inputfirtscreen {
     display: block;
     margin-top: 10px;
     font-size: 13px;
@@ -1407,8 +1428,7 @@ h4.titleinviteplayers {
   }
 }
 
-@media screen and (max-width:542px){
-
+@media screen and (max-width: 542px) {
   img#poker {
     max-width: 20px;
     max-height: 20px;
@@ -1425,35 +1445,34 @@ h4.titleinviteplayers {
     display: inline-block;
     padding-top: 32px;
     font-size: 15px;
-  }  
+  }
 
-  p.textp{
+  p.textp {
     font-size: 10px;
   }
 
-  input.displayname{
+  input.displayname {
     font-size: 11px;
     width: 60%;
   }
 
-  input.namegame{
+  input.namegame {
     font-size: 11px;
     width: 60%;
   }
 
-  input.creategame{
+  input.creategame {
     margin-top: 20px;
     font-size: 10px;
     width: 76%;
-  }  
+  }
 
-  .inputfirtscreen{
+  .inputfirtscreen {
     font-size: 10px;
   }
 }
 
-@media screen and (max-width:450px){
-
+@media screen and (max-width: 450px) {
   img#poker {
     max-width: 18px;
     max-height: 18px;
@@ -1470,13 +1489,13 @@ h4.titleinviteplayers {
     display: inline-block;
     padding-top: 34px;
     font-size: 12px;
-  }  
+  }
 
-  p.textp{
+  p.textp {
     font-size: 8px;
   }
 
-  input.displayname{
+  input.displayname {
     font-size: 10px;
     width: 60%;
     margin-left: 8%;
@@ -1484,7 +1503,7 @@ h4.titleinviteplayers {
     height: 20px;
   }
 
-  input.namegame{
+  input.namegame {
     font-size: 10px;
     width: 60%;
     margin-left: 8%;
@@ -1492,22 +1511,21 @@ h4.titleinviteplayers {
     height: 20px;
   }
 
-  input.creategame{
+  input.creategame {
     margin-top: 15px;
     font-size: 10px;
     width: 79%;
     border-radius: 6px;
     margin-left: 8%;
-  }  
+  }
 
-  .inputfirtscreen{
+  .inputfirtscreen {
     font-size: 9px;
     margin-left: 8%;
   }
 }
 
-@media screen and (max-width:368px){
-
+@media screen and (max-width: 368px) {
   img#poker {
     max-width: 16px;
     max-height: 16px;
@@ -1524,33 +1542,32 @@ h4.titleinviteplayers {
     display: inline-block;
     padding-top: 36px;
     font-size: 10px;
-  }  
+  }
 
-  p.textp{
+  p.textp {
     font-size: 7px;
   }
 
-  input.displayname{
+  input.displayname {
     font-size: 9px;
     width: 62%;
     font-size: 12px;
   }
 
-  input.namegame{
+  input.namegame {
     font-size: 9px;
     width: 62%;
     font-size: 12px;
   }
 
-  input.creategame{
+  input.creategame {
     margin-top: 15px;
     font-size: 12px;
     width: 85%;
-  }  
+  }
 }
 
-@media screen and (max-width:320px){
-
+@media screen and (max-width: 320px) {
   img#poker {
     max-width: 14px;
     max-height: 14px;
@@ -1567,145 +1584,174 @@ h4.titleinviteplayers {
     display: inline-block;
     padding-top: 35px;
     font-size: 10px;
-  }  
+  }
 
-  p.textp{
+  p.textp {
     font-size: 6px;
   }
 
-  input.displayname{
+  input.displayname {
     font-size: 8px;
     width: 60%;
     font-size: 12px;
   }
 
-  input.namegame{
+  input.namegame {
     font-size: 8px;
     width: 60%;
     font-size: 12px;
   }
 
-  input.creategame{
+  input.creategame {
     margin-top: 16px;
     font-size: 12px;
     width: 87%;
-  }  
+  }
 
-  .inputfirtscreen{
+  .inputfirtscreen {
     font-size: 9px;
   }
 }
 
 /*Resposivo da tela de Jogo principal*/
 
-@media screen and (max-width:770px){
+@media screen and (max-width: 770px) {
 
-  img.logopoker{
+  body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 750px;
+  }
+
+  img.logopoker {
     max-width: 30px;
     max-height: 30px;
   }
 
-  label.namegame{
+  label.namegame {
     font-size: 13px;
   }
 
-  button.profile{
+  button.profile {
     font-size: 1rem;
   }
 
-  div.changenameplayer{
+  div.changenameplayer {
     height: 40px;
     width: 200px;
     margin-top: 28%;
     margin-left: 10%;
   }
 
-  .pencil{
+  .pencil {
     height: 15px;
     width: 15px;
   }
 
-  button.invite{
+  button.invite {
     font-size: 0.8rem;
     font-weight: 550;
     height: 2rem;
   }
 
-  button.qrcode{
+  button.qrcode {
     height: 2.1rem;
     width: 2.1rem;
     border-radius: 9px;
   }
-  img.qrcode{
+  img.qrcode {
     width: 1.3rem;
     height: 1.3rem;
   }
 
-  div.buttons{
+  div.buttons {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .tabel{
+  .tabel {
     min-width: 18rem;
   }
 
-  .cardnew{
+  .cardnew {
     height: 4rem;
     min-width: 2.4rem;
   }
 
-  p#temp{
+  p#temp {
     font-size: 12.5px;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 4rem;
     width: 2.4rem;
   }
-  img.imgbackcard{
+  img.imgbackcard {
     height: 4rem;
     width: 2.4rem;
   }
 
-  .nameplayeraftercard{
+  .nameplayeraftercard {
     font-size: 13px;
   }
 
-  p.choosecard{
+  p.choosecard {
     font-size: 14px;
   }
 
-  button.card{
+  button.card {
     height: 4rem;
     min-width: 2.4rem;
+  }
+
+  .cardresults{
+    height: 4rem;
+    width: 2.4rem;
+  }
+
+  .voteaftercard{
+    font-size: 13px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+  p#result{
+    font-size: 14px;
   }
 
 }
 
-@media screen and (max-width:616px){
-  .tabel{
+@media screen and (max-width: 616px) {
+
+  body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 750px;
+  }
+
+  .tabel {
     min-width: 16rem;
   }
-  .cardnew{
+  .cardnew {
     height: 3.2rem;
     min-width: 2rem;
     border-radius: 10px;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 3.2rem;
     width: 2rem;
     border-radius: 10px;
   }
-  img.imgbackcard{
+  img.imgbackcard {
     height: 3.2rem;
     width: 2rem;
     border-radius: 10px;
   }
 
-  div.cheap{
+  div.cheap {
     height: 90px;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -1713,356 +1759,448 @@ h4.titleinviteplayers {
     align-items: center;
   }
 
-  div.footer{
+  div.footer {
     padding: 0 20px;
   }
+
+  .cardresults{
+    height: 3.2rem;
+    width: 2rem;
+    border-radius: 8px;
+  }
+
+  .voteaftercard{
+    font-size: 12px;
+  }
+
+  h3{
+    font-size: 13px;
+  }
+  p#result{
+    font-size: 13px;
+  }
+
 }
 
-@media screen and (max-width:460px){
+@media screen and (max-width: 460px) {
 
-  img.logopoker{
+  body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 750px;
+  }
+
+  img.logopoker {
     max-width: 20px;
     max-height: 20px;
   }
 
-  label.namegame{
+  label.namegame {
     font-size: 10px;
   }
 
-  button.profile{
+  button.profile {
     font-size: 0.8rem;
   }
 
-  div.changenameplayer{
+  div.changenameplayer {
     height: 25px;
     margin-top: 25%;
     margin-left: 6%;
     width: 40%;
   }
 
-  .pencil{
+  .pencil {
     height: 11px;
     width: 11px;
   }
 
-  .inputchangenameplayer{
+  .inputchangenameplayer {
     width: 100%;
   }
 
-  button.invite{
+  button.invite {
     font-size: 0.7rem;
     font-weight: 550;
     height: 1.8rem;
   }
 
-  button.qrcode{
+  button.qrcode {
     height: 1.8rem;
     width: 1.8rem;
   }
 
-  img.qrcode{
+  img.qrcode {
     width: 1.1rem;
     height: 1.1rem;
   }
 
-  .tabel{
+  .tabel {
     min-width: 13rem;
   }
 
-  .cardnew{
+  .cardnew {
     height: 3rem;
     min-width: 1.9rem;
     border-radius: 8px;
   }
 
-  button.RevelCards{
+  button.RevelCards {
     height: 2.5rem;
     width: 8.5rem;
   }
 
-  button.StartNewVoting{
+  button.StartNewVoting {
     height: 2.5rem;
     width: 8.5rem;
     font-size: 12px;
   }
 
-  p#temp{
+  p#temp {
     font-size: 11px;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 3rem;
     width: 1.9rem;
     border-radius: 8px;
   }
 
-  img.imgbackcard{
+  img.imgbackcard {
     height: 3rem;
     width: 1.9rem;
   }
 
-  .nameplayeraftercard{
+  .nameplayeraftercard {
     font-size: 11px;
   }
 
-  p.choosecard{
+  p.choosecard {
     font-size: 13px;
   }
 
-  button.card{
+  button.card {
     height: 3.2rem;
     min-width: 2rem;
     font-size: 15px;
   }
+
+  .cardresults{
+    height: 3rem;
+    width: 1.9rem;
+    border-radius: 8px;
+  }
+
+  .voteaftercard{
+    font-size: 12px;
+  }
+
+  h3{
+    font-size: 13px;
+  }
+  p#result{
+    font-size: 13px;
+  }
+
+  .cardnew{
+    font-size: 12px;
+  }
+
 }
 
-@media screen and (max-width:412px){
+@media screen and (max-width: 412px) {
 
-  div.changenameplayer{
+  body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 750px;
+  }
+
+  div.changenameplayer {
     height: 25px;
     margin-top: 25%;
     margin-left: 6%;
     width: 35%;
   }
 
-  .pencil{
+  .pencil {
     height: 11px;
     width: 11px;
   }
 
-  .inputchangenameplayer{
+  .inputchangenameplayer {
     width: 100%;
   }
 
-  .tabel{
+  .tabel {
     min-width: 10rem;
   }
 
-  .cardnew{
+  .cardnew {
     height: 3rem;
     min-width: 1.9rem;
     border-radius: 8px;
   }
 
-  button.RevelCards{
+  button.RevelCards {
     height: 2.2rem;
     width: 8rem;
     font-size: 0.8rem;
   }
 
-  button.StartNewVoting{
+  button.StartNewVoting {
     height: 2.2rem;
     width: 8rem;
     font-size: 0.8rem;
   }
+
+  .cardresults{
+    height: 2.8rem;
+    width: 1.8rem;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .voteaftercard{
+    font-size: 10px;
+  }
+
+  h3{
+    font-size: 12px;
+  }
+  p#result{
+    font-size: 12px;
+  }
+
+  .cardnew{
+    font-size: 12px;
+  }
+
 }
 
-@media screen and (max-width:382px){
-  
-  img.logopoker{
+@media screen and (max-width: 382px) {
+
+  body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 750px;
+  }
+
+  img.logopoker {
     max-width: 17px;
     max-height: 17px;
   }
 
-  label.namegame{
+  label.namegame {
     font-size: 8px;
     margin: 0 8px;
   }
 
-  button.profile{
+  button.profile {
     font-size: 0.8rem;
   }
 
-  button.invite{
+  button.invite {
     font-size: 0.7rem;
     font-weight: 550;
     height: 1.8rem;
     margin: 0 8px;
   }
 
-  button.qrcode{
+  button.qrcode {
     height: 1.8rem;
     width: 1.8rem;
   }
 
-  img.qrcode{
+  img.qrcode {
     width: 1.1rem;
     height: 1.1rem;
   }
 
-  .tabel{
+  .tabel {
     min-width: 10rem;
     height: 10rem;
   }
 
-  .cardnew{
+  .cardnew {
     height: 2.8rem;
     min-width: 1.8rem;
     border-radius: 7px;
   }
 
-  p#temp{
+  p#temp {
     font-size: 11px;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 2.8rem;
     width: 1.8rem;
   }
-  img.imgbackcard{
+  img.imgbackcard {
     height: 3rem;
     width: 1.9rem;
   }
 
-  .nameplayeraftercard{
+  .nameplayeraftercard {
     font-size: 11px;
   }
 
-  p.choosecard{
+  p.choosecard {
     font-size: 13px;
   }
 
-  button.card{
+  button.card {
     height: 3.2rem;
     min-width: 2rem;
     font-size: 15px;
   }
+
+  .cardnew{
+    font-size: 13px;
+  }
+
 }
 
-@media screen and (max-width:375px){
+@media screen and (max-width: 375px) {
 
-  div.changenameplayer{
+  body{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 750px;
+  }
+
+  div.changenameplayer {
     height: 25px;
     margin-top: 25%;
     margin-left: 10%;
     width: 35%;
   }
 
-  .pencil{
+  .pencil {
     height: 8px;
     width: 8px;
   }
 
-  .inputchangenameplayer{
+  .inputchangenameplayer {
     width: 100%;
   }
 
-  div.top{
+  div.top {
     display: flex;
     flex-direction: column;
   }
 
-  div.direita{
+  div.direita {
     margin-top: 20px;
   }
 
-  img.logopoker{
+  img.logopoker {
     max-width: 20px;
     max-height: 20px;
   }
 
-  label.namegame{
+  label.namegame {
     font-size: 12px;
   }
-  .tabel{
+  .tabel {
     height: 6rem;
   }
 
-  button.RevelCards{
+  button.RevelCards {
     height: 1.9rem;
     width: 6.9rem;
     font-size: 0.7rem;
     border-radius: 0.6rem;
   }
 
-  button.StartNewVoting{
+  button.StartNewVoting {
     height: 1.9rem;
     width: 6.9rem;
     font-size: 0.7rem;
   }
-  .cardnew{
+  .cardnew {
     height: 2.8rem;
     width: 1.8rem;
     border-radius: 7px;
-    font-size: 12px;
+    font-size: 8px;
   }
 
-  button.card{
-    font-size: 12px;
+  button.card {
+    font-size: 10px;
+  }
+
+  .cardresults{
+    font-size: 8px;
   }
 
 }
 
 /*Responsivo do invite players*/
 
-@media screen and (max-width:1032px){
-
-  .inviteplayers{
+@media screen and (max-width: 1032px) {
+  .inviteplayers {
     width: 60%;
   }
 }
 
-@media screen and (max-width:520px){
-
-  h4.titleinviteplayers{
+@media screen and (max-width: 520px) {
+  h4.titleinviteplayers {
     font-size: 1rem;
   }
-  
-  .labelurl{
+
+  .labelurl {
     font-size: 0.9rem;
   }
 
-  .inputurlfix{
+  .inputurlfix {
     font-size: 0.8rem;
   }
 
-  .copyurllink{
+  .copyurllink {
     font-size: 0.9rem;
   }
 }
 
-@media screen and (max-width:375px){
-
-  .inviteplayers{
+@media screen and (max-width: 375px) {
+  .inviteplayers {
     padding: 14px;
   }
 
-  h4.titleinviteplayers{
+  h4.titleinviteplayers {
     font-size: 0.8rem;
   }
-  
-  .labelurl{
+
+  .labelurl {
     font-size: 0.7rem;
   }
 
-  .inputurlfix{
+  .inputurlfix {
     font-size: 0.8rem;
-    height:30px;
+    height: 30px;
   }
 
-  .copyurllink{
+  .copyurllink {
     font-size: 0.9rem;
-    height:30px;
+    height: 30px;
   }
 }
 
 /* Responsivo do QR Code*/
 
-@media screen and (max-width:550px){
-  input#qrcodecontent{
+@media screen and (max-width: 550px) {
+  input#qrcodecontent {
     font-size: 12px;
   }
 }
 
-@media screen and (max-width:430px){
-  input#qrcodecontent{
+@media screen and (max-width: 430px) {
+  input#qrcodecontent {
     font-size: 11px;
   }
 }
 
-@media screen and (max-width:375px){
-
-  input#qrcodecontent{
+@media screen and (max-width: 375px) {
+  input#qrcodecontent {
     font-size: 10px;
   }
 
@@ -2073,3 +2211,256 @@ h4.titleinviteplayers {
   }
 }
 
+
+/*Responsivo da Tela novo jogador*/
+
+@media screen and (max-width:1568px ){
+
+  input.displaynamenew{
+    width: 87%;
+  }
+}
+
+@media screen and (max-width:1293px ){
+
+  h4.h4cyn{
+    font-size: 20px;
+  }
+
+  label.displayname{
+    font-size: 15px;
+  }
+
+  input.displaynamenew {
+    height: 42px;
+    width: 85%;
+  }
+
+  button.cg{
+    height: 42px;
+  }
+
+}
+
+@media screen and (max-width:1046px ){
+
+  div.spacename{
+    width: 40%;
+  }
+
+  input.displaynamenew{
+    width: 85%;
+  }
+
+  h4.h4cyn{
+    font-size: 16px;
+  }
+
+  label.displayname{
+    font-size: 13px;
+  }
+
+  input.displaynamenew {
+    height: 36px;
+    width: 86%;
+  }
+
+  button.cg{
+    height: 36px;
+  }
+}
+
+
+@media screen and (max-width:849px){
+
+  div.spacename{
+    width: 50%;
+  }
+
+  input.displaynamenew{
+    width: 85%;
+    font-size: 15px;
+  }
+
+  h4.h4cyn{
+    font-size: 12px;
+  }
+
+  label.displayname{
+    font-size: 10px;
+  }
+
+  input.displaynamenew {
+    height: 32px;
+    width: 76%;
+  }
+
+  input.displaynamenew {
+    width: 86%;
+  }
+
+  button.cg{
+    height: 36px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width:649px){
+
+  .alignleft {
+    margin-left: 5px;
+  }
+
+  input.displaynamenew{
+    width: 85%;
+  }
+
+  h4.h4cyn{
+    font-size: 8px;
+  }
+
+  label.displayname{
+    font-size: 8px;
+  }
+
+  input.displaynamenew {
+    height: 26px;
+    width: 82%;
+    font-size: 12px;
+  }
+
+  button.cg{
+    height: 26px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width:579px){
+  .alignleft {
+    margin-left: 5px;
+  }
+
+  input.displaynamenew {
+    height: 26px;
+    width: 80%;
+    font-size: 12px;
+  }
+
+}
+
+@media screen and (max-width:521px){
+
+  .alignleft {
+    margin-left: 5px;
+  }
+
+  input.displaynamenew{
+    width: 85%;
+  }
+
+  h4.h4cyn{
+    font-size: 8px;
+  }
+
+  label.displayname{
+    font-size: 8px;
+  }
+
+  input.displaynamenew {
+    height: 24px;
+    width: 78%;
+    border-radius: 8px;
+    font-size: 10px;
+  }
+
+  button.cg{
+    height: 24px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width:454px){
+
+  .alignleft {
+    margin-left: 5px;
+  }
+
+  input.displaynamenew{
+    width: 85%;
+  }
+
+  h4.h4cyn{
+    font-size: 6px;
+  }
+
+  label.displayname{
+    font-size: 6px;
+  }
+
+  input.displaynamenew {
+    height: 20px;
+    width: 75%;
+    border-radius: 8px;
+    font-size: 10px;
+  }
+
+  button.cg{
+    height: 20px;
+    font-size: 10px;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width:410px){
+
+  .alignleft {
+    margin-left: 5px;
+  }
+
+  input.displaynamenew {
+    height: 20px;
+    width: 72%;
+    border-radius: 8px;
+    font-size: px;
+  }
+
+  button.cg{
+    height: 20px;
+    font-size: 8px;
+    border-radius: 8px;
+  }
+
+}
+
+@media screen and (max-width:355px){
+
+  .alignleft {
+    margin-left: 5px;
+  }
+
+  input.displaynamenew{
+    width: 85%;
+  }
+
+  h4.h4cyn{
+    font-size: 5px;
+  }
+
+  label.displayname{
+    font-size: 5px;
+  }
+
+  input.displaynamenew {
+    height: 15px;
+    width: 66%;
+    border-radius: 8px;
+    font-size: 8px;
+  }
+
+  button.cg{
+    height: 15px;
+    font-size: 6px;
+    border-radius: 8px;
+  }
+}

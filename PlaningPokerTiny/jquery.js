@@ -155,6 +155,7 @@ $(document).ready(function () {
     turned: false,
   }
   const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
+
    })
 
   $(document).click(function (e) {

@@ -1,8 +1,20 @@
 import { initializeApp } from 'firebase/app';
-import {  getDatabase,  ref,  child,  get, push,  onValue,  update,  onChildChanged,  onChildAdded, set, remove} from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+  push,
+  onValue,
+  update,
+  onChildChanged,
+  onChildAdded,
+  set,
+  remove,
+} from 'firebase/database';
 import { data } from 'jquery';
 import $ from 'jquery';
-import {routie} from './routie';
+import { routie } from './routie';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBcXWuDslHfFbtENzKZaiNoYdEwXDyrEq8',
@@ -21,14 +33,13 @@ var namePlayer = '';
 var Global_Game_ID = '';
 
 export async function New_Game() {
-
   //Limpar todos os jogos anteriores quando o proximo é criado
-  var aaaaaaa= ref(getDatabase(app),"Games")
-  set(aaaaaaa, null)
+  var aaaaaaa = ref(getDatabase(app), 'Games');
+  set(aaaaaaa, null);
 
-  //Limpar os cookies do primeiro usuário 
+  //Limpar os cookies do primeiro usuário
   deleteAllCookies();
-  
+
   gameName = document.getElementById('namegame').value;
   namePlayer = document.getElementById('displayname').value;
 
@@ -47,22 +58,22 @@ export async function New_Game() {
       card: '',
     }
   );
-    //console.log(game_id)
+  //console.log(game_id)
   const db = getDatabase();
-  set(ref(db, 'Games/' + game_id + "/players"+ "/cards_turned"), {
+  set(ref(db, 'Games/' + game_id + '/players' + '/cards_turned'), {
     turned: false,
   });
 
   //Colcoar o id do primeiro jogador na id da tag img no html fixo
 
-  let first_id_player = playersRef.key
-  let imgselect  = document.querySelector("img.imgbackcard")
-  imgselect.id = first_id_player
+  let first_id_player = playersRef.key;
+  let imgselect = document.querySelector('img.imgbackcard');
+  imgselect.id = first_id_player;
 
   // Colocar o Id do player na tag p do nome em baixo da carta
 
-  let pselect = document.querySelector('.nameaftercard')
-  pselect.classList.add(first_id_player)
+  let pselect = document.querySelector('.nameaftercard');
+  pselect.classList.add(first_id_player);
 
   Global_Game_ID = game_id;
 
@@ -164,200 +175,219 @@ export async function listen_game() {
   });
 
   //Verificar se os jogadores selecionaram as cartas e colocar a imagem de trás da carta
-  const dbrefcardchange = ref(getDatabase(),'Games/' + Global_Game_ID + "/players")
-   onChildChanged(dbrefcardchange, (data)=>{
-     
-      if (data.val().card != ''){
-        let imageretire = document.getElementById(data.key);
-        if(imageretire){
-          imageretire.classList.remove('hidden');
-        }
-      } else {
-        let imageretire = document.getElementById(data.key);
-        if(imageretire){
-          imageretire.classList.add('hidden');
-        }
+  const dbrefcardchange = ref(
+    getDatabase(),
+    'Games/' + Global_Game_ID + '/players'
+  );
+  onChildChanged(dbrefcardchange, (data) => {
+    if (data.val().card != '') {
+      let imageretire = document.getElementById(data.key);
+      if (imageretire) {
+        imageretire.classList.remove('hidden');
       }
-  })
+    } else {
+      let imageretire = document.getElementById(data.key);
+      if (imageretire) {
+        imageretire.classList.add('hidden');
+      }
+    }
+  });
 
   //Setar  timer e revelar as cartas
-  const dbreftimer = ref(getDatabase(),'Games/' + Global_Game_ID + "/players" + "/cards_turned")
-  onChildChanged(dbreftimer, (change)=>{
-
-      if(change.val()== true){
-          //console.log('entrou')
+  const dbreftimer = ref(
+    getDatabase(),
+    'Games/' + Global_Game_ID + '/players' + '/cards_turned'
+  );
+  onChildChanged(dbreftimer, (change) => {
+    if (change.val() == true) {
+      //console.log('entrou')
       //Timer
       var duracao = 2;
-    
+
       var revealcards = document.getElementById('RevelCards');
       revealcards.classList.add('hidden');
-    
+
       var temp = document.querySelector('p#temp');
       temp.classList.add('hidden');
-    
+
       var funcao = setInterval(function () {
         var timer = document.querySelector('p#timer');
         timer.textContent = duracao;
-    
+
         if (duracao == 0) {
           clearInterval(funcao);
 
           //Resumo votação
 
-          let gbrefturncards = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
-          get(gbrefturncards).then((snapshot) => {
-            Object.keys(snapshot.val()).map((user)=>{
-              let aa = document.getElementById(user)
-              if(aa){
-                let tt = aa.previousElementSibling
-                tt.classList.remove('hidden')
+          let hide_cheap = document.getElementById("footer")
+          hide_cheap.classList.add("hidden")
 
-                var oldcard = document.getElementById(user);
-                oldcard.classList.add('hidden');
+          let gbrefturncards = ref(
+            getDatabase(),
+            'Games/' + Global_Game_ID + '/players/'
+          );
+          get(gbrefturncards)
+            .then((snapshot) => {
+              Object.keys(snapshot.val()).map((user) => {
+                let aa = document.getElementById(user);
+                if (aa) {
+                  let tt = aa.previousElementSibling;
+                  tt.classList.remove('hidden');
 
-              }
+                  var oldcard = document.getElementById(user);
+                  oldcard.classList.add('hidden');
+                }
+              });
             })
-          }).catch((error) => {
-            console.error(error);
-          });
+            .catch((error) => {
+              console.error(error);
+            });
 
           // calcular a média
           var soma = 0;
-          var count = ''
-          var vetor = []
-          get(gbrefturncards).then((data) => {
-            data.forEach(dataItem =>{
-              if (dataItem.val().name){
-                if(dataItem.val().card == "?"){
-                soma += 0;
-                vetor.push(dataItem.val().card)
-                }else
-                soma += Number(dataItem.val().card)
-                count ++;
-                vetor.push(Number(dataItem.val().card))
-              }
-            })
+          var count = '';
+          var vetor = [];
+          get(gbrefturncards)
+            .then((data) => {
+              data.forEach((dataItem) => {
+                if (dataItem.val().name) {
+                  if (dataItem.val().card == '?') {
+                    soma += 0;
+                    vetor.push(dataItem.val().card);
+                  } else soma += Number(dataItem.val().card);
+                  count++;
+                  vetor.push(Number(dataItem.val().card));
+                }
+              });
 
-            let presultofvoting = document.getElementById('result')
-            presultofvoting.textContent = (soma/count).toFixed(1)
+              let presultofvoting = document.getElementById('result');
+              presultofvoting.textContent = (soma / count).toFixed(1);
 
-            // Adiconar as cartas selecionadas com as respectivas qunatidades de votos
+              // Adiconar as cartas selecionadas com as respectivas qunatidades de votos
 
-              var vetorformatado = ''
-              vetorformatado = vetor.filter(function(el, i) {
-                  return vetor.indexOf(el) === i;
+              var vetorformatado = '';
+              vetorformatado = vetor.filter(function (el, i) {
+                return vetor.indexOf(el) === i;
               });
               //console.log(vetorformatado);
 
-            vetorformatado.forEach(n=>{
-              var count_num = 0
-              vetor.forEach(num=>{
-                if (num == n){
-                  count_num ++;
-                }
-              })
+              vetorformatado.forEach((n) => {
+                var count_num = 0;
+                vetor.forEach((num) => {
+                  if (num == n) {
+                    count_num++;
+                  }
+                });
 
-              let htmlfix = `
+                let htmlfix = `
               <div class="alignvotecards">
                 <button class="cardresults">${n}</button>
                 <div>
                     <p class="voteaftercard">Votes: ${count_num}</p>
                 </div>
               </div>
-              `
-              let select = document.getElementById('cheapresult')
-              select.innerHTML += htmlfix
+              `;
+                let select = document.getElementById('cheapresult');
+                select.innerHTML += htmlfix;
+              });
             })
-          }).catch((error) => {
-            console.error(error);
-          });
+            .catch((error) => {
+              console.error(error);
+            });
 
           var timer = document.querySelector('p#timer');
           timer.classList.add('hidden');
-        
+
           // var oldcard = document.querySelector('img.imgbackcard');
           // oldcard.classList.add('hidden');
-        
+
           // var newcard = document.querySelector('button#newcard');
           // newcard.classList.remove('hidden');
-        
+
           var buttonnewvoting = document.querySelector('button.StartNewVoting');
           buttonnewvoting.classList.remove('hidden');
-        
+
           var cheapnew = document.querySelector('div.cheap');
           cheapnew.style.opacity = '';
-        
+
           var popac = document.querySelector('p.choosecard');
           popac.style.opacity = '';
-        
+
           var result = document.querySelector('div.resultofvoting');
           result.classList.remove('hidden');
-          result.classList.add("w3-animate-bottom")
 
-
-    
           timer.textContent = '';
         }
-    
+
         duracao--;
       }, 1000);
-    
+
       // Valor Carta (Buscar no banco, pois senão lança uma exeption)
 
-      let gbrefgetcardvalue = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
-      get(gbrefgetcardvalue).then((snapshot) => {
-        Object.keys(snapshot.val()).map((el)=>{
-          const card = document.getElementById(el);
-          if(card){
-            const sb = card.previousElementSibling;
-            sb.textContent = snapshot.val()[el].card;
-          }
+      let gbrefgetcardvalue = ref(
+        getDatabase(),
+        'Games/' + Global_Game_ID + '/players/'
+      );
+      get(gbrefgetcardvalue)
+        .then((snapshot) => {
+          Object.keys(snapshot.val()).map((el) => {
+            const card = document.getElementById(el);
+            if (card) {
+              const sb = card.previousElementSibling;
+              sb.textContent = snapshot.val()[el].card;
+            }
+          });
         })
-      }).catch((error) => {
-        console.error(error);
-      });
+        .catch((error) => {
+          console.error(error);
+        });
 
-    
       //var cardvalue = document.querySelector('button.card.ativo').textContent;
       // if (cardvalue == ''){
       //   cardvalue = "?"
       // }
-    
+
       // var cardselect = document.querySelector('button#newcard');
       // cardselect.textContent = cardvalue;
-    
+
       var cheapnew = document.querySelector('div.cheap');
       cheapnew.style.opacity = '0.2';
-    
+
       var popac = document.querySelector('p.choosecard');
       popac.style.opacity = '0.2';
-    
-    }else if(change.val() == false){
-
-          let gbrefstartnewround = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
-          get(gbrefstartnewround).then((snapshot) => {
-            Object.keys(snapshot.val()).map((user)=>{
-              let hh = document.getElementById(user)
-              if(hh){
-                let jj = hh.previousElementSibling
-                jj.classList.add('hidden')
+    } else if (change.val() == false) {
+      let gbrefstartnewround = ref(
+        getDatabase(),
+        'Games/' + Global_Game_ID + '/players/'
+      );
+      get(gbrefstartnewround)
+        .then((snapshot) => {
+          Object.keys(snapshot.val()).map((user) => {
+            let hh = document.getElementById(user);
+            if (hh) {
+              let jj = hh.previousElementSibling;
+              jj.classList.add('hidden');
 
               let olddcard = document.getElementById(user);
-                olddcard.classList.add('hidden');
+              olddcard.classList.add('hidden');
 
-                var buttonnewvoting = document.querySelector('button.StartNewVoting');
-                buttonnewvoting.classList.add('hidden');
-
-              }
-            })
-          }).catch((error) => {
-            console.error(error);
+              var buttonnewvoting = document.querySelector(
+                'button.StartNewVoting'
+              );
+              buttonnewvoting.classList.add('hidden');
+            }
           });
-
+        })
+        .catch((error) => {
+          console.error(error);
+        });
 
       //Quando o cara clica em começar uma nova votação
       var timer = document.querySelector('p#timer');
       timer.classList.remove('hidden');
+
+      let hide_cheap = document.getElementById("footer")
+      hide_cheap.classList.remove("hidden")
 
       // var oldcard = document.querySelector('img.imgbackcard');
       // oldcard.classList.add('hidden');
@@ -370,38 +400,39 @@ export async function listen_game() {
 
       var result = document.querySelector('div.resultofvoting');
       result.classList.add('hidden');
-      result.classList.add("w3-animate-bottom")
 
       var cardativo = document.querySelector('button.card.ativo');
-      if(cardativo){
+      if (cardativo) {
         cardativo.classList.remove('ativo');
       }
 
       var temp = document.querySelector('p#temp');
       temp.classList.remove('hidden');
 
-      let teste = document.getElementById('cheapresult')
-      teste.innerHTML = ""
-        
+      let teste = document.getElementById('cheapresult');
+      teste.innerHTML = '';
     }
-  })
+  });
   //Verificar o noem do jogador alterado e mudar para os outros
 
-  let dbchangename = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
-  onChildChanged(dbchangename, (data)=>{
-    if(data.val().name){
-  get(dbchangename).then((snapshot) => {
-      let yy = document.querySelector(`p.${data.key}`)
-      if(yy){ 
-        yy.textContent = data.val().name;        
-      }
-  }).catch((error) => {
-    console.error(error);
-  });
+  let dbchangename = ref(
+    getDatabase(),
+    'Games/' + Global_Game_ID + '/players/'
+  );
+  onChildChanged(dbchangename, (data) => {
+    if (data.val().name) {
+      get(dbchangename)
+        .then((snapshot) => {
+          let yy = document.querySelector(`p.${data.key}`);
+          if (yy) {
+            yy.textContent = data.val().name;
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
-
-  })
-
+  });
 
   // let gbrefgetcardvalue = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
   // get(gbrefgetcardvalue).then((snapshot) => {
@@ -415,12 +446,6 @@ export async function listen_game() {
   // }).catch((error) => {
   //   console.error(error);
   // });
-
-
-
-
-
-
 }
 
 export async function Change_Name() {
@@ -473,14 +498,14 @@ export async function Change_Name() {
   // get(dbchangename).then((snapshot) => {
   //   Object.keys(snapshot.val()).map((user)=>{
   //     let aa = document.querySelector(`p.${user}`)
-  //     aa.textContent = nameChange;        
+  //     aa.textContent = nameChange;
   //   })
   // }).catch((error) => {
   //   console.error(error);
   // });
 
-  var pnameplayer = document.querySelector("p.nameaftercard");
-  if(pnameplayer){
+  var pnameplayer = document.querySelector('p.nameaftercard');
+  if (pnameplayer) {
     pnameplayer.textContent = nameChange;
   }
   // Nome no botão para trocar o mesmo
@@ -496,7 +521,6 @@ export async function Change_Name() {
 }
 
 export async function getDataUserAuth(Idsala) {
-
   let user_ID = '';
   let cookies = document.cookie;
   var teste = cookies.split(';');
@@ -552,12 +576,12 @@ export async function getDataUserAuth(Idsala) {
   let ca = cookiess.split('=');
   current_user_id = ca[1];
 
-  let imgselect  = document.querySelector("img.imgbackcard")
-  imgselect.id = current_user_id
+  let imgselect = document.querySelector('img.imgbackcard');
+  imgselect.id = current_user_id;
 
-  let pselect = document.querySelector('.nameaftercard')
-  if(pselect){
-    pselect.classList.add(current_user_id)
+  let pselect = document.querySelector('.nameaftercard');
+  if (pselect) {
+    pselect.classList.add(current_user_id);
   }
 }
 
@@ -584,11 +608,11 @@ async function PutInformationInScreen() {
   let ca = cookies.split('=');
   current_user_id = ca[1];
 
-  let imgselect  = document.querySelector("img.imgbackcard")
-  imgselect.id = current_user_id
+  let imgselect = document.querySelector('img.imgbackcard');
+  imgselect.id = current_user_id;
 
-  let pselect = document.querySelector('.nameaftercard')
-  pselect.classList.add(current_user_id)
+  let pselect = document.querySelector('.nameaftercard');
+  pselect.classList.add(current_user_id);
 
   listen_game();
 }
