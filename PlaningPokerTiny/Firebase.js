@@ -64,11 +64,12 @@ export async function New_Game() {
     turned: false,
   });
 
-  //Colcoar o id do primeiro jogador na id da tag img no html fixo
+  //Colcoar o id do primeiro jogador na id da tag div no html fixo
 
   let first_id_player = playersRef.key;
-  let imgselect = document.querySelector('img.imgbackcard');
+  let imgselect = document.querySelector('div.cardplayerplay');
   imgselect.id = first_id_player;
+  imgselect.classList.add("other_background_card")
 
   // Colocar o Id do player na tag p do nome em baixo da carta
 
@@ -154,10 +155,9 @@ export async function listen_game() {
           //console.log(playerId)
           let markup = `
             <div class="cardplayer">
-              <div class="cardplayerplay">
-                  <button class="cardnew hidden" id="newcard"></button>
-                  <img id="${playerId}" class="imgbackcard hidden" src="img/backcard.png">
-              </div>
+            <div id="${playerId}" class="cardplayerplay other_background_card"> 
+                <button class="cardnew hidden" id="newcard"></button>
+            </div>
               <div class="nameplayeraftercard">
                 <p class="nameaftercard ${playerId}">
                     ${nome}
@@ -183,12 +183,14 @@ export async function listen_game() {
     if (data.val().card != '') {
       let imageretire = document.getElementById(data.key);
       if (imageretire) {
-        imageretire.classList.remove('hidden');
+        imageretire.classList.remove("other_background_card")
+        imageretire.classList.add('background_card');
       }
     } else {
       let imageretire = document.getElementById(data.key);
       if (imageretire) {
-        imageretire.classList.add('hidden');
+        imageretire.classList.remove('background_card');
+        imageretire.classList.add("other_background_card")
       }
     }
   });
@@ -231,11 +233,11 @@ export async function listen_game() {
               Object.keys(snapshot.val()).map((user) => {
                 let aa = document.getElementById(user);
                 if (aa) {
-                  let tt = aa.previousElementSibling;
-                  tt.classList.remove('hidden');
+                  let tt = aa.children;
+                  tt[0].classList.remove('hidden');
 
-                  var oldcard = document.getElementById(user);
-                  oldcard.classList.add('hidden');
+                  // var oldcard = document.getElementById(user);
+                  // oldcard.classList.add('hidden');
                 }
               });
             })
@@ -247,6 +249,7 @@ export async function listen_game() {
           var soma = 0;
           var count = '';
           var vetor = [];
+          var flag = 0;
           get(gbrefturncards)
             .then((data) => {
               data.forEach((dataItem) => {
@@ -254,7 +257,19 @@ export async function listen_game() {
                   if (dataItem.val().card == '?') {
                     soma += 0;
                     vetor.push(dataItem.val().card);
-                  } else soma += Number(dataItem.val().card);
+                  } else if(dataItem.val().card == '1/2'){
+                    soma += 0.5;
+                    vetor.push(dataItem.val().card);
+                  } else if(dataItem.val().card == ''){
+                    soma = soma;
+                    count--;
+                    vetor.push(dataItem.val().card);
+                  } else if(dataItem.val().card == '0'){
+                    soma+=0
+                    flag = 1;
+                    vetor.push(0);
+                  } else
+                  soma += Number(dataItem.val().card);
                   count++;
                   vetor.push(Number(dataItem.val().card));
                 }
@@ -265,19 +280,38 @@ export async function listen_game() {
 
               // Adiconar as cartas selecionadas com as respectivas qunatidades de votos
 
-              var vetorformatado = '';
-              vetorformatado = vetor.filter(function (el, i) {
+              var vetorformatado;
+               vetorformatado = vetor.filter(function (el, i) {
                 return vetor.indexOf(el) === i;
-              });
-              //console.log(vetorformatado);
+               });
+
+               console.log(vetorformatado)
+              if (vetor.map(val=>{
+                if(val == ""){
+                  let tam = vetorformatado.length
+               if (flag == 0){
+                 vetorformatado.splice(tam-1, 1)
+               }
+                }
+              }))
+               
+
+               console.log(vetorformatado)
+               console.log(vetor)
 
               vetorformatado.forEach((n) => {
                 var count_num = 0;
                 vetor.forEach((num) => {
                   if (num == n) {
+                    console.log(n)
+                    console.log(num)
                     count_num++;
                   }
                 });
+
+                if (n == "" || n == 0){
+                  count_num = count_num/2;
+                }
 
                 let htmlfix = `
               <div class="alignvotecards">
@@ -332,9 +366,10 @@ export async function listen_game() {
         .then((snapshot) => {
           Object.keys(snapshot.val()).map((el) => {
             const card = document.getElementById(el);
+            console.log
             if (card) {
-              const sb = card.previousElementSibling;
-              sb.textContent = snapshot.val()[el].card;
+              const sb = card.children;
+              sb[0].textContent = snapshot.val()[el].card;
             }
           });
         })
@@ -365,17 +400,22 @@ export async function listen_game() {
           Object.keys(snapshot.val()).map((user) => {
             let hh = document.getElementById(user);
             if (hh) {
-              let jj = hh.previousElementSibling;
-              jj.classList.add('hidden');
+              let jj = hh.children;
+              jj[0].classList.add('hidden');
 
-              let olddcard = document.getElementById(user);
-              olddcard.classList.add('hidden');
+              // let olddcard = document.getElementById(user);
+              // olddcard.classList.add('hidden');
 
               var buttonnewvoting = document.querySelector(
                 'button.StartNewVoting'
               );
               buttonnewvoting.classList.add('hidden');
+
+              hh.classList.add("other_background_card")
             }
+
+            
+
           });
         })
         .catch((error) => {
@@ -389,14 +429,19 @@ export async function listen_game() {
       let hide_cheap = document.getElementById("footer")
       hide_cheap.classList.remove("hidden")
 
-      // var oldcard = document.querySelector('img.imgbackcard');
-      // oldcard.classList.add('hidden');
+      //  var oldcard = document.querySelector('div.imgbackcard');
+      //  oldcard.classList.add('other_background_card');
 
       // var newcard = document.querySelector('button#newcard');
       // newcard.classList.add('hidden');
 
       // var buttonnewvoting = document.querySelector('button.StartNewVoting');
       // buttonnewvoting.classList.add('hidden');
+
+      let backcard = document.querySelector("div.cardplayerplay")
+       if(backcard){
+         backcard.classList.add("other_background_card")
+      }
 
       var result = document.querySelector('div.resultofvoting');
       result.classList.add('hidden');
@@ -411,6 +456,7 @@ export async function listen_game() {
 
       let teste = document.getElementById('cheapresult');
       teste.innerHTML = '';
+
     }
   });
   //Verificar o noem do jogador alterado e mudar para os outros
@@ -576,8 +622,9 @@ export async function getDataUserAuth(Idsala) {
   let ca = cookiess.split('=');
   current_user_id = ca[1];
 
-  let imgselect = document.querySelector('img.imgbackcard');
+  let imgselect = document.querySelector('div.cardplayerplay');
   imgselect.id = current_user_id;
+  imgselect.classList.add("other_background_card")
 
   let pselect = document.querySelector('.nameaftercard');
   if (pselect) {
@@ -608,7 +655,7 @@ async function PutInformationInScreen() {
   let ca = cookies.split('=');
   current_user_id = ca[1];
 
-  let imgselect = document.querySelector('img.imgbackcard');
+  let imgselect = document.querySelector('div.cardplayerplay');
   imgselect.id = current_user_id;
 
   let pselect = document.querySelector('.nameaftercard');
@@ -624,7 +671,7 @@ function setCookie(cname, cvalue, exdays) {
   document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
 }
 
-function deleteAllCookies() {
+export function deleteAllCookies() {
   var cookies = document.cookie.split(';');
 
   for (var i = 0; i < cookies.length; i++) {

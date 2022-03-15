@@ -18,6 +18,10 @@ body {
   background-clip: border-box, border-box, border-box, border-box;
   background-size: 17px 17px;
 }
+.other_background_card{
+  background: #e8e9ea;
+}
+
 
 div.register {
   z-index: 1;
@@ -691,7 +695,6 @@ p#timer {
 }
 
 .cardplayerplay {
-  background: #e8e9ea;
   height: 5rem;
   width: 3rem;
   border-radius: 0.8rem;

@@ -6,6 +6,7 @@ import { getDataUserAuth } from './Firebase.js';
 import { listen_game } from './Firebase.js';
 import { RetirarHide } from './JavaScript.js';
 import { CopyUrlTransfer } from './JavaScript.js';
+import {deleteAllCookies} from "./Firebase.js"
 import $ from 'jquery';
 
 $(document).ready(function () {
@@ -20,6 +21,12 @@ $(document).ready(function () {
     // Se já existir um game criado e  o jogador entarr pela url com o ID
     var idnotf = res[1].substr(3);
     Global_Game_ID = idnotf;
+    let id_tester = ref(getDatabase(),"Games/")
+    get(id_tester).then((snap)=>{
+      if(Object.keys(snap.val())[0] != Global_Game_ID){
+        window.alert("You are in a session that no longer exists in the DataBase. Please enter in another ;)")
+      }
+    })
     var cookies = document.cookie;
     //Verificar se tem um cokkie salvo, então não pedir um nome para o jogador entrar
     if (cookies.length == 0) {
@@ -27,28 +34,41 @@ $(document).ready(function () {
       $('.section, .superhide, .footer').removeClass('hidden');
       $('.nmplayer').removeClass('hidden');
     } else {
-      $('.register').addClass('hidden');
-      $('.section, .superhide, .footer').removeClass('hidden');
-      getDataUserAuth(Global_Game_ID);
 
       let current_user_id = '';
       let cookies = document.cookie;
       let ca = cookies.split('=');
       current_user_id = ca[1];
 
-      let imgselect  = document.querySelector("img.imgbackcard")
+      let verify = ref(getDatabase(),"Games/" + Global_Game_ID +"/players/")
+
+      get(verify)
+        .then((snapshot) => {
+          // Object.keys(snapshot.val()).map((user) => {
+            // console.log(Object.keys(snapshot.val()))
+            if (Object.keys(snapshot.val()).includes(current_user_id)){
+              console.log("Tem")
+            }else{
+              console.log("Não tem")
+              deleteAllCookies();
+              window.location.reload();
+            }
+          //});
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      $('.register').addClass('hidden');
+      $('.section, .superhide, .footer').removeClass('hidden');
+      getDataUserAuth(Global_Game_ID);
+
+      let imgselect  = document.querySelector("div.cardplayerplay")
       imgselect.id = current_user_id
 
       listen_game();
     }
   }
-
-  // let page_width = window.screen.width
-  // console.log(page_width)
-  // if(page_width <= 616){
-  //   let icon_qrcode = document.getElementById("qrcode")
-  //   icon_qrcode.classList.remove()
-  // }
 
   $('.cg').on('click', function () {
     let NewName = $('.displaynamenew').val();
@@ -336,8 +356,8 @@ function setCookie(cValue, expDays) {
 }
 
 function RetireHideImageCard() {
-  var imageretire = document.querySelector('img.imgbackcard');
-  imageretire.classList.remove('hidden');
+  var imageretire = document.querySelector('div.cardplayerplay');
+  imageretire.classList.add('background_card');
 }
 
 function RetireHideRevelCards() {
@@ -346,8 +366,8 @@ function RetireHideRevelCards() {
 }
 
  function AddHideImageCard() {
-  var imageretire = document.querySelector('img.imgbackcard');
-  imageretire.classList.add('hidden');
+  var imageretire = document.querySelector('div.cardplayerplay');
+  imageretire.classList.remove('background_card');
 }
 
 function AddHideRevelCards() {

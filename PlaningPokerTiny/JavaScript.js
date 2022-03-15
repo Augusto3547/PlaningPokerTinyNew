@@ -1,4 +1,4 @@
-import {  getDatabase,  ref,  child,  get,  push,  onValue,  update} from 'firebase/database';
+import {  getDatabase,  ref,  child,  get,  push,  onValue,  update, set} from 'firebase/database';
 
 function AdicionarAtributo(e) {
   console.log(e);
@@ -14,6 +14,13 @@ export function RetirarHide() {
   var elemento = document.getElementById('escondido2');
   elemento.classList.remove('hidden');
 }
+
+window.addEventListener("beforeunload", function(event) {
+    let teste = ref(getDatabase(app), 'Games')
+   if(event){
+     set(teste, null)
+   }
+});
 
 //Copiar para a area de transferencia do usuario com o botão Copy Invitation link
 
@@ -79,8 +86,8 @@ function resumoVotacao() {
   var timer = document.querySelector('p#timer');
   timer.classList.add('hidden');
 
-  var oldcard = document.querySelector('img.imgbackcard');
-  oldcard.classList.add('hidden');
+  var oldcard = document.querySelector('div.cardplayerplay');
+  oldcard.classList.remove('background_card');
 
   var newcard = document.querySelector('button#newcard');
   newcard.classList.remove('hidden');
@@ -104,9 +111,6 @@ butt.addEventListener('click', function (e) {
   var timer = document.querySelector('p#timer');
   timer.classList.remove('hidden');
 
-  var oldcard = document.querySelector('img.imgbackcard');
-  oldcard.classList.add('hidden');
-
   var newcard = document.querySelector('button#newcard');
   newcard.classList.add('hidden');
 
@@ -123,4 +127,5 @@ butt.addEventListener('click', function (e) {
 
   var temp = document.querySelector('p#temp');
   temp.classList.remove('hidden');
+
 });
