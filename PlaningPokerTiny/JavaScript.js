@@ -15,13 +15,6 @@ export function RetirarHide() {
   elemento.classList.remove('hidden');
 }
 
-window.addEventListener("beforeunload", function(event) {
-    let teste = ref(getDatabase(app), 'Games')
-   if(event){
-     set(teste, null)
-   }
-});
-
 //Copiar para a area de transferencia do usuario com o botão Copy Invitation link
 
 export function CopyUrlTransfer() {

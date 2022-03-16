@@ -11,6 +11,7 @@ import {
   onChildAdded,
   set,
   remove,
+  onChildRemoved,
 } from 'firebase/database';
 import { data } from 'jquery';
 import $ from 'jquery';
@@ -480,18 +481,24 @@ export async function listen_game() {
     }
   });
 
-  // let gbrefgetcardvalue = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
-  // get(gbrefgetcardvalue).then((snapshot) => {
-  //   Object.keys(snapshot.val()).map((el)=>{
-  //     const card = document.getElementById(el);
-  //     if(card){
-  //       const sb = card.previousElementSibling;
-  //       sb.textContent = snapshot.val()[el].card;
-  //     }
-  //   })
-  // }).catch((error) => {
-  //   console.error(error);
-  // });
+    //Verificar se  um jogo foi excluido
+    const dbrefgmaeclear = ref(
+      getDatabase(),
+      'Games/'
+    );
+     onChildRemoved(dbrefgmaeclear, (snapshot) => {
+      let url = window.location.href;
+      let res = url.split('#');
+      var idnotf = res[1].substr(3);
+      let Game_ID = idnotf;
+      console.log(Game_ID)
+      console.log(snapshot)
+
+      window.alert("You are in a session that no longer exists in the DataBase. Please enter in another ;)");
+      window.location.href = "https://planingpokertiny-42303.web.app/";
+     
+    });
+  
 }
 
 export async function Change_Name() {

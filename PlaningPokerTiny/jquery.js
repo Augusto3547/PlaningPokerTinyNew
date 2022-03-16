@@ -21,12 +21,12 @@ $(document).ready(function () {
     // Se já existir um game criado e  o jogador entarr pela url com o ID
     var idnotf = res[1].substr(3);
     Global_Game_ID = idnotf;
-    let id_tester = ref(getDatabase(),"Games/")
-    get(id_tester).then((snap)=>{
-      if(Object.keys(snap.val())[0] != Global_Game_ID){
-        window.alert("You are in a session that no longer exists in the DataBase. Please enter in another ;)")
-      }
-    })
+    // let id_tester = ref(getDatabase(),"Games/")
+    // get(id_tester).then((snap)=>{
+    //   if(Object.keys(snap.val())[0] != Global_Game_ID){
+    //     window.alert("You are in a session that no longer exists in the DataBase. Please enter in another ;)")
+    //   }
+    // })
     var cookies = document.cookie;
     //Verificar se tem um cokkie salvo, então não pedir um nome para o jogador entrar
     if (cookies.length == 0) {
@@ -40,16 +40,14 @@ $(document).ready(function () {
       let ca = cookies.split('=');
       current_user_id = ca[1];
 
+      //Verificar se o jogador que entou esta com o ID na sala anterior ou não
       let verify = ref(getDatabase(),"Games/" + Global_Game_ID +"/players/")
-
       get(verify)
         .then((snapshot) => {
           // Object.keys(snapshot.val()).map((user) => {
             // console.log(Object.keys(snapshot.val()))
             if (Object.keys(snapshot.val()).includes(current_user_id)){
-              console.log("Tem")
             }else{
-              console.log("Não tem")
               deleteAllCookies();
               window.location.reload();
             }
