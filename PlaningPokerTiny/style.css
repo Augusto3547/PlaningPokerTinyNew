@@ -5,23 +5,94 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-.background_card{  
-  background: linear-gradient(45deg,#3993ff 12%,transparent 0,transparent 88%,#3993ff 0),linear-gradient(135deg,transparent 37%,#1a7bf2 0,#1a7bf2 63%,transparent 0),linear-gradient(45deg,transparent 37%,#3993ff 0,#3993ff 63%,transparent 0),#74b3ff;
+.background_card {
+  background: linear-gradient(
+      45deg,
+      #3993ff 12%,
+      transparent 0,
+      transparent 88%,
+      #3993ff 0
+    ),
+    linear-gradient(
+      135deg,
+      transparent 37%,
+      #1a7bf2 0,
+      #1a7bf2 63%,
+      transparent 0
+    ),
+    linear-gradient(
+      45deg,
+      transparent 37%,
+      #3993ff 0,
+      #3993ff 63%,
+      transparent 0
+    ),
+    #74b3ff;
   background-color: rgb(116, 179, 255);
   background-position-x: 0%, 0%, 0%, 0%;
   background-position-y: 0%, 0%, 0%, 0%;
   background-repeat: repeat, repeat, repeat, repeat;
   background-attachment: scroll, scroll, scroll, scroll;
-  background-image: linear-gradient(45deg, rgb(57, 147, 255) 12%, transparent 0px, transparent 88%, rgb(57, 147, 255) 0px), linear-gradient(135deg, transparent 37%, rgb(26, 123, 242) 0px, rgb(26, 123, 242) 63%, transparent 0px), linear-gradient(45deg, transparent 37%, rgb(57, 147, 255) 0px, rgb(57, 147, 255) 63%, transparent 0px), none;
+  background-image: linear-gradient(
+      45deg,
+      rgb(57, 147, 255) 12%,
+      transparent 0px,
+      transparent 88%,
+      rgb(57, 147, 255) 0px
+    ),
+    linear-gradient(
+      135deg,
+      transparent 37%,
+      rgb(26, 123, 242) 0px,
+      rgb(26, 123, 242) 63%,
+      transparent 0px
+    ),
+    linear-gradient(
+      45deg,
+      transparent 37%,
+      rgb(57, 147, 255) 0px,
+      rgb(57, 147, 255) 63%,
+      transparent 0px
+    ),
+    none;
   background-size: auto, auto, auto, auto;
   background-origin: padding-box, padding-box, padding-box, padding-box;
   background-clip: border-box, border-box, border-box, border-box;
   background-size: 17px 17px;
 }
-.other_background_card{
+.other_background_card {
   background: #e8e9ea;
 }
 
+div.up-players {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+div.down-players {
+  text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 38% 25% 40.5%;
+}
+
+.left-players {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+
+.right-players {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
 
 div.register {
   z-index: 1;
@@ -347,7 +418,7 @@ button.savedeck {
   font-size: 120%;
   font-weight: bold;
 }
-button.card {
+/* button.card {
   border-radius: 0.8rem;
   font-size: 19px;
   height: 5rem;
@@ -355,7 +426,7 @@ button.card {
   border-color: #3993ff;
   background: white;
   margin-left: 8px;
-}
+} */
 button.card:hover {
   background: rgb(233, 231, 231);
   margin-top: -10px;
@@ -611,7 +682,7 @@ input#qrcodecontent {
 
 .midle {
   align-items: center;
-  margin-top: 150px;
+  margin-top: 13%;
 }
 
 .emoji {
@@ -631,14 +702,9 @@ input#qrcodecontent {
 .tabel {
   background: #d7e9ff;
   border-radius: 2.8rem;
-  grid-area: table;
   height: auto;
-  margin: 0 auto;
-  min-height: 10rem;
-  min-width: 20rem;
   padding: 0 1.6rem;
   position: relative;
-  width: 15%;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -691,7 +757,7 @@ p#timer {
   display: block;
   justify-content: center;
   align-items: center;
-  margin: 2% 1%;
+  margin: 10px 1%;
 }
 
 .cardplayerplay {
@@ -742,7 +808,7 @@ img.imgbackcard {
   padding: 15px 0px;
 }
 
-.spacecards{
+.spacecards {
   overflow-x: scroll;
   overflow-y: hidden;
 }
@@ -832,7 +898,7 @@ button.card {
   border-radius: 0.8rem;
   font-size: 19px;
   height: 5rem;
-  min-width: 3rem;
+  width: 3rem;
   border-color: #3993ff;
   background: white;
   margin-left: 12px;
@@ -845,7 +911,7 @@ button.card {
   border-radius: 0.8rem;
   font-size: 19px;
   height: 5rem;
-  min-width: 3rem;
+  width: 3rem;
   border-color: #3993ff;
   background: white;
   border: 2px solid #3993ff;
@@ -1619,8 +1685,7 @@ h4.titleinviteplayers {
 /*Resposivo da tela de Jogo principal*/
 
 @media screen and (max-width: 770px) {
-
-  body{
+  body {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 750px;
@@ -1672,122 +1737,18 @@ h4.titleinviteplayers {
     align-items: center;
     justify-content: center;
   }
-
-  .tabel {
-    min-width: 18rem;
-  }
-
-  .cardnew {
-    height: 4rem;
-    min-width: 2.4rem;
-  }
-
-  p#temp {
-    font-size: 12.5px;
-  }
-
-  .cardplayerplay {
-    height: 4rem;
-    width: 2.4rem;
-  }
-  img.imgbackcard {
-    height: 4rem;
-    width: 2.4rem;
-  }
-
-  .nameplayeraftercard {
-    font-size: 13px;
-  }
-
-  p.choosecard {
-    font-size: 14px;
-  }
-
-  button.card {
-    height: 4rem;
-    min-width: 2.4rem;
-  }
-
-  .cardresults{
-    height: 4rem;
-    width: 2.4rem;
-  }
-
-  .voteaftercard{
-    font-size: 13px;
-  }
-
-  h3{
-    font-size: 14px;
-  }
-  p#result{
-    font-size: 14px;
-  }
-
 }
 
 @media screen and (max-width: 616px) {
-
-  body{
+  body {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 750px;
   }
-
-  .tabel {
-    min-width: 16rem;
-  }
-  .cardnew {
-    height: 3.2rem;
-    min-width: 2rem;
-    border-radius: 10px;
-  }
-
-  .cardplayerplay {
-    height: 3.2rem;
-    width: 2rem;
-    border-radius: 10px;
-  }
-  img.imgbackcard {
-    height: 3.2rem;
-    width: 2rem;
-    border-radius: 10px;
-  }
-
-  div.cheap {
-    height: 90px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    align-items: center;
-  }
-
-  div.footer {
-    padding: 0 20px;
-  }
-
-  .cardresults{
-    height: 3.2rem;
-    width: 2rem;
-    border-radius: 8px;
-  }
-
-  .voteaftercard{
-    font-size: 12px;
-  }
-
-  h3{
-    font-size: 13px;
-  }
-  p#result{
-    font-size: 13px;
-  }
-
 }
 
 @media screen and (max-width: 460px) {
-
-  body{
+  body {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 750px;
@@ -1838,82 +1799,10 @@ h4.titleinviteplayers {
     height: 1.1rem;
   }
 
-  .tabel {
-    min-width: 13rem;
-  }
-
-  .cardnew {
-    height: 3rem;
-    min-width: 1.9rem;
-    border-radius: 8px;
-  }
-
-  button.RevelCards {
-    height: 2.5rem;
-    width: 8.5rem;
-  }
-
-  button.StartNewVoting {
-    height: 2.5rem;
-    width: 8.5rem;
-    font-size: 12px;
-  }
-
-  p#temp {
-    font-size: 11px;
-  }
-
-  .cardplayerplay {
-    height: 3rem;
-    width: 1.9rem;
-    border-radius: 8px;
-  }
-
-  img.imgbackcard {
-    height: 3rem;
-    width: 1.9rem;
-  }
-
-  .nameplayeraftercard {
-    font-size: 11px;
-  }
-
-  p.choosecard {
-    font-size: 13px;
-  }
-
-  button.card {
-    height: 3.2rem;
-    min-width: 2rem;
-    font-size: 15px;
-  }
-
-  .cardresults{
-    height: 3rem;
-    width: 1.9rem;
-    border-radius: 8px;
-  }
-
-  .voteaftercard{
-    font-size: 12px;
-  }
-
-  h3{
-    font-size: 13px;
-  }
-  p#result{
-    font-size: 13px;
-  }
-
-  .cardnew{
-    font-size: 12px;
-  }
-
 }
 
 @media screen and (max-width: 412px) {
-
-  body{
+  body {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 750px;
@@ -1935,55 +1824,10 @@ h4.titleinviteplayers {
     width: 100%;
   }
 
-  .tabel {
-    min-width: 10rem;
-  }
-
-  .cardnew {
-    height: 3rem;
-    min-width: 1.9rem;
-    border-radius: 8px;
-  }
-
-  button.RevelCards {
-    height: 2.2rem;
-    width: 8rem;
-    font-size: 0.8rem;
-  }
-
-  button.StartNewVoting {
-    height: 2.2rem;
-    width: 8rem;
-    font-size: 0.8rem;
-  }
-
-  .cardresults{
-    height: 2.8rem;
-    width: 1.8rem;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-
-  .voteaftercard{
-    font-size: 10px;
-  }
-
-  h3{
-    font-size: 12px;
-  }
-  p#result{
-    font-size: 12px;
-  }
-
-  .cardnew{
-    font-size: 12px;
-  }
-
 }
 
 @media screen and (max-width: 382px) {
-
-  body{
+  body {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 750px;
@@ -2020,53 +1864,10 @@ h4.titleinviteplayers {
     height: 1.1rem;
   }
 
-  .tabel {
-    min-width: 10rem;
-    height: 10rem;
-  }
-
-  .cardnew {
-    height: 2.8rem;
-    min-width: 1.8rem;
-    border-radius: 7px;
-  }
-
-  p#temp {
-    font-size: 11px;
-  }
-
-  .cardplayerplay {
-    height: 2.8rem;
-    width: 1.8rem;
-  }
-  img.imgbackcard {
-    height: 3rem;
-    width: 1.9rem;
-  }
-
-  .nameplayeraftercard {
-    font-size: 11px;
-  }
-
-  p.choosecard {
-    font-size: 13px;
-  }
-
-  button.card {
-    height: 3.2rem;
-    min-width: 2rem;
-    font-size: 15px;
-  }
-
-  .cardnew{
-    font-size: 13px;
-  }
-
 }
 
 @media screen and (max-width: 375px) {
-
-  body{
+  body {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 750px;
@@ -2104,36 +1905,6 @@ h4.titleinviteplayers {
 
   label.namegame {
     font-size: 12px;
-  }
-  .tabel {
-    height: 6rem;
-  }
-
-  button.RevelCards {
-    height: 1.9rem;
-    width: 6.9rem;
-    font-size: 0.7rem;
-    border-radius: 0.6rem;
-  }
-
-  button.StartNewVoting {
-    height: 1.9rem;
-    width: 6.9rem;
-    font-size: 0.7rem;
-  }
-  .cardnew {
-    height: 2.8rem;
-    width: 1.8rem;
-    border-radius: 7px;
-    font-size: 8px;
-  }
-
-  button.card {
-    font-size: 10px;
-  }
-
-  .cardresults{
-    font-size: 8px;
   }
 
 }
@@ -2214,23 +1985,20 @@ h4.titleinviteplayers {
   }
 }
 
-
 /*Responsivo da Tela novo jogador*/
 
-@media screen and (max-width:1568px ){
-
-  input.displaynamenew{
+@media screen and (max-width: 1568px) {
+  input.displaynamenew {
     width: 87%;
   }
 }
 
-@media screen and (max-width:1293px ){
-
-  h4.h4cyn{
+@media screen and (max-width: 1293px) {
+  h4.h4cyn {
     font-size: 20px;
   }
 
-  label.displayname{
+  label.displayname {
     font-size: 15px;
   }
 
@@ -2239,27 +2007,25 @@ h4.titleinviteplayers {
     width: 85%;
   }
 
-  button.cg{
+  button.cg {
     height: 42px;
   }
-
 }
 
-@media screen and (max-width:1046px ){
-
-  div.spacename{
+@media screen and (max-width: 1046px) {
+  div.spacename {
     width: 40%;
   }
 
-  input.displaynamenew{
+  input.displaynamenew {
     width: 85%;
   }
 
-  h4.h4cyn{
+  h4.h4cyn {
     font-size: 16px;
   }
 
-  label.displayname{
+  label.displayname {
     font-size: 13px;
   }
 
@@ -2268,28 +2034,26 @@ h4.titleinviteplayers {
     width: 86%;
   }
 
-  button.cg{
+  button.cg {
     height: 36px;
   }
 }
 
-
-@media screen and (max-width:849px){
-
-  div.spacename{
+@media screen and (max-width: 849px) {
+  div.spacename {
     width: 50%;
   }
 
-  input.displaynamenew{
+  input.displaynamenew {
     width: 85%;
     font-size: 15px;
   }
 
-  h4.h4cyn{
+  h4.h4cyn {
     font-size: 12px;
   }
 
-  label.displayname{
+  label.displayname {
     font-size: 10px;
   }
 
@@ -2302,27 +2066,26 @@ h4.titleinviteplayers {
     width: 86%;
   }
 
-  button.cg{
+  button.cg {
     height: 36px;
     font-size: 13px;
   }
 }
 
-@media screen and (max-width:649px){
-
+@media screen and (max-width: 649px) {
   .alignleft {
     margin-left: 5px;
   }
 
-  input.displaynamenew{
+  input.displaynamenew {
     width: 85%;
   }
 
-  h4.h4cyn{
+  h4.h4cyn {
     font-size: 8px;
   }
 
-  label.displayname{
+  label.displayname {
     font-size: 8px;
   }
 
@@ -2332,13 +2095,13 @@ h4.titleinviteplayers {
     font-size: 12px;
   }
 
-  button.cg{
+  button.cg {
     height: 26px;
     font-size: 12px;
   }
 }
 
-@media screen and (max-width:579px){
+@media screen and (max-width: 579px) {
   .alignleft {
     margin-left: 5px;
   }
@@ -2348,24 +2111,22 @@ h4.titleinviteplayers {
     width: 80%;
     font-size: 12px;
   }
-
 }
 
-@media screen and (max-width:521px){
-
+@media screen and (max-width: 521px) {
   .alignleft {
     margin-left: 5px;
   }
 
-  input.displaynamenew{
+  input.displaynamenew {
     width: 85%;
   }
 
-  h4.h4cyn{
+  h4.h4cyn {
     font-size: 8px;
   }
 
-  label.displayname{
+  label.displayname {
     font-size: 8px;
   }
 
@@ -2376,28 +2137,27 @@ h4.titleinviteplayers {
     font-size: 10px;
   }
 
-  button.cg{
+  button.cg {
     height: 24px;
     font-size: 12px;
     border-radius: 8px;
   }
 }
 
-@media screen and (max-width:454px){
-
+@media screen and (max-width: 454px) {
   .alignleft {
     margin-left: 5px;
   }
 
-  input.displaynamenew{
+  input.displaynamenew {
     width: 85%;
   }
 
-  h4.h4cyn{
+  h4.h4cyn {
     font-size: 6px;
   }
 
-  label.displayname{
+  label.displayname {
     font-size: 6px;
   }
 
@@ -2408,15 +2168,14 @@ h4.titleinviteplayers {
     font-size: 10px;
   }
 
-  button.cg{
+  button.cg {
     height: 20px;
     font-size: 10px;
     border-radius: 8px;
   }
 }
 
-@media screen and (max-width:410px){
-
+@media screen and (max-width: 410px) {
   .alignleft {
     margin-left: 5px;
   }
@@ -2428,29 +2187,27 @@ h4.titleinviteplayers {
     font-size: px;
   }
 
-  button.cg{
+  button.cg {
     height: 20px;
     font-size: 8px;
     border-radius: 8px;
   }
-
 }
 
-@media screen and (max-width:355px){
-
+@media screen and (max-width: 355px) {
   .alignleft {
     margin-left: 5px;
   }
 
-  input.displaynamenew{
+  input.displaynamenew {
     width: 85%;
   }
 
-  h4.h4cyn{
+  h4.h4cyn {
     font-size: 5px;
   }
 
-  label.displayname{
+  label.displayname {
     font-size: 5px;
   }
 
@@ -2461,9 +2218,95 @@ h4.titleinviteplayers {
     font-size: 8px;
   }
 
-  button.cg{
+  button.cg {
     height: 15px;
     font-size: 6px;
     border-radius: 8px;
   }
+}
+
+/*Responsivo da Parte do meio do Jogo (mesa e cartas ao redor)*/
+
+@media screen and (max-width: 1278px) {
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 35% 30% 30%;
+  }
+
+  .cardplayerplay{
+    height: 3.6rem;
+    width: 2.3rem;
+    border-radius: 0.8rem;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+
+  .nameplayeraftercard {
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .cardnew{
+    height: 3.6rem;
+    width: 2.3rem;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  button.StartNewVoting{
+    width: 8rem;
+    font-size: 14px;
+    height: 2.8rem;
+  }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 32% 35% 30%;
+  }
+
+  .tabel{
+    font-size: 12px;
+  }
+
+  button.RevelCards{
+    height: 2.8rem;
+    width: 8.5rem;
+    font-size: 15px;
+  }
+
+
+  button.card{
+    font-size: 16px;
+    height: 4rem;
+    width: 2.5rem;
+    border-radius: 10px;
+  }
+
+  .cardresults{
+    height:4.5rem;
+    width: 2.6rem;
+    border-radius: 10px;
+  }
+  
+  div.bar{
+    height: 150px;
+    width: 12px;
+  }
+
+  h3{
+    font-size: 15px;
+  }
+
+  p#result{
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: px) {
+
 }

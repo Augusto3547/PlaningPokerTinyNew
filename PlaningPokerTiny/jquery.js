@@ -1,4 +1,12 @@
-import {  getDatabase,  ref,  child,  get,  push,  onValue,  update} from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+  push,
+  onValue,
+  update,
+} from 'firebase/database';
 import { New_Game } from './Firebase.js';
 import { New_Player } from './Firebase.js';
 import { Change_Name } from './Firebase.js';
@@ -6,13 +14,12 @@ import { getDataUserAuth } from './Firebase.js';
 import { listen_game } from './Firebase.js';
 import { RetirarHide } from './JavaScript.js';
 import { CopyUrlTransfer } from './JavaScript.js';
-import {deleteAllCookies} from "./Firebase.js"
+import { deleteAllCookies } from './Firebase.js';
 import $ from 'jquery';
 
 $(document).ready(function () {
   //getVotingSystem();
-
-  $('#namegame').val("Tiny") // Pré carregar o nome padrão do jogo como "Tiny"
+  $('#namegame').val('Tiny'); // Pré carregar o nome padrão do jogo como "Tiny"
 
   var url = window.location.href;
   var res = url.split('#');
@@ -34,23 +41,22 @@ $(document).ready(function () {
       $('.section, .superhide, .footer').removeClass('hidden');
       $('.nmplayer').removeClass('hidden');
     } else {
-
       let current_user_id = '';
       let cookies = document.cookie;
       let ca = cookies.split('=');
       current_user_id = ca[1];
 
       //Verificar se o jogador que entou esta com o ID na sala anterior ou não
-      let verify = ref(getDatabase(),"Games/" + Global_Game_ID +"/players/")
+      let verify = ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/');
       get(verify)
         .then((snapshot) => {
           // Object.keys(snapshot.val()).map((user) => {
-            // console.log(Object.keys(snapshot.val()))
-            if (Object.keys(snapshot.val()).includes(current_user_id)){
-            }else{
-              deleteAllCookies();
-              window.location.reload();
-            }
+          // console.log(Object.keys(snapshot.val()))
+          if (Object.keys(snapshot.val()).includes(current_user_id)) {
+          } else {
+            deleteAllCookies();
+            window.location.reload();
+          }
           //});
         })
         .catch((error) => {
@@ -61,8 +67,8 @@ $(document).ready(function () {
       $('.section, .superhide, .footer').removeClass('hidden');
       getDataUserAuth(Global_Game_ID);
 
-      let imgselect  = document.querySelector("div.cardplayerplay")
-      imgselect.id = current_user_id
+      // let imgselect  = document.querySelector("div.cardplayerplay")
+      // imgselect.id = current_user_id
 
       listen_game();
     }
@@ -97,9 +103,9 @@ $(document).ready(function () {
     }
     $(this).toggleClass('ativo');
     if ($(this).hasClass('ativo')) {
-      RetireHideImageCard();
+      //RetireHideImageCard();
       RetireHideRevelCards();
-      // Jogar o valor da carta para o banco no respectivo usuário 
+      // Jogar o valor da carta para o banco no respectivo usuário
 
       //Buscar o ID do usuário que esta jogando
       let current_user_id = '';
@@ -107,26 +113,31 @@ $(document).ready(function () {
       let ca = cookies.split('=');
       current_user_id = ca[1];
 
-        // Buscar o Id do jogo pela URL
+      // Buscar o Id do jogo pela URL
 
-        let url = window.location.href;
-        let res = url.split('#');
-        let idnotf = res[1].substr(3);
-        Global_Game_ID = idnotf;
+      let url = window.location.href;
+      let res = url.split('#');
+      let idnotf = res[1].substr(3);
+      Global_Game_ID = idnotf;
 
       let card_value = $('.card.ativo').text();
       let card = {
-        card: card_value
-      }
-      let dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
+        card: card_value,
+      };
+      let dbref = update(
+        ref(
+          getDatabase(),
+          'Games/' + Global_Game_ID + '/players/' + current_user_id
+        ),
+        card
+      );
 
       // console.log(Global_Game_ID)
       // console.log(current_user_id)
       // console.log(card_value)
       // console.log(dbref)
-      
     } else {
-      AddHideImageCard();
+      //AddHideImageCard();
       AddHideRevelCards();
       //Retirar o valor da carta no banco caso o player desclicar da mesma
       let current_user_id = '';
@@ -135,16 +146,21 @@ $(document).ready(function () {
       current_user_id = ca[1];
 
       let card = {
-        card: ""
-      }
-      let dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/' + current_user_id),card)
+        card: '',
+      };
+      let dbref = update(
+        ref(
+          getDatabase(),
+          'Games/' + Global_Game_ID + '/players/' + current_user_id
+        ),
+        card
+      );
     }
-
   });
 
   // Alterar para cartas viradas : true
-   $('#RevelCards').on('click', function (e) {
-    let Global_Game_ID = ""
+  $('#RevelCards').on('click', function (e) {
+    let Global_Game_ID = '';
     // Buscar o Id do jogo pela URL
 
     let url = window.location.href;
@@ -153,28 +169,38 @@ $(document).ready(function () {
     Global_Game_ID = idnotf;
 
     let udpaterevealcards = {
-    turned: true,
-    }
-    const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
+      turned: true,
+    };
+    const dbref = update(
+      ref(
+        getDatabase(),
+        'Games/' + Global_Game_ID + '/players' + '/cards_turned'
+      ),
+      udpaterevealcards
+    );
+  });
 
-   });
+  // Alterar para cartas viradas : false
+  $('#StartNewVoting').on('click', function (e) {
+    let Global_Game_ID = '';
+    // Buscar o Id do jogo pela URL
 
-   // Alterar para cartas viradas : false
-   $('#StartNewVoting').on('click', function (e) {
-    let Global_Game_ID = ""
-        // Buscar o Id do jogo pela URL
+    let url = window.location.href;
+    let res = url.split('#');
+    let idnotf = res[1].substr(3);
+    Global_Game_ID = idnotf;
 
-        let url = window.location.href;
-        let res = url.split('#');
-        let idnotf = res[1].substr(3);
-        Global_Game_ID = idnotf;
-
-  let udpaterevealcards = {
-    turned: false,
-  }
-  const dbref = update(ref(getDatabase(), 'Games/' + Global_Game_ID + "/players" + "/cards_turned"),udpaterevealcards)
-
-   })
+    let udpaterevealcards = {
+      turned: false,
+    };
+    const dbref = update(
+      ref(
+        getDatabase(),
+        'Games/' + Global_Game_ID + '/players' + '/cards_turned'
+      ),
+      udpaterevealcards
+    );
+  });
 
   $(document).click(function (e) {
     //Para fechar fora timer
@@ -363,7 +389,7 @@ function RetireHideRevelCards() {
   revealcards.classList.remove('hidden');
 }
 
- function AddHideImageCard() {
+function AddHideImageCard() {
   var imageretire = document.querySelector('div.cardplayerplay');
   imageretire.classList.remove('background_card');
 }

@@ -1,4 +1,13 @@
-import {  getDatabase,  ref,  child,  get,  push,  onValue,  update, set} from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+  push,
+  onValue,
+  update,
+  set,
+} from 'firebase/database';
 
 function AdicionarAtributo(e) {
   console.log(e);
@@ -37,9 +46,8 @@ let buttonsettimer = document.querySelector('button#RevelCards');
 buttonsettimer.addEventListener('click', SetTimer);
 
 function SetTimer() {
-
-   //Timer
-   var duracao = 2;
+  //Timer
+  var duracao = 2;
 
   var revealcards = document.getElementById('RevelCards');
   revealcards.classList.add('hidden');

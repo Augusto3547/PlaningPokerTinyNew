@@ -25,7 +25,7 @@
             <p class="textp">Welcome to the Master Scrum Poker</p>
             <label class="inputfirtscreen" for="namegame">Your's Game Name</label>
             <input placeholder="Game's name" type="text" id="namegame" class="namegame" name="namegame">
-         <!--    <label class="inputfirtscreen" for="slectall">Voting system</label>
+            <!--    <label class="inputfirtscreen" for="slectall">Voting system</label>
             <select class="slectall" id="slectall">
                 <option value="(0,1/2,1,2,3,5,8,13,20,40,100,?)">Modified Fibonacci (0,1/2,1,2,3,5,8,13,20,40,100,?)
                 </option>
@@ -151,7 +151,7 @@
                 </div>                
             </div>
             -->
-        <div class="midle">
+        <div class="midle" id="midle">
             <!-- <p class="emoji">Feeling lonely? &#x1f634</p>
             <p class="invite">Invite Players</p> -->
             <div class="dialog2 hidden" id="escondido2">
@@ -173,14 +173,53 @@
                     </div>
                 </div>
             </div>
-            <div class="tabel" id="tabel">
-                <p id="temp">Pick your Cards!</p>
-                <button class="RevelCards hidden" id="RevelCards">Reveal Cards!</button>
-                <button class="StartNewVoting hidden" id="StartNewVoting">Start New
-                    Voting</button>
-                <p id="timer"></p>
+
+            <div class="up-players" id="up-players">
+
+
+
             </div>
-            <div id="players">
+
+            <div class="grid-container">
+                <div class="left-players" id="left-players">
+
+
+
+
+                </div>
+
+                <div class="center tabel">
+                        <p id="temp">Pick your Cards!</p>
+                        <button class="RevelCards hidden" id="RevelCards">Reveal Cards!</button>
+                        <button class="StartNewVoting hidden" id="StartNewVoting">Start New
+                            Voting</button>
+                        <p id="timer"></p>
+                </div>
+
+
+                <div class="right-players" id="right-players">
+
+
+
+                </div>
+            </div>
+
+            <div class="down-players" id="down-players">
+                <div class="cardplayer">
+                    <div class="cardplayerplay first other_background_card">
+                        <button class="cardnew hidden" id="newcard"></button>
+                    </div>
+                    <div class="nameplayeraftercard">
+                        <p class="nameaftercard">
+                            Player's name
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- <div id="players">
                 <div class="cardplayer">
                     <div class="cardplayerplay other_background_card"> 
                         <button class="cardnew hidden" id="newcard"></button>
@@ -191,16 +230,18 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
         </div>
     </section>
     <div class="resultofvoting hidden">
         <div class="sapceresult">
             <div class="spacecards">
-                <div class="cheapresult" id="cheapresult"> <!--Aqui vai as cartas que os jogadores selecionaram-->
-                  
+                <div class="cheapresult" id="cheapresult">
+                    <!--Aqui vai as cartas que os jogadores selecionaram-->
 
-                    
+
+
                 </div>
             </div>
             <div class="separation">
@@ -235,20 +276,20 @@
                                 </div>
                             </div>
                     -->
-             <div class="cheap">
-                     <button class="card">0</button>
-                    <button class="card">1/2</button>
-                     <button class="card">1</button>
-                     <button class="card">2</button>
-                    <button class="card">3</button>
-                    <button class="card">5</button>
-                    <button class="card">8</button>
-                     <button class="card">13</button>
-                    <button class="card">20</button>
-                    <button class="card">40</button>
-                     <button class="card">100</button>
-                     <button class="card">?</button>
-             </div>   
+            <div class="cheap">
+                <button class="card">0</button>
+                <button class="card">1/2</button>
+                <button class="card">1</button>
+                <button class="card">2</button>
+                <button class="card">3</button>
+                <button class="card">5</button>
+                <button class="card">8</button>
+                <button class="card">13</button>
+                <button class="card">20</button>
+                <button class="card">40</button>
+                <button class="card">100</button>
+                <button class="card">?</button>
+            </div>
         </div>
     </div>
     <script type="module" src="./index.js"></script>

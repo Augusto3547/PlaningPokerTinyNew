@@ -35,8 +35,8 @@ var Global_Game_ID = '';
 
 export async function New_Game() {
   //Limpar todos os jogos anteriores quando o proximo é criado
-  var aaaaaaa = ref(getDatabase(app), 'Games');
-  set(aaaaaaa, null);
+  var dbrefcleargames = ref(getDatabase(app), 'Games');
+  set(dbrefcleargames, null);
 
   //Limpar os cookies do primeiro usuário
   deleteAllCookies();
@@ -52,40 +52,43 @@ export async function New_Game() {
     game_id = response.key;
   }
 
-  const playersRef = await push(
-    ref(getDatabase(app), 'Games/' + game_id + '/players'),
-    {
-      name: namePlayer,
-      card: '',
-    }
-  );
+  // const playersRef = await push(
+  //   ref(getDatabase(app), 'Games/' + game_id + '/players'),
+  //   {
+  //     name: namePlayer,
+  //     card: '',
+  //   }
+  // );
+
+  //console.log(playersRef.key)
   //console.log(game_id)
   const db = getDatabase();
   set(ref(db, 'Games/' + game_id + '/players' + '/cards_turned'), {
     turned: false,
   });
 
-  //Colcoar o id do primeiro jogador na id da tag div no html fixo
+  // //Colcoar o id do primeiro jogador na id da tag div no html fixo
 
-  let first_id_player = playersRef.key;
-  let imgselect = document.querySelector('div.cardplayerplay');
-  imgselect.id = first_id_player;
-  imgselect.classList.add("other_background_card")
+  // let first_id_player = playersRef.key;
+  // let imgselect = document.querySelector('div.cardplayerplay');
+  // imgselect.id = first_id_player;
+  // imgselect.classList.add('other_background_card');
 
-  // Colocar o Id do player na tag p do nome em baixo da carta
+  // // Colocar o Id do player na tag p do nome em baixo da carta
 
-  let pselect = document.querySelector('.nameaftercard');
-  pselect.classList.add(first_id_player);
+  // let pselect = document.querySelector('.nameaftercard');
+  // pselect.classList.add(first_id_player);
+
 
   Global_Game_ID = game_id;
 
-  setCookie(namePlayer, playersRef.key, 1);
+  //setCookie(namePlayer, playersRef.key, 1);
+  New_Player(namePlayer, game_id, 0);
   PutInformationInScreen();
-
   routie('id=' + Global_Game_ID);
 }
 
-export async function New_Player(NameNewPlayer, Idsala) {
+export async function New_Player(NameNewPlayer, Idsala, flag=null) {
   var NewPlayer = {
     name: NameNewPlayer,
     card: '',
@@ -107,7 +110,7 @@ export async function New_Player(NameNewPlayer, Idsala) {
       if (snapshot.exists()) {
         gameName = snapshot.val().name; // para colocar o noem do jogo na tela quanado um novo jogador entrar
       } else {
-        //console.log('No data available');
+        console.log('No data available');
       }
     })
     .catch((error) => {
@@ -115,7 +118,10 @@ export async function New_Player(NameNewPlayer, Idsala) {
     });
   namePlayer = NameNewPlayer; // para colocar o nome do jogo na tela quanado um novo jogador entrar
 
-  PutInformationInScreen();
+  if (flag != 0){
+    PutInformationInScreen();
+  }
+  
 }
 
 // Esta função é responsável por ouvir TODOS os eventos do jogo e realizar as alterações necessárias
@@ -139,22 +145,24 @@ export async function listen_game() {
   let cookies = document.cookie;
   let ca = cookies.split('=');
   current_user_id = ca[1];
+  let idx = 0;
 
   const dbchangeref = ref(
     getDatabase(),
-    'Games/' + Global_Game_ID + '/players'
-  );
+    'Games/' + Global_Game_ID + '/players/'
+ );
   //Verificar quando um novo jogador entrar
   onChildAdded(dbchangeref, (snapshot) => {
     const playerId = snapshot.key;
-    //Object.keys(snapshot.val()).map((playerId) => {
-    if (current_user_id != playerId) {
-      let teste = document.getElementById(playerId);
-      if (!teste) {
-        const nome = snapshot.val().name;
-        if (nome) {
-          //console.log(playerId)
-          let markup = `
+    //Object.keys(snapshot.val()).map((playerId, idx) => {
+    //console.log(snapshot.val(), idx);
+  //if (current_user_id != playerId) {
+    let teste = document.getElementById(playerId);
+    if (!teste) {
+      const nome = snapshot.val().name;
+      if (nome) {
+        console.log(playerId)
+        let markup = `
             <div class="cardplayer">
             <div id="${playerId}" class="cardplayerplay other_background_card"> 
                 <button class="cardnew hidden" id="newcard"></button>
@@ -166,11 +174,57 @@ export async function listen_game() {
             </div>
             </div>
           `;
-          //console.log(markup)
-          let pselector = document.getElementById('players');
-          pselector.innerHTML += markup;
+
+        let pdown = document.getElementById('down-players');
+        let pup = document.getElementById('up-players');
+        let pright = document.getElementById('right-players');
+        let pleft = document.getElementById('left-players');
+
+        //console.log(snapshot.val(), idx);
+        console.log(idx);
+        switch (idx) {
+          case 0:
+            pdown.innerHTML = markup;
+            break;
+          case 1:
+            let changemargin = document.querySelector('div.midle');
+            changemargin.style.cssText = 'margin-top: 6%; align-items: center;';
+            pup.innerHTML = markup;
+            break;
+          case 2:
+            pleft.innerHTML += markup;
+            break;
+          case 3:
+            pright.innerHTML += markup;
+            break;
+          case 4:
+            pdown.innerHTML += markup;
+            break;
+          case 5:
+            pup.innerHTML += markup;
+            break;
+          case 6:
+            pdown.innerHTML += markup;
+            break;
+          case 7:
+            pup.innerHTML += markup;
+            break;
+          case 8:
+            pdown.innerHTML += markup;
+            break;
+          case 9:
+            pup.innerHTML += markup;
+            break;
+          case 10:
+            pleft.innerHTML += markup;
+            break;
+          case 11:
+            pright.innerHTML += markup;
+            break;
         }
+        idx++;
       }
+      // }
     }
     //});
   });
@@ -182,16 +236,19 @@ export async function listen_game() {
   );
   onChildChanged(dbrefcardchange, (data) => {
     if (data.val().card != '') {
+      console.log(data.key)
       let imageretire = document.getElementById(data.key);
+      console.log(data.key)
       if (imageretire) {
-        imageretire.classList.remove("other_background_card")
-        imageretire.classList.add('background_card');
+        imageretire.classList.remove('other_background_card');
+        imageretire.classList.add('background_card'); 
       }
     } else {
       let imageretire = document.getElementById(data.key);
+      console.log(data.key)
       if (imageretire) {
         imageretire.classList.remove('background_card');
-        imageretire.classList.add("other_background_card")
+        imageretire.classList.add('other_background_card');
       }
     }
   });
@@ -222,8 +279,8 @@ export async function listen_game() {
 
           //Resumo votação
 
-          let hide_cheap = document.getElementById("footer")
-          hide_cheap.classList.add("hidden")
+          let hide_cheap = document.getElementById('footer');
+          hide_cheap.classList.add('hidden');
 
           let gbrefturncards = ref(
             getDatabase(),
@@ -258,19 +315,18 @@ export async function listen_game() {
                   if (dataItem.val().card == '?') {
                     soma += 0;
                     vetor.push(dataItem.val().card);
-                  } else if(dataItem.val().card == '1/2'){
+                  } else if (dataItem.val().card == '1/2') {
                     soma += 0.5;
                     vetor.push(dataItem.val().card);
-                  } else if(dataItem.val().card == ''){
+                  } else if (dataItem.val().card == '') {
                     soma = soma;
                     count--;
                     vetor.push(dataItem.val().card);
-                  } else if(dataItem.val().card == '0'){
-                    soma+=0
+                  } else if (dataItem.val().card == '0') {
+                    soma += 0;
                     flag = 1;
                     vetor.push(0);
-                  } else
-                  soma += Number(dataItem.val().card);
+                  } else soma += Number(dataItem.val().card);
                   count++;
                   vetor.push(Number(dataItem.val().card));
                 }
@@ -282,36 +338,36 @@ export async function listen_game() {
               // Adiconar as cartas selecionadas com as respectivas qunatidades de votos
 
               var vetorformatado;
-               vetorformatado = vetor.filter(function (el, i) {
+              vetorformatado = vetor.filter(function (el, i) {
                 return vetor.indexOf(el) === i;
-               });
+              });
 
-               console.log(vetorformatado)
-              if (vetor.map(val=>{
-                if(val == ""){
-                  let tam = vetorformatado.length
-               if (flag == 0){
-                 vetorformatado.splice(tam-1, 1)
-               }
-                }
-              }))
-               
-
-               console.log(vetorformatado)
-               console.log(vetor)
+              console.log(vetorformatado);
+              if (
+                vetor.map((val) => {
+                  if (val == '') {
+                    let tam = vetorformatado.length;
+                    if (flag == 0) {
+                      vetorformatado.splice(tam - 1, 1);
+                    }
+                  }
+                })
+              )
+                console.log(vetorformatado);
+              console.log(vetor);
 
               vetorformatado.forEach((n) => {
                 var count_num = 0;
                 vetor.forEach((num) => {
                   if (num == n) {
-                    console.log(n)
-                    console.log(num)
+                    console.log(n);
+                    console.log(num);
                     count_num++;
                   }
                 });
 
-                if (n == "" || n == 0){
-                  count_num = count_num/2;
+                if (n == '' || n == 0) {
+                  count_num = count_num / 2;
                 }
 
                 let htmlfix = `
@@ -324,6 +380,7 @@ export async function listen_game() {
               `;
                 let select = document.getElementById('cheapresult');
                 select.innerHTML += htmlfix;
+                console.log("Opa")
               });
             })
             .catch((error) => {
@@ -367,7 +424,7 @@ export async function listen_game() {
         .then((snapshot) => {
           Object.keys(snapshot.val()).map((el) => {
             const card = document.getElementById(el);
-            console.log
+            console.log;
             if (card) {
               const sb = card.children;
               sb[0].textContent = snapshot.val()[el].card;
@@ -412,11 +469,8 @@ export async function listen_game() {
               );
               buttonnewvoting.classList.add('hidden');
 
-              hh.classList.add("other_background_card")
+              hh.classList.add('other_background_card');
             }
-
-            
-
           });
         })
         .catch((error) => {
@@ -427,8 +481,8 @@ export async function listen_game() {
       var timer = document.querySelector('p#timer');
       timer.classList.remove('hidden');
 
-      let hide_cheap = document.getElementById("footer")
-      hide_cheap.classList.remove("hidden")
+      let hide_cheap = document.getElementById('footer');
+      hide_cheap.classList.remove('hidden');
 
       //  var oldcard = document.querySelector('div.imgbackcard');
       //  oldcard.classList.add('other_background_card');
@@ -439,9 +493,9 @@ export async function listen_game() {
       // var buttonnewvoting = document.querySelector('button.StartNewVoting');
       // buttonnewvoting.classList.add('hidden');
 
-      let backcard = document.querySelector("div.cardplayerplay")
-       if(backcard){
-         backcard.classList.add("other_background_card")
+      let backcard = document.querySelector('div.cardplayerplay');
+      if (backcard) {
+        backcard.classList.add('other_background_card');
       }
 
       var result = document.querySelector('div.resultofvoting');
@@ -457,7 +511,6 @@ export async function listen_game() {
 
       let teste = document.getElementById('cheapresult');
       teste.innerHTML = '';
-
     }
   });
   //Verificar o noem do jogador alterado e mudar para os outros
@@ -481,24 +534,21 @@ export async function listen_game() {
     }
   });
 
-    //Verificar se  um jogo foi excluido
-    const dbrefgmaeclear = ref(
-      getDatabase(),
-      'Games/'
-    );
-     onChildRemoved(dbrefgmaeclear, (snapshot) => {
-      let url = window.location.href;
-      let res = url.split('#');
-      var idnotf = res[1].substr(3);
-      let Game_ID = idnotf;
-      console.log(Game_ID)
-      console.log(snapshot)
+  //Verificar se  um jogo foi excluido
+  const dbrefgmaeclear = ref(getDatabase(), 'Games/');
+  onChildRemoved(dbrefgmaeclear, (snapshot) => {
+    let url = window.location.href;
+    let res = url.split('#');
+    var idnotf = res[1].substr(3);
+    let Game_ID = idnotf;
+    console.log(Game_ID);
+    console.log(snapshot);
 
-      window.alert("You are in a session that no longer exists in the DataBase. Please enter in another ;)");
-      window.location.href = "https://planingpokertiny-42303.web.app/";
-     
-    });
-  
+    window.alert(
+      'You are in a session that no longer exists in the DataBase. Please enter in another ;)'
+    );
+    window.location.href = 'https://planingpokertiny-42303.web.app/';
+  });
 }
 
 export async function Change_Name() {
@@ -631,7 +681,7 @@ export async function getDataUserAuth(Idsala) {
 
   let imgselect = document.querySelector('div.cardplayerplay');
   imgselect.id = current_user_id;
-  imgselect.classList.add("other_background_card")
+  imgselect.classList.add('other_background_card');
 
   let pselect = document.querySelector('.nameaftercard');
   if (pselect) {
@@ -665,8 +715,10 @@ async function PutInformationInScreen() {
   let imgselect = document.querySelector('div.cardplayerplay');
   imgselect.id = current_user_id;
 
-  let pselect = document.querySelector('.nameaftercard');
-  pselect.classList.add(current_user_id);
+  let pselect = document.querySelector('div.nameaftercard');
+  if (pselect) {
+    pselect.classList.add(current_user_id);
+  }
 
   listen_game();
 }
