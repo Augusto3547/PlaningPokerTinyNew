@@ -200,6 +200,22 @@ $(document).ready(function () {
       ),
       udpaterevealcards
     );
+
+    //Limapr  a carta selecionada de cada jogador
+
+    let dbrefclean = ref(getDatabase(), "Games/"+Global_Game_ID+"/players/");
+
+    get(dbrefclean).then((snapshot) => {
+
+    Object.keys(snapshot.val()).forEach((id)=>{
+    if (id != "cards_turned"){
+      let reff = ref(getDatabase(),"Games/"+Global_Game_ID+"/players/"+id)
+     update(reff, {card: ""});
+    }
+    })
+      
+    })
+
   });
 
   $(document).click(function (e) {

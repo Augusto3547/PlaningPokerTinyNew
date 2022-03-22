@@ -199,10 +199,10 @@ export async function listen_game() {
             pup.innerHTML = markup;
             break;
           case 2:
-            pleft.innerHTML += markup;
+            pdown.innerHTML += markup;
             break;
           case 3:
-            pright.innerHTML += markup;
+            pup.innerHTML += markup;
             break;
           case 4:
             pdown.innerHTML += markup;
