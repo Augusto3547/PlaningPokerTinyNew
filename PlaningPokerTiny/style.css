@@ -807,11 +807,6 @@ img.imgbackcard {
   padding: 15px 0px;
 }
 
-div.spacecards{
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
-
 div.bar {
   height: 200px;
   width: 15px;
@@ -2317,6 +2312,11 @@ h4.titleinviteplayers {
   .grid-container {
     display: grid;
     grid-template-columns: 31% 40% 30%;
+  }
+
+  div.spacecards{
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
 
 }

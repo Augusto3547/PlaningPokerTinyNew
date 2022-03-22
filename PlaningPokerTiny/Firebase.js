@@ -322,6 +322,7 @@ export async function listen_game() {
                   if (dataItem.val().card == '?') {
                     soma += 0;
                     vetor.push(dataItem.val().card);
+                    count--;
                   } else if (dataItem.val().card == '1/2') {
                     soma += 0.5;
                     vetor.push(dataItem.val().card);
