@@ -79,19 +79,19 @@ div.down-players {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 38% 25% 40.5%;
+  grid-template-columns: 38% 25% 36%;
 }
 
 .left-players {
   display: flex;
   justify-content: right;
-  align-items: right;
+  align-items: center;
 }
 
 .right-players {
   display: flex;
   justify-content: left;
-  align-items: left;
+  align-items: center;
 }
 
 div.register {
@@ -702,7 +702,7 @@ input#qrcodecontent {
 .tabel {
   background: #d7e9ff;
   border-radius: 2.8rem;
-  height: auto;
+  height: 10rem;
   padding: 0 1.6rem;
   position: relative;
   align-items: center;
@@ -801,14 +801,13 @@ img.imgbackcard {
   justify-content: center;
   align-items: center;
   background-color: white;
-  width: auto;
   position: fixed;
-  width: 100%;
+  width: 90%;
   bottom: 0%;
   padding: 15px 0px;
 }
 
-.spacecards {
+div.spacecards{
   overflow-x: scroll;
   overflow-y: hidden;
 }
@@ -888,9 +887,7 @@ p.choosecard {
 
 div.cheap {
   text-align: center;
-  display: flex;
   flex-wrap: nowrap;
-  align-items: center;
   margin: auto;
 }
 
@@ -1737,6 +1734,7 @@ h4.titleinviteplayers {
     align-items: center;
     justify-content: center;
   }
+
 }
 
 @media screen and (max-width: 616px) {
@@ -1744,6 +1742,14 @@ h4.titleinviteplayers {
     overflow-x: hidden;
     overflow-y: scroll;
     height: 750px;
+  }
+
+  div.cheap {
+    height: 90px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    align-items: center;
   }
 }
 
@@ -2271,6 +2277,7 @@ h4.titleinviteplayers {
 
   .tabel{
     font-size: 12px;
+    height: 8rem;
   }
 
   button.RevelCards{
@@ -2307,6 +2314,272 @@ h4.titleinviteplayers {
   }
 }
 
-@media screen and (max-width: px) {
+@media screen and (max-width: 888px) {
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 31% 40% 30%;
+  }
+
+}
+
+@media screen and (max-width: 770px) {
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 28% 45% 30%;
+  }
+
+  .cardresults{
+    height:4.1rem;
+    width: 2.4rem;
+    border-radius: 10px;
+  }
+  
+  div.bar{
+    height: 140px;
+    width: 10px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  p#result{
+    font-size: 14px;
+  }
+
+}
+
+@media screen and (max-width: 684px) {
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 26% 50% 30%;
+  }
+
+  .tabel{
+    height: 8rem;
+  }
+
+  .cardplayerplay{
+    height: 3rem;
+    width: 2rem;
+    border-radius: 0.8rem;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+
+  .nameplayeraftercard {
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .cardnew{
+    height: 3rem;
+    width: 2rem;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .alignvotecards{
+    margin: 0 8px;
+  }
+
+  .cardresults{
+    height:3.9rem;
+    width: 2.4rem;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+  
+  div.bar{
+    height: 140px;
+    width: 10px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  p#result{
+    font-size: 14px;
+  }
+
+  button.RevelCards{
+    height: 2.5rem;
+    width: 8rem;
+    font-size: 12px;
+  }
+
+  button.StartNewVoting{
+    font-size: 12px;
+    height: 2.5rem;
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 26% 50% 30%;
+  }
+
+  .tabel{
+    height: 7rem;
+    border-radius: 30px;
+    margin: 0 3%;
+  }
+
+  .cardplayerplay{
+    height: 2.6rem;
+    width: 1.8rem;
+    border-radius: 0.8rem;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+
+  .nameplayeraftercard {
+    text-align: center;
+    font-size: 9px;
+  }
+
+  .cardnew{
+    height: 3rem;
+    width: 2rem;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .alignvotecards{
+    margin: 0 8px;
+  }
+
+  p.choosecard{
+    font-size: 13px;
+  }
+
+  .cardresults{
+    height:3.5rem;
+    width: 2.2rem;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .voteaftercard {
+    text-align: center;
+    font-size: 10px;
+  }
+  
+  div.bar{
+    height: 140px;
+    width: 10px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  p#result{
+    font-size: 14px;
+  }
+
+  button.RevelCards{
+    height: 2.5rem;
+    width: 8rem;
+    font-size: 12px;
+  }
+
+  button.StartNewVoting{
+    font-size: 12px;
+    height: 2.5rem;
+  }
+
+  button.card{
+    font-size: 14px;
+    height: 3.6rem;
+    width: 2.3rem;
+  }
+
+}
+
+@media screen and (max-width: 466px) {
+
+  .tabel{
+    height: 6rem;
+  }
+
+  button.RevelCards{
+    height: 2rem;
+    width: 7.5rem;
+    font-size: 10px;
+  }
+
+  button.StartNewVoting {
+    font-size: 10px;
+    height: 2rem;
+    width: 7.5rem;
+    }
+
+    p#timer {
+      font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 26% 52% 30%;
+  }
+
+  .tabel{
+    font-size: 10px;
+  }
+
+  .cardplayerplay{
+    height: 2.6rem;
+    width: 1.7rem;
+    border-radius: 0.8rem;
+    margin: 0 auto;
+    border-radius: 6px;
+  }
+
+  .nameplayeraftercard {
+    text-align: center;
+    font-size: 8px;
+  }
+
+  .cardnew{
+    height: 2.6rem;
+    width: 1.7rem;
+    font-size: 8px;
+    border-radius: 6px;
+  }
+
+  .cardresults{
+    height:3.1rem;
+    width: 2rem;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  div.bar{
+    height: 130px;
+    width: 10px;
+  }
+
+  h3{
+    font-size: 12px;
+  }
+
+  p#result{
+    font-size: 12px;
+  }
+
+  button.card{
+    font-size: 11px;
+  }
 
 }

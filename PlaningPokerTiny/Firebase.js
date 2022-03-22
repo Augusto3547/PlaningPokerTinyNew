@@ -161,7 +161,7 @@ export async function listen_game() {
     if (!teste) {
       const nome = snapshot.val().name;
       if (nome) {
-        console.log(playerId)
+       // console.log(playerId)
         let markup = `
             <div class="cardplayer">
             <div id="${playerId}" class="cardplayerplay other_background_card"> 
@@ -181,14 +181,21 @@ export async function listen_game() {
         let pleft = document.getElementById('left-players');
 
         //console.log(snapshot.val(), idx);
-        console.log(idx);
+        //console.log(idx);
         switch (idx) {
           case 0:
             pdown.innerHTML = markup;
             break;
           case 1:
             let changemargin = document.querySelector('div.midle');
-            changemargin.style.cssText = 'margin-top: 6%; align-items: center;';
+            let width = window.screen.width;
+            if (width <= 550){
+              changemargin.style.cssText = 'margin-top: 25%; align-items: center;';  
+            }else if(width > 550 && width <=1278){
+              changemargin.style.cssText = 'margin-top: 20%; align-items: center;';  
+            }else{
+              changemargin.style.cssText = 'margin-top: 6%; align-items: center;';
+            }            
             pup.innerHTML = markup;
             break;
           case 2:
@@ -236,16 +243,16 @@ export async function listen_game() {
   );
   onChildChanged(dbrefcardchange, (data) => {
     if (data.val().card != '') {
-      console.log(data.key)
+      //console.log(data.key)
       let imageretire = document.getElementById(data.key);
-      console.log(data.key)
+      //console.log(data.key)
       if (imageretire) {
         imageretire.classList.remove('other_background_card');
         imageretire.classList.add('background_card'); 
       }
     } else {
       let imageretire = document.getElementById(data.key);
-      console.log(data.key)
+      //console.log(data.key)
       if (imageretire) {
         imageretire.classList.remove('background_card');
         imageretire.classList.add('other_background_card');
@@ -342,7 +349,7 @@ export async function listen_game() {
                 return vetor.indexOf(el) === i;
               });
 
-              console.log(vetorformatado);
+             // console.log(vetorformatado);
               if (
                 vetor.map((val) => {
                   if (val == '') {
@@ -353,15 +360,13 @@ export async function listen_game() {
                   }
                 })
               )
-                console.log(vetorformatado);
-              console.log(vetor);
+                //console.log(vetorformatado);
+              //console.log(vetor);
 
               vetorformatado.forEach((n) => {
                 var count_num = 0;
                 vetor.forEach((num) => {
                   if (num == n) {
-                    console.log(n);
-                    console.log(num);
                     count_num++;
                   }
                 });
@@ -380,7 +385,7 @@ export async function listen_game() {
               `;
                 let select = document.getElementById('cheapresult');
                 select.innerHTML += htmlfix;
-                console.log("Opa")
+                //console.log("Opa")
               });
             })
             .catch((error) => {
@@ -424,7 +429,6 @@ export async function listen_game() {
         .then((snapshot) => {
           Object.keys(snapshot.val()).map((el) => {
             const card = document.getElementById(el);
-            console.log;
             if (card) {
               const sb = card.children;
               sb[0].textContent = snapshot.val()[el].card;
