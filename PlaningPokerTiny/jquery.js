@@ -338,7 +338,7 @@ $(document).ready(function () {
     $('.qcode').addClass('hidden');
   });
 
-  $('#closeqrcode').on('click', function (e) {
+  $('.closeqrcode').on('click', function (e) {
     $('.qcode').addClass('hidden');
   });
 

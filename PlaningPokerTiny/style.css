@@ -496,13 +496,14 @@ button.profile:hover {
 
 #escon {
   position: absolute;
+  height: 0px;
 }
 
 .changenameplayer {
   height: 60px;
   width: 80%;
   background-color: rgb(235, 229, 229);
-  margin-top: 40%;
+  margin-top: 10%;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -1697,7 +1698,7 @@ h4.titleinviteplayers {
   div.changenameplayer {
     height: 40px;
     width: 200px;
-    margin-top: 28%;
+    margin-top: 8%;
     margin-left: 10%;
   }
 
@@ -1768,7 +1769,7 @@ h4.titleinviteplayers {
 
   div.changenameplayer {
     height: 25px;
-    margin-top: 25%;
+    margin-top: 8%;
     margin-left: 6%;
     width: 40%;
   }
@@ -1809,7 +1810,7 @@ h4.titleinviteplayers {
 
   div.changenameplayer {
     height: 25px;
-    margin-top: 25%;
+    margin-top: 8%;
     margin-left: 6%;
     width: 35%;
   }
@@ -1874,8 +1875,8 @@ h4.titleinviteplayers {
 
   div.changenameplayer {
     height: 25px;
-    margin-top: 25%;
-    margin-left: 10%;
+    margin-top: 8%;
+    margin-left: 12%;
     width: 35%;
   }
 

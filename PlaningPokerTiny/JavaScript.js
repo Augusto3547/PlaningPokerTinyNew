@@ -9,16 +9,6 @@ import {
   set,
 } from 'firebase/database';
 
-function AdicionarAtributo(e) {
-  console.log(e);
-  var element = document.getElementById('escondido');
-  element.classList.add('hidden');
-}
-
-function CancelarAcao(e) {
-  e.stopPropagation();
-}
-
 export function RetirarHide() {
   var elemento = document.getElementById('escondido2');
   elemento.classList.remove('hidden');

@@ -228,6 +228,12 @@ export async function listen_game() {
           case 11:
             pright.innerHTML += markup;
             break;
+          case 12:
+            pleft.innerHTML += markup;
+            break;
+          case 13:
+            pright.innerHTML += markup;
+            break;
         }
         idx++;
       }
@@ -546,8 +552,8 @@ export async function listen_game() {
     let res = url.split('#');
     var idnotf = res[1].substr(3);
     let Game_ID = idnotf;
-    console.log(Game_ID);
-    console.log(snapshot);
+    //console.log(Game_ID);
+    //console.log(snapshot);
 
     window.alert(
       'You are in a session that no longer exists in the DataBase. Please enter in another ;)'
