@@ -44,6 +44,10 @@ export async function New_Game() {
   gameName = document.getElementById('namegame').value;
   namePlayer = document.getElementById('displayname').value;
 
+  if(namePlayer.length == 0){
+    window.alert("You need put any name to start a game");
+  }else{
+
   if (!game_id) {
     const response = await push(ref(getDatabase(app), 'Games'), {
       name: gameName,
@@ -86,6 +90,7 @@ export async function New_Game() {
   New_Player(namePlayer, game_id, 0);
   PutInformationInScreen();
   routie('id=' + Global_Game_ID);
+}
 }
 
 export async function New_Player(NameNewPlayer, Idsala, flag=null) {
