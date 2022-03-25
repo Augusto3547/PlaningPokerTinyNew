@@ -162,8 +162,8 @@ export async function listen_game() {
     //Object.keys(snapshot.val()).map((playerId, idx) => {
     //console.log(snapshot.val(), idx);
   //if (current_user_id != playerId) {
-    let teste = document.getElementById(playerId);
-    if (!teste) {
+    let playerIdSelector = document.getElementById(playerId);
+    if (!playerIdSelector) {
       const nome = snapshot.val().name;
       if (nome) {
        // console.log(playerId)
@@ -351,8 +351,14 @@ export async function listen_game() {
                 }
               });
 
-              let presultofvoting = document.getElementById('result');
-              presultofvoting.textContent = (soma / count).toFixed(1);
+			 if (soma == 0 && count== 0){
+				 soma = 0;
+			 }else{
+				 soma = soma/count;
+			 }
+
+              let presultofvoting = document.getElementById('result'); 
+              presultofvoting.textContent = (soma).toFixed(1);
 
               // Adiconar as cartas selecionadas com as respectivas qunatidades de votos
 
@@ -525,8 +531,8 @@ export async function listen_game() {
       var temp = document.querySelector('p#temp');
       temp.classList.remove('hidden');
 
-      let teste = document.getElementById('cheapresult');
-      teste.innerHTML = '';
+      let resultCheap = document.getElementById('cheapresult');
+      resultCheap.innerHTML = '';
     }
   });
   //Verificar o noem do jogador alterado e mudar para os outros
@@ -568,7 +574,18 @@ export async function listen_game() {
 }
 
 export async function Change_Name() {
-  var nameChange = document.getElementById('ChangeNamePlayer').value;
+	let flag = 0;
+  var nameChange = document.getElementById('ChangeNamePlayerInput').value;
+
+	const verifyName = nameChange.split(" ").map((i)=>{
+		if (i.length != 0){
+			flag = 1;
+		}
+	})
+
+	if (flag == 0){
+		window.alert("Please enter a name to change.")
+	}else{
 
   let playerChange = {
     name: nameChange,
@@ -577,8 +594,8 @@ export async function Change_Name() {
 
   let current_user_id = '';
   let cookies = document.cookie;
-  var teste = cookies.split(';');
-  teste.forEach((element) => {
+  var vetCookies = cookies.split(';');
+  vetCookies.forEach((element) => {
     if (element.length > 0) {
       let ca = element.split('=');
       current_user_id = ca[1];
@@ -606,12 +623,8 @@ export async function Change_Name() {
     getDatabase(app),
     'Games/' + Global_Game_ID + '/players' + '/' + current_user_id
   );
-
-  if (nameChange.lenght == 0) {
-    window.alert('For Change a name first, you neded to put a any name');
-  } else {
     update(dbref, playerChange);
-  }
+  
 
   // let dbchangename = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
   // get(dbchangename).then((snapshot) => {
@@ -623,7 +636,7 @@ export async function Change_Name() {
   //   console.error(error);
   // });
 
-  var pnameplayer = document.querySelector('p.nameaftercard');
+  var pnameplayer = document.querySelector(current_user_id);
   if (pnameplayer) {
     pnameplayer.textContent = nameChange;
   }
@@ -637,13 +650,14 @@ export async function Change_Name() {
 
   var closesection = document.querySelector('div.diag');
   closesection.classList.add('hidden');
+	}
 }
 
 export async function getDataUserAuth(Idsala) {
   let user_ID = '';
   let cookies = document.cookie;
-  var teste = cookies.split(';');
-  teste.forEach((element) => {
+  var vetCookies = cookies.split(';');
+  vetCookies.forEach((element) => {
     if (element.length > 0) {
       let ca = element.split('=');
       user_ID = ca[1];
@@ -684,6 +698,7 @@ export async function getDataUserAuth(Idsala) {
   var tag = document.createElement('i');
   tag.classList.add('fas');
   tag.classList.add('fa-angle-down');
+  tag.id = "down_"
   bnameplayer.textContent = namePlayer;
   bnameplayer.appendChild(tag);
 

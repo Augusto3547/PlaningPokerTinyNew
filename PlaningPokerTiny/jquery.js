@@ -242,17 +242,17 @@ $(document).ready(function () {
       $('#newsus').addClass('hidden');
     }
 
-    //Para Fechar fora do Change name Player
-    var containerNews = $('#escon');
-    var iconeNews = $('.profile');
+    // // //Para Fechar fora do Change name Player
+    // 	var containerNews = $('#escon');
+    // 	var iconeNews = $('.profile');
 
-    if (
-      !containerNews.is(e.target) &&
-      containerNews.has(e.target).length === 0 &&
-      !iconeNews.is(e.target)
-    ) {
-      $('#escon').addClass('hidden');
-    }
+    // if (
+    //   !containerNews.is(e.target) &&
+    //   containerNews.has(e.target).length === 0 &&
+    //   !iconeNews.is(e.target)
+    // ) {
+    //   $('#escon').addClass('hidden');
+    // }
   });
 
   //Para fechar close do Invite players
@@ -266,7 +266,7 @@ $(document).ready(function () {
     $('.newsus').toggleClass('hidden');
   });
   //Para fechar o change player name
-  $('.profile, .fa-address-card, .fa-angle-down').on('click', function (e) {
+  $('.profile').on('click', function (e) {
     $('#escon').toggleClass('hidden');
   });
 
