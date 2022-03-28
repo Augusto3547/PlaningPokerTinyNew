@@ -853,7 +853,7 @@ div.cheapresult {
 
 p.choosecard {
   text-align: center;
-  margin-top: 180px;
+  margin-top: 155px;
 }
 
 .cheapplayer {
@@ -1728,7 +1728,6 @@ h4.titleinviteplayers {
     align-items: center;
     justify-content: center;
   }
-
 }
 
 @media screen and (max-width: 616px) {
@@ -1798,7 +1797,6 @@ h4.titleinviteplayers {
     width: 1.1rem;
     height: 1.1rem;
   }
-
 }
 
 @media screen and (max-width: 412px) {
@@ -1823,7 +1821,6 @@ h4.titleinviteplayers {
   .inputchangenameplayer {
     width: 100%;
   }
-
 }
 
 @media screen and (max-width: 382px) {
@@ -1863,7 +1860,6 @@ h4.titleinviteplayers {
     width: 1.1rem;
     height: 1.1rem;
   }
-
 }
 
 @media screen and (max-width: 375px) {
@@ -1906,7 +1902,6 @@ h4.titleinviteplayers {
   label.namegame {
     font-size: 12px;
   }
-
 }
 
 /*Responsivo do invite players*/
@@ -2228,13 +2223,12 @@ h4.titleinviteplayers {
 /*Responsivo da Parte do meio do Jogo (mesa e cartas ao redor)*/
 
 @media screen and (max-width: 1278px) {
-
   .grid-container {
     display: grid;
     grid-template-columns: 35% 30% 30%;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 3.6rem;
     width: 2.3rem;
     border-radius: 0.8rem;
@@ -2247,121 +2241,113 @@ h4.titleinviteplayers {
     font-size: 11px;
   }
 
-  .cardnew{
+  .cardnew {
     height: 3.6rem;
     width: 2.3rem;
     font-size: 12px;
     border-radius: 10px;
   }
 
-  button.StartNewVoting{
+  button.StartNewVoting {
     width: 8rem;
     font-size: 14px;
     height: 2.8rem;
   }
-
 }
 
 @media screen and (max-width: 1000px) {
-
   .grid-container {
     display: grid;
     grid-template-columns: 32% 35% 30%;
   }
 
-  .tabel{
+  .tabel {
     font-size: 12px;
     height: 8rem;
   }
 
-  button.RevelCards{
+  button.RevelCards {
     height: 2.8rem;
     width: 8.5rem;
     font-size: 15px;
   }
 
-
-  button.card{
+  button.card {
     font-size: 16px;
     height: 4rem;
     width: 2.5rem;
     border-radius: 10px;
   }
 
-  .cardresults{
-    height:4.5rem;
+  .cardresults {
+    height: 4.5rem;
     width: 2.6rem;
     border-radius: 10px;
   }
-  
-  div.bar{
+
+  div.bar {
     height: 150px;
     width: 12px;
   }
 
-  h3{
+  h3 {
     font-size: 15px;
   }
 
-  p#result{
+  p#result {
     font-size: 15px;
   }
 }
 
 @media screen and (max-width: 888px) {
-
   .grid-container {
     display: grid;
     grid-template-columns: 31% 40% 30%;
   }
 
-  div.spacecards{
+  div.spacecards {
     overflow-x: scroll;
     overflow-y: hidden;
   }
-
 }
 
 @media screen and (max-width: 770px) {
-
   .grid-container {
     display: grid;
     grid-template-columns: 28% 45% 30%;
   }
 
-  .cardresults{
-    height:4.1rem;
+  .cardresults {
+    height: 4.1rem;
     width: 2.4rem;
     border-radius: 10px;
   }
-  
-  div.bar{
+
+  div.bar {
     height: 140px;
     width: 10px;
   }
 
-  h3{
+  h3 {
     font-size: 14px;
   }
 
-  p#result{
+  p#result {
     font-size: 14px;
   }
-
 }
 
 @media screen and (max-width: 684px) {
-
   .grid-container {
     display: grid;
     grid-template-columns: 26% 50% 30%;
   }
 
-  .tabel{
+  .tabel {
     height: 8rem;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 3rem;
     width: 2rem;
     border-radius: 0.8rem;
@@ -2374,64 +2360,62 @@ h4.titleinviteplayers {
     font-size: 11px;
   }
 
-  .cardnew{
+  .cardnew {
     height: 3rem;
     width: 2rem;
     font-size: 12px;
     border-radius: 8px;
   }
 
-  .alignvotecards{
+  .alignvotecards {
     margin: 0 8px;
   }
 
-  .cardresults{
-    height:3.9rem;
+  .cardresults {
+    height: 3.9rem;
     width: 2.4rem;
     border-radius: 10px;
     font-size: 12px;
   }
-  
-  div.bar{
+
+  div.bar {
     height: 140px;
     width: 10px;
   }
 
-  h3{
+  h3 {
     font-size: 14px;
   }
 
-  p#result{
+  p#result {
     font-size: 14px;
   }
 
-  button.RevelCards{
+  button.RevelCards {
     height: 2.5rem;
     width: 8rem;
     font-size: 12px;
   }
 
-  button.StartNewVoting{
+  button.StartNewVoting {
     font-size: 12px;
     height: 2.5rem;
   }
-
 }
 
 @media screen and (max-width: 550px) {
-
   .grid-container {
     display: grid;
     grid-template-columns: 26% 50% 30%;
   }
 
-  .tabel{
+  .tabel {
     height: 7rem;
     border-radius: 30px;
     margin: 0 3%;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 2.6rem;
     width: 1.8rem;
     border-radius: 0.8rem;
@@ -2444,23 +2428,23 @@ h4.titleinviteplayers {
     font-size: 9px;
   }
 
-  .cardnew{
+  .cardnew {
     height: 3rem;
     width: 2rem;
     font-size: 12px;
     border-radius: 8px;
   }
 
-  .alignvotecards{
+  .alignvotecards {
     margin: 0 8px;
   }
 
-  p.choosecard{
+  p.choosecard {
     font-size: 13px;
   }
 
-  .cardresults{
-    height:3.5rem;
+  .cardresults {
+    height: 3.5rem;
     width: 2.2rem;
     border-radius: 10px;
     font-size: 12px;
@@ -2470,46 +2454,44 @@ h4.titleinviteplayers {
     text-align: center;
     font-size: 10px;
   }
-  
-  div.bar{
+
+  div.bar {
     height: 140px;
     width: 10px;
   }
 
-  h3{
+  h3 {
     font-size: 14px;
   }
 
-  p#result{
+  p#result {
     font-size: 14px;
   }
 
-  button.RevelCards{
+  button.RevelCards {
     height: 2.5rem;
     width: 8rem;
     font-size: 12px;
   }
 
-  button.StartNewVoting{
+  button.StartNewVoting {
     font-size: 12px;
     height: 2.5rem;
   }
 
-  button.card{
+  button.card {
     font-size: 14px;
     height: 3.6rem;
     width: 2.3rem;
   }
-
 }
 
 @media screen and (max-width: 466px) {
-
-  .tabel{
+  .tabel {
     height: 6rem;
   }
 
-  button.RevelCards{
+  button.RevelCards {
     height: 2rem;
     width: 7.5rem;
     font-size: 10px;
@@ -2519,25 +2501,24 @@ h4.titleinviteplayers {
     font-size: 10px;
     height: 2rem;
     width: 7.5rem;
-    }
+  }
 
-    p#timer {
-      font-size: 20px;
-    }
+  p#timer {
+    font-size: 20px;
+  }
 }
 
 @media screen and (max-width: 375px) {
-
   .grid-container {
     display: grid;
     grid-template-columns: 26% 52% 30%;
   }
 
-  .tabel{
+  .tabel {
     font-size: 10px;
   }
 
-  .cardplayerplay{
+  .cardplayerplay {
     height: 2.6rem;
     width: 1.7rem;
     border-radius: 0.8rem;
@@ -2550,35 +2531,34 @@ h4.titleinviteplayers {
     font-size: 8px;
   }
 
-  .cardnew{
+  .cardnew {
     height: 2.6rem;
     width: 1.7rem;
     font-size: 8px;
     border-radius: 6px;
   }
 
-  .cardresults{
-    height:3.1rem;
+  .cardresults {
+    height: 3.1rem;
     width: 2rem;
     border-radius: 10px;
     font-size: 12px;
   }
 
-  div.bar{
+  div.bar {
     height: 130px;
     width: 10px;
   }
 
-  h3{
+  h3 {
     font-size: 12px;
   }
 
-  p#result{
+  p#result {
     font-size: 12px;
   }
 
-  button.card{
+  button.card {
     font-size: 11px;
   }
-
 }

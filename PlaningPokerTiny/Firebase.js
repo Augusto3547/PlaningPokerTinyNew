@@ -13,7 +13,7 @@ import {
   remove,
   onChildRemoved,
 } from 'firebase/database';
-import { data } from 'jquery';
+import { data, isEmptyObject } from 'jquery';
 import $ from 'jquery';
 import { routie } from './routie';
 
@@ -44,56 +44,54 @@ export async function New_Game() {
   gameName = document.getElementById('namegame').value;
   namePlayer = document.getElementById('displayname').value;
 
-  if(namePlayer.length == 0){
-    window.alert("You need put any name to start a game");
-  }else{
+  if (namePlayer.length == 0) {
+    window.alert('You need put any name to start a game');
+  } else {
+    if (!game_id) {
+      const response = await push(ref(getDatabase(app), 'Games'), {
+        name: gameName,
+      });
 
-  if (!game_id) {
-    const response = await push(ref(getDatabase(app), 'Games'), {
-      name: gameName,
+      game_id = response.key;
+    }
+
+    // const playersRef = await push(
+    //   ref(getDatabase(app), 'Games/' + game_id + '/players'),
+    //   {
+    //     name: namePlayer,
+    //     card: '',
+    //   }
+    // );
+
+    //console.log(playersRef.key)
+    //console.log(game_id)
+    const db = getDatabase();
+    set(ref(db, 'Games/' + game_id + '/players' + '/cards_turned'), {
+      turned: false,
     });
 
-    game_id = response.key;
+    // //Colcoar o id do primeiro jogador na id da tag div no html fixo
+
+    // let first_id_player = playersRef.key;
+    // let imgselect = document.querySelector('div.cardplayerplay');
+    // imgselect.id = first_id_player;
+    // imgselect.classList.add('other_background_card');
+
+    // // Colocar o Id do player na tag p do nome em baixo da carta
+
+    // let pselect = document.querySelector('.nameaftercard');
+    // pselect.classList.add(first_id_player);
+
+    Global_Game_ID = game_id;
+
+    //setCookie(namePlayer, playersRef.key, 1);
+    New_Player(namePlayer, game_id, 0);
+    PutInformationInScreen();
+    routie('id=' + Global_Game_ID);
   }
-
-  // const playersRef = await push(
-  //   ref(getDatabase(app), 'Games/' + game_id + '/players'),
-  //   {
-  //     name: namePlayer,
-  //     card: '',
-  //   }
-  // );
-
-  //console.log(playersRef.key)
-  //console.log(game_id)
-  const db = getDatabase();
-  set(ref(db, 'Games/' + game_id + '/players' + '/cards_turned'), {
-    turned: false,
-  });
-
-  // //Colcoar o id do primeiro jogador na id da tag div no html fixo
-
-  // let first_id_player = playersRef.key;
-  // let imgselect = document.querySelector('div.cardplayerplay');
-  // imgselect.id = first_id_player;
-  // imgselect.classList.add('other_background_card');
-
-  // // Colocar o Id do player na tag p do nome em baixo da carta
-
-  // let pselect = document.querySelector('.nameaftercard');
-  // pselect.classList.add(first_id_player);
-
-
-  Global_Game_ID = game_id;
-
-  //setCookie(namePlayer, playersRef.key, 1);
-  New_Player(namePlayer, game_id, 0);
-  PutInformationInScreen();
-  routie('id=' + Global_Game_ID);
-}
 }
 
-export async function New_Player(NameNewPlayer, Idsala, flag=null) {
+export async function New_Player(NameNewPlayer, Idsala, flag = null) {
   var NewPlayer = {
     name: NameNewPlayer,
     card: '',
@@ -123,10 +121,9 @@ export async function New_Player(NameNewPlayer, Idsala, flag=null) {
     });
   namePlayer = NameNewPlayer; // para colocar o nome do jogo na tela quanado um novo jogador entrar
 
-  if (flag != 0){
+  if (flag != 0) {
     PutInformationInScreen();
   }
-  
 }
 
 // Esta função é responsável por ouvir TODOS os eventos do jogo e realizar as alterações necessárias
@@ -155,18 +152,18 @@ export async function listen_game() {
   const dbchangeref = ref(
     getDatabase(),
     'Games/' + Global_Game_ID + '/players/'
- );
+  );
   //Verificar quando um novo jogador entrar
   onChildAdded(dbchangeref, (snapshot) => {
     const playerId = snapshot.key;
     //Object.keys(snapshot.val()).map((playerId, idx) => {
     //console.log(snapshot.val(), idx);
-  //if (current_user_id != playerId) {
+    //if (current_user_id != playerId) {
     let playerIdSelector = document.getElementById(playerId);
     if (!playerIdSelector) {
       const nome = snapshot.val().name;
       if (nome) {
-       // console.log(playerId)
+        // console.log(playerId)
         let markup = `
             <div class="cardplayer">
             <div id="${playerId}" class="cardplayerplay other_background_card"> 
@@ -194,13 +191,16 @@ export async function listen_game() {
           case 1:
             let changemargin = document.querySelector('div.midle');
             let width = window.screen.width;
-            if (width <= 550){
-              changemargin.style.cssText = 'margin-top: 25%; align-items: center;';  
-            }else if(width > 550 && width <=1278){
-              changemargin.style.cssText = 'margin-top: 20%; align-items: center;';  
-            }else{
-              changemargin.style.cssText = 'margin-top: 6%; align-items: center;';
-            }            
+            if (width <= 550) {
+              changemargin.style.cssText =
+                'margin-top: 25%; align-items: center;';
+            } else if (width > 550 && width <= 1278) {
+              changemargin.style.cssText =
+                'margin-top: 20%; align-items: center;';
+            } else {
+              changemargin.style.cssText =
+                'margin-top: 6%; align-items: center;';
+            }
             pup.innerHTML = markup;
             break;
           case 2:
@@ -259,7 +259,7 @@ export async function listen_game() {
       //console.log(data.key)
       if (imageretire) {
         imageretire.classList.remove('other_background_card');
-        imageretire.classList.add('background_card'); 
+        imageretire.classList.add('background_card');
       }
     } else {
       let imageretire = document.getElementById(data.key);
@@ -351,14 +351,14 @@ export async function listen_game() {
                 }
               });
 
-			 if (soma == 0 && count== 0){
-				 soma = 0;
-			 }else{
-				 soma = soma/count;
-			 }
+              if (soma == 0 && count == 0) {
+                soma = 0;
+              } else {
+                soma = soma / count;
+              }
 
-              let presultofvoting = document.getElementById('result'); 
-              presultofvoting.textContent = (soma).toFixed(1);
+              let presultofvoting = document.getElementById('result');
+              presultofvoting.textContent = soma.toFixed(1);
 
               // Adiconar as cartas selecionadas com as respectivas qunatidades de votos
 
@@ -367,7 +367,7 @@ export async function listen_game() {
                 return vetor.indexOf(el) === i;
               });
 
-             // console.log(vetorformatado);
+              // console.log(vetorformatado);
               if (
                 vetor.map((val) => {
                   if (val == '') {
@@ -379,21 +379,21 @@ export async function listen_game() {
                 })
               )
                 //console.log(vetorformatado);
-              //console.log(vetor);
+                //console.log(vetor);
 
-              vetorformatado.forEach((n) => {
-                var count_num = 0;
-                vetor.forEach((num) => {
-                  if (num == n) {
-                    count_num++;
+                vetorformatado.forEach((n) => {
+                  var count_num = 0;
+                  vetor.forEach((num) => {
+                    if (num == n) {
+                      count_num++;
+                    }
+                  });
+
+                  if (n == '' || n == 0) {
+                    count_num = count_num / 2;
                   }
-                });
 
-                if (n == '' || n == 0) {
-                  count_num = count_num / 2;
-                }
-
-                let htmlfix = `
+                  let htmlfix = `
               <div class="alignvotecards">
                 <button class="cardresults">${n}</button>
                 <div>
@@ -401,10 +401,10 @@ export async function listen_game() {
                 </div>
               </div>
               `;
-                let select = document.getElementById('cheapresult');
-                select.innerHTML += htmlfix;
-                //console.log("Opa")
-              });
+                  let select = document.getElementById('cheapresult');
+                  select.innerHTML += htmlfix;
+                  //console.log("Opa")
+                });
             })
             .catch((error) => {
               console.error(error);
@@ -574,83 +574,81 @@ export async function listen_game() {
 }
 
 export async function Change_Name() {
-	let flag = 0;
+  let flag = 0;
   var nameChange = document.getElementById('ChangeNamePlayerInput').value;
 
-	const verifyName = nameChange.split(" ").map((i)=>{
-		if (i.length != 0){
-			flag = 1;
-		}
-	})
-
-	if (flag == 0){
-		window.alert("Please enter a name to change.")
-	}else{
-
-  let playerChange = {
-    name: nameChange,
-    card: '',
-  };
-
-  let current_user_id = '';
-  let cookies = document.cookie;
-  var vetCookies = cookies.split(';');
-  vetCookies.forEach((element) => {
-    if (element.length > 0) {
-      let ca = element.split('=');
-      current_user_id = ca[1];
+  const verifyName = nameChange.split(' ').map((i) => {
+    if (i.length != 0) {
+      flag = 1;
     }
   });
 
-  deleteAllCookies();
-  setCookie(nameChange, current_user_id, 1);
+  if (flag == 0) {
+    window.alert('Please enter a name to change.');
+  } else {
+    let playerChange = {
+      name: nameChange,
+      card: '',
+    };
 
-  // Buscar o ID do Jogo
-  const dbRef = ref(getDatabase());
-  await get(child(dbRef, 'Games/'))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        Global_Game_ID = Object.keys(snapshot.val())[0];
-      } else {
-        //console.log('No data available');
+    let current_user_id = '';
+    let cookies = document.cookie;
+    var vetCookies = cookies.split(';');
+    vetCookies.forEach((element) => {
+      if (element.length > 0) {
+        let ca = element.split('=');
+        current_user_id = ca[1];
       }
-    })
-    .catch((error) => {
-      console.error(error);
     });
 
-  const dbref = ref(
-    getDatabase(app),
-    'Games/' + Global_Game_ID + '/players' + '/' + current_user_id
-  );
+    deleteAllCookies();
+    setCookie(nameChange, current_user_id, 1);
+
+    // Buscar o ID do Jogo
+    const dbRef = ref(getDatabase());
+    await get(child(dbRef, 'Games/'))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          Global_Game_ID = Object.keys(snapshot.val())[0];
+        } else {
+          //console.log('No data available');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    const dbref = ref(
+      getDatabase(app),
+      'Games/' + Global_Game_ID + '/players' + '/' + current_user_id
+    );
     update(dbref, playerChange);
-  
 
-  // let dbchangename = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
-  // get(dbchangename).then((snapshot) => {
-  //   Object.keys(snapshot.val()).map((user)=>{
-  //     let aa = document.querySelector(`p.${user}`)
-  //     aa.textContent = nameChange;
-  //   })
-  // }).catch((error) => {
-  //   console.error(error);
-  // });
+    // let dbchangename = ref(getDatabase(),"Games/" + Global_Game_ID + "/players/")
+    // get(dbchangename).then((snapshot) => {
+    //   Object.keys(snapshot.val()).map((user)=>{
+    //     let aa = document.querySelector(`p.${user}`)
+    //     aa.textContent = nameChange;
+    //   })
+    // }).catch((error) => {
+    //   console.error(error);
+    // });
 
-  var pnameplayer = document.querySelector(current_user_id);
-  if (pnameplayer) {
-    pnameplayer.textContent = nameChange;
+    var pnameplayer = document.querySelector(current_user_id);
+    if (pnameplayer) {
+      pnameplayer.textContent = nameChange;
+    }
+    // Nome no botão para trocar o mesmo
+    var bnameplayer = document.querySelector('button.profile');
+    var tag = document.createElement('i');
+    tag.classList.add('fas');
+    tag.classList.add('fa-angle-down');
+    bnameplayer.textContent = nameChange;
+    bnameplayer.appendChild(tag);
+
+    var closesection = document.querySelector('div.diag');
+    closesection.classList.add('hidden');
   }
-  // Nome no botão para trocar o mesmo
-  var bnameplayer = document.querySelector('button.profile');
-  var tag = document.createElement('i');
-  tag.classList.add('fas');
-  tag.classList.add('fa-angle-down');
-  bnameplayer.textContent = nameChange;
-  bnameplayer.appendChild(tag);
-
-  var closesection = document.querySelector('div.diag');
-  closesection.classList.add('hidden');
-	}
 }
 
 export async function getDataUserAuth(Idsala) {
@@ -698,7 +696,7 @@ export async function getDataUserAuth(Idsala) {
   var tag = document.createElement('i');
   tag.classList.add('fas');
   tag.classList.add('fa-angle-down');
-  tag.id = "down_"
+  tag.id = 'down_';
   bnameplayer.textContent = namePlayer;
   bnameplayer.appendChild(tag);
 
@@ -718,6 +716,49 @@ export async function getDataUserAuth(Idsala) {
   if (pselect) {
     pselect.classList.add(current_user_id);
   }
+
+  //Verificar apenas para o seu usuário se tem uma carta selecionada e add a carta ativa
+  const verifyativo = ref(
+    getDatabase(),
+    'Games/' + Global_Game_ID + '/players/' + current_user_id
+  );
+
+  get(verifyativo).then((data) => {
+    if (data.val().card != '') {
+      let card_val = data.val().card;
+      let selectcheap = document.querySelector('div.cheap');
+      selectcheap.childNodes.forEach((ss) => {
+        if (card_val == ss.textContent) {
+          ss.classList.add('ativo');
+          let button_select = document.querySelector('button.RevelCards');
+          button_select.classList.remove('hidden');
+        }
+      });
+    }
+  });
+
+  const verifycards = ref(
+    getDatabase(),
+    'Games/' + Global_Game_ID + '/players/'
+  );
+
+  get(verifycards).then((players) => {
+    Object.keys(players.val()).forEach((id) => {
+      if (id != 'cards_turned') {
+        let select_id = ref(
+          getDatabase(),
+          'Games/' + Global_Game_ID + '/players/' + id
+        );
+        get(select_id).then((idespecify) => {
+          if (idespecify.val().card != '') {
+            let backcard = document.getElementById(id);
+            backcard.classList.remove('other_background_card');
+            backcard.classList.add('background_card');
+          }
+        });
+      }
+    });
+  });
 }
 
 async function PutInformationInScreen() {
