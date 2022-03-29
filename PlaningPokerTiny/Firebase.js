@@ -435,7 +435,7 @@ export async function listen_game() {
         }
 
         duracao--;
-      }, 1000);
+      }, 700);
 
       // Valor Carta (Buscar no banco, pois senão lança uma exeption)
 
