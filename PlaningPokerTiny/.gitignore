@@ -26,6 +26,5 @@ dist-ssr
 # Meus arquivos
 
 .firebaserc
-firebase.json
 dist
 .firebase
