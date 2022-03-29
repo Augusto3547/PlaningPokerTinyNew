@@ -18,7 +18,6 @@ import { deleteAllCookies } from './Firebase.js';
 import $ from 'jquery';
 
 $(document).ready(function () {
-  //getVotingSystem();
   $('#namegame').val('Tiny'); // Pré carregar o nome padrão do jogo como "Tiny"
 
   var url = window.location.href;
@@ -28,12 +27,6 @@ $(document).ready(function () {
     // Se já existir um game criado e  o jogador entarr pela url com o ID
     var idnotf = res[1].substr(3);
     Global_Game_ID = idnotf;
-    // let id_tester = ref(getDatabase(),"Games/")
-    // get(id_tester).then((snap)=>{
-    //   if(Object.keys(snap.val())[0] != Global_Game_ID){
-    //     window.alert("You are in a session that no longer exists in the DataBase. Please enter in another ;)")
-    //   }
-    // })
     var cookies = document.cookie;
     //Verificar se tem um cokkie salvo, então não pedir um nome para o jogador entrar
     if (cookies.length == 0) {
@@ -50,14 +43,11 @@ $(document).ready(function () {
       let verify = ref(getDatabase(), 'Games/' + Global_Game_ID + '/players/');
       get(verify)
         .then((snapshot) => {
-          // Object.keys(snapshot.val()).map((user) => {
-          // console.log(Object.keys(snapshot.val()))
           if (Object.keys(snapshot.val()).includes(current_user_id)) {
           } else {
             deleteAllCookies();
             window.location.reload();
           }
-          //});
         })
         .catch((error) => {
           console.error(error);
@@ -66,9 +56,6 @@ $(document).ready(function () {
       $('.register').addClass('hidden');
       $('.section, .superhide, .footer').removeClass('hidden');
       getDataUserAuth(Global_Game_ID);
-
-      // let imgselect  = document.querySelector("div.cardplayerplay")
-      // imgselect.id = current_user_id
 
       listen_game();
     }
@@ -103,7 +90,6 @@ $(document).ready(function () {
     }
     $(this).toggleClass('ativo');
     if ($(this).hasClass('ativo')) {
-      //RetireHideImageCard();
       RetireHideRevelCards(Global_Game_ID);
       // Jogar o valor da carta para o banco no respectivo usuário
 
@@ -132,12 +118,7 @@ $(document).ready(function () {
         card
       );
 
-      // console.log(Global_Game_ID)
-      // console.log(current_user_id)
-      // console.log(card_value)
-      // console.log(dbref)
     } else {
-      //AddHideImageCard();
       AddHideRevelCards();
       //Retirar o valor da carta no banco caso o player desclicar da mesma
       let current_user_id = '';
@@ -241,18 +222,6 @@ $(document).ready(function () {
     ) {
       $('#newsus').addClass('hidden');
     }
-
-    // // //Para Fechar fora do Change name Player
-    // 	var containerNews = $('#escon');
-    // 	var iconeNews = $('.profile');
-
-    // if (
-    //   !containerNews.is(e.target) &&
-    //   containerNews.has(e.target).length === 0 &&
-    //   !iconeNews.is(e.target)
-    // ) {
-    //   $('#escon').addClass('hidden');
-    // }
   });
 
   //Para fechar close do Invite players
@@ -370,24 +339,6 @@ $(document).ready(function () {
   });
 });
 
-// function getVotingSystem() {
-//   let cookies = document.cookie;
-//   var options = cookies.split(';');
-//   options.forEach((element) => {
-//     if (element.length > 0) {
-//       var regExp = /\(([^)]+)\)/;
-//       var value = regExp.exec(element);
-//       $('.lastoption').before(
-//         "<option name='mcustom' value='" +
-//           value[1] +
-//           "'>" +
-//           element +
-//           '</option>'
-//       );
-//     }
-//   });
-// }
-
 function setCookie(cValue, expDays) {
   let date = new Date();
   date.setTime(date.getTime() + expDays * 24 * 60 * 60 * 1000);
@@ -395,10 +346,6 @@ function setCookie(cValue, expDays) {
   document.cookie = cValue + '; ';
 }
 
-// function RetireHideImageCard() {
-//   var imageretire = document.querySelector('div.cardplayerplay');
-//   imageretire.classList.add('background_card');
-// }
 
 //Função para adiconar o botão de revelar as cartas, mas se as cartas estiverem sendo viradas, ele não irá mostrar
 function RetireHideRevelCards(Global_Game_ID) {
@@ -413,11 +360,6 @@ function RetireHideRevelCards(Global_Game_ID) {
 	  }
   })
 }
-
-// function AddHideImageCard() {
-//   var imageretire = document.querySelector('div.cardplayerplay');
-//   imageretire.classList.remove('background_card');
-// }
 
 function AddHideRevelCards() {
   var revealcards = document.getElementById('RevelCards');
