@@ -588,7 +588,6 @@ export async function Change_Name() {
   } else {
     let playerChange = {
       name: nameChange,
-      card: '',
     };
 
     let current_user_id = '';
