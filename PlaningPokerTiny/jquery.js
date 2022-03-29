@@ -104,7 +104,7 @@ $(document).ready(function () {
     $(this).toggleClass('ativo');
     if ($(this).hasClass('ativo')) {
       //RetireHideImageCard();
-      RetireHideRevelCards();
+      RetireHideRevelCards(Global_Game_ID);
       // Jogar o valor da carta para o banco no respectivo usuário
 
       //Buscar o ID do usuário que esta jogando
@@ -395,20 +395,29 @@ function setCookie(cValue, expDays) {
   document.cookie = cValue + '; ';
 }
 
-function RetireHideImageCard() {
-  var imageretire = document.querySelector('div.cardplayerplay');
-  imageretire.classList.add('background_card');
+// function RetireHideImageCard() {
+//   var imageretire = document.querySelector('div.cardplayerplay');
+//   imageretire.classList.add('background_card');
+// }
+
+//Função para adiconar o botão de revelar as cartas, mas se as cartas estiverem sendo viradas, ele não irá mostrar
+function RetireHideRevelCards(Global_Game_ID) {
+  let verifubutton = ref(getDatabase(),'Games/' + Global_Game_ID + '/players' + '/cards_turned')
+  get(verifubutton).then(function(data) {
+	  if(data.val().turned == true){
+		var revealcards = document.getElementById('RevelCards');
+		revealcards.classList.add('hidden');
+	  }else{
+		var revealcards = document.getElementById('RevelCards');
+		revealcards.classList.remove('hidden');
+	  }
+  })
 }
 
-function RetireHideRevelCards() {
-  var revealcards = document.getElementById('RevelCards');
-  revealcards.classList.remove('hidden');
-}
-
-function AddHideImageCard() {
-  var imageretire = document.querySelector('div.cardplayerplay');
-  imageretire.classList.remove('background_card');
-}
+// function AddHideImageCard() {
+//   var imageretire = document.querySelector('div.cardplayerplay');
+//   imageretire.classList.remove('background_card');
+// }
 
 function AddHideRevelCards() {
   var revealcards = document.getElementById('RevelCards');
