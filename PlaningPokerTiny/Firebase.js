@@ -247,6 +247,9 @@ export async function listen_game() {
       //Timer
       var duracao = 2;
 
+	  var HideCards = document.getElementById('hideCards');
+	  HideCards.classList.remove('hidden');
+
       var revealcards = document.getElementById('RevelCards');
       revealcards.classList.add('hidden');
 
@@ -361,12 +364,6 @@ export async function listen_game() {
           var buttonnewvoting = document.querySelector('button.StartNewVoting');
           buttonnewvoting.classList.remove('hidden');
 
-          var cheapnew = document.querySelector('div.cheap');
-          cheapnew.style.opacity = '';
-
-          var popac = document.querySelector('p.choosecard');
-          popac.style.opacity = '';
-
           var result = document.querySelector('div.resultofvoting');
           result.classList.remove('hidden');
 
@@ -396,11 +393,6 @@ export async function listen_game() {
           console.error(error);
         });
 
-      var cheapnew = document.querySelector('div.cheap');
-      cheapnew.style.opacity = '0.2';
-
-      var popac = document.querySelector('p.choosecard');
-      popac.style.opacity = '0.2';
     } else if (change.val() == false) {
       let gbrefstartnewround = ref(
         getDatabase(),
@@ -428,6 +420,9 @@ export async function listen_game() {
         });
 
       //Quando o cara clica em começar uma nova votação
+	  var HideCards = document.getElementById('hideCards');
+	  HideCards.classList.add('hidden');
+
       var timer = document.querySelector('p#timer');
       timer.classList.remove('hidden');
 
@@ -452,6 +447,7 @@ export async function listen_game() {
 
       let resultCheap = document.getElementById('cheapresult');
       resultCheap.innerHTML = '';
+
     }
   });
   //Verificar o noem do jogador alterado e mudar para os outros

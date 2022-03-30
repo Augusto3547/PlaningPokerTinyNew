@@ -57,7 +57,7 @@ function SetTimer() {
     }
 
     duracao--;
-  }, 1000);
+  }, 700);
 
   // Valor Carta
 

@@ -853,6 +853,15 @@ div.cheapresult {
   text-align: center;
 }
 
+.hideCards {
+	position: absolute;
+	background-color: #f9f9f9;;
+	width: 100%;
+	opacity: 0.6;
+	height: 17%;
+	z-index: 30;
+  }
+
 p.choosecard {
   text-align: center;
   margin-top: 155px;
