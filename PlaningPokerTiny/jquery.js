@@ -19,7 +19,7 @@ import {
   
   $(document).ready(function () {
 	$('#namegame').val('Tiny'); // Pré carregar o nome padrão do jogo como "Tiny"
-  
+
 	var url = window.location.href;
 	var res = url.split('#');
 	let Global_Game_ID = '';
@@ -63,8 +63,21 @@ import {
   
 	$('.cg').on('click', function () {
 	  let NewName = $('.displaynamenew').val();
-	  New_Player(NewName, Global_Game_ID);
-	  $('.nmplayer').addClass('hidden');
+	  let flag = 0;
+	  var nameChange = document.getElementById('ChangeNamePlayerInput').value;
+	
+	  const verifyName = NewName.split(' ').map((i) => {
+		if (i.length != 0) {
+		  flag = 1;
+		}
+	  });
+	
+	  if (flag == 0) {
+		window.alert('Please enter a name to enter in the Game');
+	  } else {
+		New_Player(NewName, Global_Game_ID);
+		$('.nmplayer').addClass('hidden');
+	  }
 	});
   
 	$('.pencil').on('click', () => {
@@ -317,15 +330,24 @@ import {
 	//Esta função abaixo é para validar se o player colocou o nome ou não
   
 	$('.creategame').on('click', async function (e) {
-	  if ($('#displayname').val().length == 0) {
-		alert('Favor inserir nome antes de enviar');
-		return;
-	  }
+		let flag = 0;
+		var nameChange = $('#displayname').val();
+	  
+		const verifyName = nameChange.split(' ').map((i) => {
+		  if (i.length != 0) {
+			flag = 1;
+		  }
+		});
+	  
+		if (flag == 0) {
+		  window.alert('You need put any name to start a game');
+		} else {
   
-	  $('.register').addClass('hidden');
-	  $('.section, .footer, .superhide').removeClass('hidden');
-  
-	  New_Game();
+			$('.register').addClass('hidden');
+			$('.section, .footer, .superhide').removeClass('hidden');
+		
+			New_Game();
+		}
 	});
   
 	//Copiar a URL do site para o input de invite players

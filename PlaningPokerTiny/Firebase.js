@@ -44,9 +44,6 @@ export async function New_Game() {
   gameName = document.getElementById('namegame').value;
   namePlayer = document.getElementById('displayname').value;
 
-  if (namePlayer.length == 0) {
-    window.alert('You need put any name to start a game');
-  } else {
     if (!game_id) {
       const response = await push(ref(getDatabase(app), 'Games'), {
         name: gameName,
@@ -65,10 +62,12 @@ export async function New_Game() {
     New_Player(namePlayer, game_id, 0);
     PutInformationInScreen();
     routie('id=' + Global_Game_ID);
-  }
 }
 
 export async function New_Player(NameNewPlayer, Idsala, flag = null) {
+  if (NameNewPlayer.length > 10) {
+	NameNewPlayer = NameNewPlayer.substring(0, 10) + '...';
+  }
   var NewPlayer = {
     name: NameNewPlayer,
     card: '',
@@ -450,7 +449,8 @@ export async function listen_game() {
 
     }
   });
-  //Verificar o noem do jogador alterado e mudar para os outros
+  
+  //Verificar o nome do jogador alterado e mudar para os outros
 
   let dbchangename = ref(
     getDatabase(),
@@ -499,6 +499,11 @@ export async function Change_Name() {
   if (flag == 0) {
     window.alert('Please enter a name to change.');
   } else {
+
+	if (nameChange.length > 10) {
+		nameChange = nameChange.substring(0, 10) + '...';
+	}
+
     let playerChange = {
       name: nameChange,
     };
@@ -538,6 +543,7 @@ export async function Change_Name() {
 
     var pnameplayer = document.querySelector(current_user_id);
     if (pnameplayer) {
+		let nomeformater = nameChange.substring(0,20);
       pnameplayer.textContent = nameChange;
     }
     // Nome no botão para trocar o mesmo
@@ -545,6 +551,10 @@ export async function Change_Name() {
     var tag = document.createElement('i');
     tag.classList.add('fas');
     tag.classList.add('fa-angle-down');
+	if(nameChange.length > 10) {
+		nameChange = nameChange.substring(0, 10);
+		nameChange = nameChange + '...';
+	  }
     bnameplayer.textContent = nameChange;
     bnameplayer.appendChild(tag);
 
@@ -599,6 +609,10 @@ export async function getDataUserAuth(Idsala) {
   tag.classList.add('fas');
   tag.classList.add('fa-angle-down');
   tag.id = 'down_';
+  if (namePlayer.length > 10) {
+	namePlayer = namePlayer.substring(0, 10);
+	namePlayer = namePlayer + '...';
+  }
   bnameplayer.textContent = namePlayer;
   bnameplayer.appendChild(tag);
 
@@ -675,6 +689,10 @@ async function PutInformationInScreen() {
   var tag = document.createElement('i');
   tag.classList.add('fas');
   tag.classList.add('fa-angle-down');
+  if (namePlayer.length > 10) {
+	namePlayer = namePlayer.substring(0, 10);
+	namePlayer = namePlayer + '...';
+  }
   bnameplayer.textContent = namePlayer;
   bnameplayer.appendChild(tag);
 
