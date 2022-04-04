@@ -272,10 +272,14 @@ export async function listen_game() {
           get(gbrefturncards)
             .then((snapshot) => {
               Object.keys(snapshot.val()).map((user) => {
-                let aa = document.getElementById(user);
-                if (aa) {
-                  let tt = aa.children;
-                  tt[0].classList.remove('hidden');
+                let cardplayerplay = document.getElementById(user);
+                if (cardplayerplay) {
+                  let cardnew = cardplayerplay.children;
+				  if (cardnew[0].textContent.length != 0) {
+					cardnew[0].classList.remove('hidden');
+				  }else{
+					cardnew[0].classList.add('hidden');
+				  }
                 }
               });
             })
@@ -641,7 +645,7 @@ export async function getDataUserAuth(Idsala) {
       if (id != 'cards_turned') {
         let select_id = ref(
           getDatabase(),
-          'Games/' + Global_Game_ID + '/players/' + id
+          'Games/' + Idsala + '/players/' + id
         );
         get(select_id).then((idespecify) => {
           if (idespecify.val().card != '') {
