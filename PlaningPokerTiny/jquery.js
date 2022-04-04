@@ -327,17 +327,22 @@ import {
 	  $('.qcode').addClass('hidden');
 	});
   
-	//Esta função abaixo é para validar se o player colocou o nome ou não
+	//Esta função abaixo é para validar se o player colocou o nome do jogo e do player ou não
   
 	$('.creategame').on('click', async function (e) {
 		let flag = 0;
-		var nameChange = $('#displayname').val();
+		let nameChange = $('#displayname').val();
+		let nameGame = $('#namegame').val();
 	  
 		const verifyName = nameChange.split(' ').map((i) => {
 		  if (i.length != 0) {
 			flag = 1;
 		  }
 		});
+
+		if(nameGame.length == 0){
+			window.alert("Please, insert a name for the game");
+		}else{
 	  
 		if (flag == 0) {
 		  window.alert('You need put any name to start a game');
@@ -348,6 +353,7 @@ import {
 		
 			New_Game();
 		}
+	}
 	});
   
 	//Copiar a URL do site para o input de invite players

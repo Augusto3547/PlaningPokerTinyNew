@@ -73,8 +73,6 @@ export async function New_Player(NameNewPlayer, Idsala, flag = null) {
     card: '',
   };
 
-  //console.log(Idsala);
-
   const refdb = await push(
     ref(getDatabase(app), 'Games/' + Idsala + '/players'),
     NewPlayer
@@ -380,11 +378,11 @@ export async function listen_game() {
       );
       get(gbrefgetcardvalue)
         .then((snapshot) => {
-          Object.keys(snapshot.val()).map((el) => {
-            const card = document.getElementById(el);
+          Object.keys(snapshot.val()).map((id) => {
+            const card = document.getElementById(id);
             if (card) {
-              const sb = card.children;
-              sb[0].textContent = snapshot.val()[el].card;
+              const selectCardNew = card.children;
+              selectCardNew[0].textContent = snapshot.val()[id].card;
             }
           });
         })
@@ -400,17 +398,17 @@ export async function listen_game() {
       get(gbrefstartnewround)
         .then((snapshot) => {
           Object.keys(snapshot.val()).map((user) => {
-            let hh = document.getElementById(user);
-            if (hh) {
-              let jj = hh.children;
-              jj[0].classList.add('hidden');
+            let cardplayerplay = document.getElementById(user);
+            if (cardplayerplay) {
+              let cardnew = cardplayerplay.children;
+              cardnew[0].classList.add('hidden');
 
               var buttonnewvoting = document.querySelector(
                 'button.StartNewVoting'
               );
               buttonnewvoting.classList.add('hidden');
 
-              hh.classList.add('other_background_card');
+              cardplayerplay.classList.add('other_background_card');
             }
           });
         })
@@ -460,9 +458,9 @@ export async function listen_game() {
     if (data.val().name) {
       get(dbchangename)
         .then((snapshot) => {
-          let yy = document.querySelector(`p.${data.key}`);
-          if (yy) {
-            yy.textContent = data.val().name;
+          let nameaftercard = document.querySelector(`p.${data.key}`);
+          if (nameaftercard) {
+            nameaftercard.textContent = data.val().name;
           }
         })
         .catch((error) => {
@@ -564,6 +562,7 @@ export async function Change_Name() {
 }
 
 export async function getDataUserAuth(Idsala) {
+  let namePlayer = '';
   let user_ID = '';
   let cookies = document.cookie;
   var vetCookies = cookies.split(';');
@@ -571,6 +570,7 @@ export async function getDataUserAuth(Idsala) {
     if (element.length > 0) {
       let ca = element.split('=');
       user_ID = ca[1];
+	  namePlayer = ca[0];
     }
   });
 
@@ -584,25 +584,12 @@ export async function getDataUserAuth(Idsala) {
       console.log('No data available');
     }
   });
-
-  let namePlayer = '';
-  // Buscar no Banco o nome do player
-  await get(child(dbRef, 'Games/' + Idsala + '/players/' + user_ID)).then(
-    (snapshot) => {
-      if (snapshot.exists()) {
-        namePlayer = snapshot.val().name; // para colocar o noem do jogo na tela quanado um novo jogador entrar
-      } else {
-        console.log('No data available');
-      }
-    }
-  );
+  
 
   //Nome do lado da imagem
   var labelgame = document.querySelector('label.namegame');
   labelgame.textContent = gameName;
-  //Nome em baixo da carta com a animação
-  var pnameplayer = document.querySelector('p.nameaftercard');
-  pnameplayer.textContent = namePlayer;
+
   // Nome no botão para trocar o mesmo
   var bnameplayer = document.querySelector('button.profile');
   var tag = document.createElement('i');
@@ -624,19 +611,10 @@ export async function getDataUserAuth(Idsala) {
   let ca = cookiess.split('=');
   current_user_id = ca[1];
 
-  let imgselect = document.querySelector('div.cardplayerplay');
-  imgselect.id = current_user_id;
-  imgselect.classList.add('other_background_card');
-
-  let pselect = document.querySelector('.nameaftercard');
-  if (pselect) {
-    pselect.classList.add(current_user_id);
-  }
-
   //Verificar apenas para o seu usuário se tem uma carta selecionada e add a carta ativa
   const verifyativo = ref(
     getDatabase(),
-    'Games/' + Global_Game_ID + '/players/' + current_user_id
+    'Games/' + Idsala + '/players/' + current_user_id
   );
 
   get(verifyativo).then((data) => {
@@ -655,7 +633,7 @@ export async function getDataUserAuth(Idsala) {
 
   const verifycards = ref(
     getDatabase(),
-    'Games/' + Global_Game_ID + '/players/'
+    'Games/' + Idsala + '/players/'
   );
 
   get(verifycards).then((players) => {
