@@ -190,22 +190,22 @@ export async function listen_game() {
             pup.innerHTML += markup;
             break;
           case 8:
-            pdown.innerHTML += markup;
+            pleft.innerHTML += markup;
             break;
           case 9:
-            pup.innerHTML += markup;
+            pright.innerHTML += markup;
             break;
           case 10:
-            pleft.innerHTML += markup;
+            pdown.innerHTML += markup;
             break;
           case 11:
-            pright.innerHTML += markup;
+            pup.innerHTML += markup;
             break;
           case 12:
-            pleft.innerHTML += markup;
+            pdown.innerHTML += markup;
             break;
           case 13:
-            pright.innerHTML += markup;
+            pup.innerHTML += markup;
             break;
         }
         idx++;
